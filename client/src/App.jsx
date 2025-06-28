@@ -7,10 +7,13 @@ import Home from './Pages/Home'
 
 export default function App(){
   return (
+    <div className='Main_Class'>
+      <img class="bg-Image" src='./Components_CSS/Bg1.png'></img>
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home/>}/>
     </Routes>
     </BrowserRouter>
+    </div>
   )
 }

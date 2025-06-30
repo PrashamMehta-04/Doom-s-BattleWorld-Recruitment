@@ -1,19 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import {Routes,Route,BrowserRouter} from 'react-router-dom'  
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import Home from './Pages/Home'
+import Navbar from './Components/Navbar';
 
-export default function App(){
+export default function App() {
   return (
-    <div className='Main_Class'>
-      <img class="bg-Image" src='./Components_CSS/Bg1.png'></img>
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home/>}/>
-    </Routes>
-    </BrowserRouter>
-    </div>
-  )
+    <>
+    <img className="bg-Image" src = "./Components_CSS/Bg1.png" alt="Background" />
+      <Navbar />
+      <div style={{ marginTop: '10px' }}>
+        <Routes>
+//         <Route path="/" element={<Home />} />
+       </Routes>
+      </div>
+    </>
+  );
 }

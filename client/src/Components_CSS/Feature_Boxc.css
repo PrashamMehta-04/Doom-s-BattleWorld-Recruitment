@@ -1,0 +1,44 @@
+.heroic-profile-box {
+  background: rgba(30, 30, 60, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 24px 40px rgba(0,0,0,0.2);
+  padding: 15px 15px;
+  color: #fff;
+  max-width: 180px;
+  margin: 30px auto;
+  margin-left: 0px;
+  margin-right: 2px;
+  text-align: center;
+  border: 1.5px solid #6c63ff;
+  padding-top: 5px;
+  box-sizing: border-box;
+}
+.icon-circle {
+  width: 48px;
+  height: 48px;
+  background: #6c63ff; /* Soft purple, adjust as needed */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px auto;
+}
+
+.icon-circle img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.heroic-profile-box h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 5px 0 20px;
+  
+}
+
+.heroic-profile-box p {
+  font-size: 13px;
+  color: #ccc;
+  margin: 10px 0 10px;
+}

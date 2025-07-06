@@ -7,30 +7,20 @@ import calender from '../Components_CSS/calendar.svg';
 import msg from '../Components_CSS/message-square.svg';
 import search from '../Components_CSS/search-check.svg';
 import { GoogleLogin } from '@react-oauth/google';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [showGoogle, setShowGoogle] = useState(true);
+  const navigate = useNavigate();
 
   return (
     <div>
       <Navbar />
       <h1>BattleWorld Awaits!</h1>
       <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
-        <Login_Button text="Login as Marvel Hero" onClick={() => setShowGoogle(true)} />
-        <Login_Button text="Login as Doom" />
+        <Login_Button text="Login as Marvel Hero" onClick={() => navigate('/login')} />
+        <Login_Button text="Login as Doom" onClick={() => navigate('/login')} />
       </div>
-      {showGoogle && (
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
-          <GoogleLogin
-            onSuccess={credentialResponse => {
-              console.log(credentialResponse);
-            }}
-            onError={() => {
-              console.log('Login Failed');
-            }}
-          />
-        </div>
-      )}
       <div style={{ display: 'flex', gap: '24px', justifyContent: 'center', marginTop: '32px' }}>
         <FeatureBox
           title="Create a heroic profile"
@@ -44,7 +34,7 @@ const Home = () => {
         />
         <FeatureBox
           title="Chat with recruiters"
-          description="Direct communication with Doom and other recruiters"
+          description="Direct communication with Doom"
           icon={msg}
         />
         <FeatureBox

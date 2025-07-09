@@ -4,15 +4,15 @@ import Home from './Pages/Home'
 import Navbar from './Components/Navbar';
 import Login from './Pages/Login';
 import Sign from './Pages/Sign_Up';
+import Home_Logged from './Pages/Home_Logged';
 
 export default function App() {
   return (
     <>
     <img className="bg-Image" src = "./Components_CSS/Bg1.png" alt="Background" />
-      <Navbar />
-      <div style={{ marginTop: '10px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home_Logged/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<Sign />} />
         </Routes>

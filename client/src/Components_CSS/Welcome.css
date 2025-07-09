@@ -1,0 +1,39 @@
+.wel{
+    background: linear-gradient(90deg, #211e57 0%, #2d1a67 100%);
+    border-radius: 12px;
+    margin-left: 15px;
+    margin-right: 15px;
+    display:flex;
+    flex-wrap: wrap;
+    align-items:center;
+    margin-top:90px;
+    justify-content: space-between;
+    padding-left: 40px;
+    padding-bottom: 10px;
+    max-width: 100%;
+    width:auto;
+    flex-shrink: 1;
+    min-width: 0;
+}
+.wel h1{
+    margin-bottom: 10px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-size: 40px;
+}
+.wel p{ 
+    margin-top:10px;
+    text-align: left;
+    font-size: 18px;
+}
+.jbs{
+    padding-left: 500px;
+    padding-right: 50px;
+}
+.aps{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.ints{
+    padding-left: 50px;
+    padding-right: 50px;
+}

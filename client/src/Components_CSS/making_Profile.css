@@ -1,0 +1,44 @@
+.Profile{
+ background: linear-gradient(90deg, #4c1b35, #5a274e);
+    border-radius: 16px;
+    margin-left: 15px;
+    margin-right: 15px;
+    display:flex;
+    flex-wrap: wrap;
+    margin-top:18px;
+    align-items: center;
+    max-width: 100%;
+    width: auto;
+    flex-shrink: 1;
+min-width: 0;
+}
+.Profile img{
+    margin-top: 20px;
+     width: 70px;
+     margin-left:25px;
+  height: 70px;
+  margin-right: 10px;
+  align-items: center;
+}
+.text{
+     margin-left: 20px;
+    margin-right:350px;
+}
+.Profile h1{
+    margin-bottom: 10px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-size: 30px;
+}
+.Profile  p{
+    margin-top:10px;
+    text-align: left;
+    font-size: 18px;
+}
+.Complete{
+    margin-left:350px;
+    background-color: orangered;
+    transition:all 0.3s ease;
+}
+.Complete:hover{
+    transform:scale(1.09);
+}

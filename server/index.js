@@ -1,0 +1,58 @@
+const express =require('express');
+const cors=require('cors');
+const app=express();
+const mongoose =require('mongoose');
+const config =require('./config');
+const PORT =config.port;
+const {user} =require('./schema');
+app.use(cors());
+mongoose.connect(config.mongoURI,{
+    useNewUrlParser:true,
+    useUnifiedTopology:true
+});
+const db=mongoose.connection;
+db.on('error',()=>{console.log("Error connecting to database")});
+db.once('open',()=>{
+    console.log("Connected to database");
+})
+app.use(express.json());
+app.post('/api/google',async (req,res)=>{
+    const{username,password,name,type}=req.body;
+    try{
+    const check=await user.findOne({username});
+    if(!check){
+        const newData=new user({Username:username,password:password,Name:name,loginType:type});
+       await newData.save();
+        console.log("Successfully Logged in!");
+        res.status(200).send(true);
+    }
+    else{
+        console.log("Successfully Logged in!");
+        res.status(200).send(true);
+    }}
+    catch(error){
+        console.error("Server Error: ",error);
+        res.status(500).send("Server Error");
+    }
+});
+app.post('/api/login', async(req,res)=>{
+    const{username,password}=req.body;
+    try{
+    const check=await user.findOne({username,password});
+    if(check){
+        console.log("Logged In!");
+        res.status(200).send(true);
+    }
+    else{
+        console.log("Password and Username does not match!");
+        res.status(401).send(false);
+    }}
+    catch(error){
+        console.error("Server Error: ", error);
+        res.status(500).send("Server Error");
+    }
+})
+app.listen(PORT,()=>{
+    console.log(`Server is running on ${PORT}`);
+}
+);

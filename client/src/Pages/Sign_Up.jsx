@@ -1,23 +1,62 @@
 import React, { useState } from 'react';
 import '../Components_CSS/Loginc.css';
 import { GoogleLogin } from '@react-oauth/google';
+import {useNavigate} from 'react-router-dom';
+// import { set } from 'mongoose';
 
 const Sign_Up = () => {
+  const navigate=useNavigate();
   const [form, setForm] = useState({
     name: '',
-    email: '',
+    username: '',
     password: '',
     confirmPassword: '',
     superPower: ''
   });
+  const[type,setType]=useState('');
 
   const handleChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    if(form.confirmPassword!=form.password){
+      console.log("Password and Confirm Password don't match!");
+    }
+    else{
     // handle sign up logic here
+    try{
+      const username=form.username;
+      const password=form.password;
+      const name=form.name;
+    const response=await fetch('http://localhost:5000/api/signup',{
+      method:"POST",
+      headers:{
+      'Content-Type':'application/json'
+      },
+      body:JSON.stringify({username,password,name,type:'manual'})
+    });
+    if(response.ok){
+      navigate('/Home_Logged');
+      localStorage.setItem('Name',name);
+      localStorage.setItem('userName',username);
+      setForm.username='';
+      setForm.name='';
+      setForm.password='';
+      setForm.confirmPassword='';
+    }
+    else if(response.status==401){
+      console.log("Password and Confirm password does not match!");
+    }
+    else{
+      console.log('Error Connecting to the Server!');
+    }
+    }
+    catch(error){
+      console.error("Error fetching",error);
+    }
+  }
     console.log(form);
   };
 
@@ -41,10 +80,10 @@ const Sign_Up = () => {
             className="login-input"
           />
           <input
-            type="email"
-            name="email"
-            placeholder="Email ID"
-            value={form.email}
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={form.username}
             onChange={handleChange}
             required
             className="login-input"
@@ -67,7 +106,7 @@ const Sign_Up = () => {
             required
             className="login-input"
           />
-          <input
+          {/* <input
             type="text"
             name="superPower"
             placeholder="SuperPower"
@@ -75,10 +114,10 @@ const Sign_Up = () => {
             onChange={handleChange}
             required
             className="login-input"
-          />
+          /> */}
           <button type="submit" className="login-btn">Sign Up</button>
         </form>
-        <div className="login-google-btn">
+        {/* <div className="login-google-btn">
           <GoogleLogin
             onSuccess={credentialResponse => {
               console.log(credentialResponse);
@@ -87,7 +126,7 @@ const Sign_Up = () => {
               console.log('Login Failed');
             }}
           />
-        </div>
+        </div> */}
       </div>
     </div>
     

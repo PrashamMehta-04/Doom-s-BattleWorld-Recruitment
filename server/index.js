@@ -51,7 +51,26 @@ app.post('/api/login', async(req,res)=>{
         console.error("Server Error: ", error);
         res.status(500).send("Server Error");
     }
-})
+});
+app.post('/api/signup',async(req,res)=>{
+    const{username,password,name,type}=req.body;
+    try{
+        const check=await user.findOne({username});
+        if(check){
+            res.status(401).send("Username already exists");
+        }
+        else{
+            const newUser=new user({Username:username,password:password,Name:name,loginType:type});
+            await newUser.save();
+            console.log("Successfully Logged in!");
+            res.status(200).send(true);
+        }
+    }
+    catch(error){
+        console.error("Error in the server ",error);
+        res.status(500).send("Server Error!");
+    }
+});
 app.listen(PORT,()=>{
     console.log(`Server is running on ${PORT}`);
 }

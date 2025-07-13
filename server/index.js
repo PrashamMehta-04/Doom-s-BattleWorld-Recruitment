@@ -5,6 +5,7 @@ const mongoose =require('mongoose');
 const config =require('./config');
 const PORT =config.port;
 const {user} =require('./schema');
+const {heroes}=require('./schema')
 app.use(cors());
 mongoose.connect(config.mongoURI,{
     useNewUrlParser:true,
@@ -22,6 +23,8 @@ app.post('/api/google',async (req,res)=>{
     const check=await user.findOne({username});
     if(!check){
         const newData=new user({Username:username,password:password,Name:name,loginType:type});
+        const heroData=new heroes({Username:username});
+        await heroData.save();
        await newData.save();
         console.log("Successfully Logged in!");
         res.status(200).send(true);
@@ -61,6 +64,8 @@ app.post('/api/signup',async(req,res)=>{
         }
         else{
             const newUser=new user({Username:username,password:password,Name:name,loginType:type});
+            const newHero=new heroes({Username:username});
+            await newHero.save();
             await newUser.save();
             console.log("Successfully Logged in!");
             res.status(200).send(true);

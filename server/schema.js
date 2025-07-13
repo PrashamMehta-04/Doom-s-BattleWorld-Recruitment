@@ -20,4 +20,31 @@ const schema=new mongoose.Schema({
     }
 });
 const user=mongoose.model('User',schema);
-module.exports={user};
+const schema2=mongoose.Schema({
+    Username:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    SuperPower:{
+        type:String,
+        
+    },
+    BackStory:{
+        type:String,
+       
+    },
+    keyBattles:{
+        type:String,
+        
+    },
+    Weakness:{
+        type:String,
+    },
+    preferredRole:{
+        type:String,
+    }
+});
+const heroes=mongoose.model('Heroes',schema2);
+module.exports={user,heroes};
+

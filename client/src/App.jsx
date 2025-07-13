@@ -12,9 +12,10 @@ export default function App() {
     <img className="bg-Image" src = "./Components_CSS/Bg1.png" alt="Background" />
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Routes>
-          <Route path="/" element={<Sign/>} />
-          <Route path="/Home_Logged" element={<Home_Logged />} />
-          <Route path="/sign-up" element={<Login />} />
+          <Route path="/" element={<Login/>} />
+          <Route path="/Home_Logged" element={<Home_Logged />}/>
+          <Route path="/sign-up" element={<Sign />} />
+          <Route path="/home" element={<Home/>}/>
         </Routes>
       </div>
     </>

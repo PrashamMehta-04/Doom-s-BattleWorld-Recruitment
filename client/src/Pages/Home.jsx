@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <h1>BattleWorld Awaits!</h1>
+      <h1 style={{ paddingTop: '160px', textAlign: 'center' }}>BattleWorld Awaits!</h1>
       <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
         <Login_Button text="Login as Marvel Hero" onClick={() => navigate('/login')} />
         <Login_Button text="Login as Doom" onClick={() => navigate('/login')} />

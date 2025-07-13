@@ -1,0 +1,83 @@
+.openings-container {
+  width: 100%;
+  padding: 40px;
+  margin-top: 40px;
+  background: rgba(91, 63, 191, 0.15); /* Same as welcome box */
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.openings-header {
+  font-size: 24px;
+  color: #ff5e5e;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.job-card {
+  background-color: #1c1f36;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-4px);
+}
+
+.job-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.job-title {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+  margin: 0;
+}
+
+.job-desc {
+  font-size: 14px;
+  color: #cccccc;
+  margin: 0;
+}
+
+.applicant-tag {
+  margin-top: 8px;
+  background-color: #4caf50;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.review-btn {
+  background-color: #1e88e5;
+  color: white;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.review-btn:hover {
+  background-color: #1565c0;
+}

@@ -5,7 +5,7 @@ import Navbar from './Components/Navbar';
 import Login from './Pages/Login';
 import Sign from './Pages/Sign_Up';
 import Home_Logged from './Pages/Home_Logged';
-
+import Doom from './Pages/Doom';
 export default function App() {
   return (
     <>
@@ -16,6 +16,7 @@ export default function App() {
           <Route path="/Home_Logged" element={<Home_Logged />}/>
           <Route path="/sign-up" element={<Sign />} />
           <Route path="/home" element={<Home/>}/>
+          <Route path="/doom" element={<Doom/>}/>
         </Routes>
       </div>
     </>

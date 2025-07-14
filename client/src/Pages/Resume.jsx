@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import '../Components_CSS/resumec.css';
-import {useNavigate} from 'react';
+import {useNavigate} from 'react-router-dom';
 const Resume=()=>{
     const navigate=useNavigate();
    const[powerArr,setPowerArr]=useState(['']);
@@ -122,7 +122,7 @@ const Resume=()=>{
     <div className="field-list">
       <input type="text" placeholder="Enter Weakness"
       value={weaks}
-      onChange={(e)=>whandleChange(index,weaks)}
+      onChange={(e)=>whandleChange(index,e.target.value)}
       />
       <button onClick={()=>wremove(index)} className="btn remove">Remove</button>
     </div>

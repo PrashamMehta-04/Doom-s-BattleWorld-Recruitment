@@ -80,8 +80,8 @@ const Login = () => {
         <p className="login-subtitle">Sign in to unlock your multiversal destiny</p>
         <form className="login-form" onSubmit={handleFormSubmit}>
           <input
-            type="email"
-            placeholder="Email ID"
+            type="text"
+            placeholder="Username"
             value={username}
             onChange={e => setUsername(e.target.value)}
             required

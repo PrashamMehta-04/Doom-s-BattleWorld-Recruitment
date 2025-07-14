@@ -13,7 +13,7 @@ const Welcome = ({ name, stats }) => {
 
   return (
     <>
-      <div className="wel">
+      <div className="wel1">
         <h1>Welcome Back, {name}!</h1>
 
         <div className="stats-container">

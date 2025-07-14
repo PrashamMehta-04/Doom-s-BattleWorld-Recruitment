@@ -76,6 +76,17 @@ app.post('/api/signup',async(req,res)=>{
         res.status(500).send("Server Error!");
     }
 });
+app.post('/api/resume',async(req,res)=>{
+    const[{username,powerArr,bStory,battles,weak,pRole}]=req.body;
+    try{
+        const check=await heroes.findOne({Username:username});
+        
+    }
+    catch(error){
+        console.error('Server Error',error);
+        res.status(500).send('Server Error!');
+    }
+})
 app.listen(PORT,()=>{
     console.log(`Server is running on ${PORT}`);
 }

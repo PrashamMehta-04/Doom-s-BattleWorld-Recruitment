@@ -27,7 +27,7 @@ const schema2=mongoose.Schema({
         unique:true
     },
     SuperPower:{
-        type:String,
+        type:Array,
         
     },
     BackStory:{
@@ -35,11 +35,11 @@ const schema2=mongoose.Schema({
        
     },
     keyBattles:{
-        type:String,
+        type:Array,
         
     },
     Weakness:{
-        type:String,
+        type:Array,
     },
     preferredRole:{
         type:String,

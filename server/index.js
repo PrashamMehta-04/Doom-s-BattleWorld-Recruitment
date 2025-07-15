@@ -7,6 +7,8 @@ const PORT =config.port;
 const {user} =require('./schema');
 const {heroes}=require('./schema');
 const {Doom} =require('./schema');
+const bcrypt=require('bcrypt');
+const saltRounds=10;
 app.use(cors());
 mongoose.connect(config.mongoURI,{
     useNewUrlParser:true,
@@ -42,14 +44,22 @@ app.post('/api/google',async (req,res)=>{
 app.post('/api/login', async(req,res)=>{
     const{username,password}=req.body;
     try{
-    const check=await user.findOne({username,password});
-    if(check){
-        console.log("Logged In!");
-        res.status(200).send(true);
+    const check=await user.findOne({Username:username});
+    console.log(check);
+    if(!check){
+        console.log("User not found!");
+        res.status(404).send(false);
     }
     else{
-        console.log("Password and Username does not match!");
+      const passMatch=await bcrypt.compare(password,check.password);
+      if(passMatch){
+        console.log("Logged in!");
+        res.status(200).send(true);
+      }
+      else{
+        console.log('Password and Username dont match!');
         res.status(401).send(false);
+      }
     }}
     catch(error){
         console.error("Server Error: ", error);
@@ -64,7 +74,8 @@ app.post('/api/signup',async(req,res)=>{
             res.status(401).send("Username already exists");
         }
         else{
-            const newUser=new user({Username:username,password:password,Name:name,loginType:type});
+            const hash=await bcrypt.hash(password,saltRounds);
+            const newUser=new user({Username:username,password:hash,Name:name,loginType:type});
             const newHero=new heroes({Username:username});
             await newHero.save();
             await newUser.save();
@@ -77,6 +88,28 @@ app.post('/api/signup',async(req,res)=>{
         res.status(500).send("Server Error!");
     }
 });
+app.post('/api/resume',async(req,res)=>{
+    const{username,powerArr,bStory,battles,weak,pRole}=req.body;
+    try{
+        await heroes.updateOne(
+            {Username:username},{
+                $set:{
+                    SuperPower:powerArr,
+                    BackStory:bStory,
+                    keyBattles:battles,
+                    Weakness:weak,
+                    preferredRole:pRole
+                }
+            }
+        );
+        res.status(200).send(true);
+        
+    }
+    catch(error){
+        console.error('Server Error',error);
+        res.status(500).send('Server Error!');
+    }
+})
 app.listen(PORT,()=>{
     console.log(`Server is running on ${PORT}`);
 }

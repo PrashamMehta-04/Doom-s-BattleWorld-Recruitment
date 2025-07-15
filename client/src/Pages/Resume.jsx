@@ -83,7 +83,7 @@ const Resume=()=>{
   <p>Tell the multiverse about your powers and abilities</p>
 
   {/* Hero Superpower Section */}
-  <section className="form-sec">
+  <section className="form-section">
     <h2>🔋 Hero Superpower</h2>
    {powerArr.map((power,index)=>(
     <div className="field-list">

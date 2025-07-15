@@ -1,4 +1,4 @@
-main-body {
+main-body  {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #0a0e2a;
@@ -8,36 +8,38 @@ main-body {
   background-size: 50px 50px;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center ;
-  padding: 40px 0;
+  padding: 40px;
 }
 
 .base-container {
   width: 90%;
   max-width: 900px;
   margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
   padding: 40px;
-  background-color: rgba(15, 20, 60, 0.95);
+  background-color: rgba(20, 26, 71, 0.95);
   border-radius: 16px;
   /* box-shadow: 0 0 60px rgba(0, 200, 255, 0.15), 0 0 30px rgba(255, 255, 255, 0.05); */
 }
 
 main-body h1 {
-  text-align: center;
+  text-align: left;
   font-size: 2.5rem;
   color: #a6c9ff;
   margin-bottom: 10px;
 }
 
 main-body p {
-  text-align: center;
+  text-align: left;
   font-size: 1rem;
   color: #c0c9ff;
   margin-bottom: 30px;
 }
 
-.form-sec {
+.form-section {
   margin-bottom: 30px;
   padding: 20px;
   align-items: left;
@@ -45,9 +47,10 @@ main-body p {
   background-color: #0e1336;
   border: 1px solid #2c3e75;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: left;
 }
 
-.form-sec h2 {
+.form-section h2 {
   font-size: 1.3rem;
   color: #78aaff;
   align-items: left;
@@ -65,7 +68,7 @@ main-body p {
   margin-bottom: 10px;
 }
 
-input, textarea {
+input[type="text"], textarea {
   flex: 1;
   padding: 12px 15px;
   font-size: 1rem;
@@ -77,8 +80,8 @@ input, textarea {
   /* margin-top: 8px; */
 }
 
-main-body textarea {
-  width: 100%;
+textarea {
+  width: 97%;
   height: 100px;
   resize: vertical;
   align-items: left;

@@ -7,6 +7,9 @@ const PORT =config.port;
 const {user} =require('./schema');
 const {heroes}=require('./schema');
 const bcrypt=require('bcrypt');
+const jwt=require('jsonwebtoken');
+const jwt_Key=config.JWTkey;
+const verifyToken=require('./Route');
 const saltRounds=10;
 app.use(cors());
 mongoose.connect(config.mongoURI,{
@@ -53,7 +56,8 @@ app.post('/api/login', async(req,res)=>{
       const passMatch=await bcrypt.compare(password,check.password);
       if(passMatch){
         console.log("Logged in!");
-        res.status(200).send(true);
+        const token=jwt.sign({id:check.id,username:check.Username},jwt_Key,{expiresIn:'20h'})
+        res.json({token});
       }
       else{
         console.log('Password and Username dont match!');
@@ -87,8 +91,9 @@ app.post('/api/signup',async(req,res)=>{
         res.status(500).send("Server Error!");
     }
 });
-app.post('/api/resume',async(req,res)=>{
-    const{username,powerArr,bStory,battles,weak,pRole}=req.body;
+app.post('/api/resume',verifyToken,async(req,res)=>{
+    const{powerArr,bStory,battles,weak,pRole}=req.body;
+    const username=req.user.username;
     try{
         await heroes.updateOne(
             {Username:username},{
@@ -107,6 +112,22 @@ app.post('/api/resume',async(req,res)=>{
     catch(error){
         console.error('Server Error',error);
         res.status(500).send('Server Error!');
+    }
+});
+app.get('/api/validate',async (req,res)=>{
+    const token=req.header('Authorization').replace('Bearer ','');
+    if(!token){
+        res.status(401).json({error:'No token provided'});
+    }
+    else{
+        try{
+            const decoded=jwt.verify(token,jwt_Key);
+            res.json({user:{id:decoded.id,username:decoded.username}});
+        }
+        catch(err){
+            console.error('Error',err);
+            res.status(401).json({error:'Invalid token'});
+        }
     }
 })
 app.listen(PORT,()=>{

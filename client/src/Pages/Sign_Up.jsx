@@ -38,7 +38,7 @@ const Sign_Up = () => {
       body:JSON.stringify({username,password,name,type:'manual'})
     });
     if(response.ok){
-      navigate('/Home_Logged');
+      navigate('/login');
       localStorage.setItem('Name',name);
       localStorage.setItem('userName',username);
       setForm.username='';

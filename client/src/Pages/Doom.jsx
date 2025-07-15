@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Login_Button from '../Components/Login_Button';
 import FeatureBox from '../Components/Feature_Box';
 import circleUser from '../Components_CSS/circle-user.svg';
@@ -9,8 +9,10 @@ import { useNavigate } from 'react-router-dom';
 import Navbar_Login from '../Components/Doom_Navbar';
 import Job_Cards from '../Components/Job_Cards';
 import Welcome from '../Components/Doom_Welcome';
+import useAuthGuard from '../Components/useAuthGuard';
 
 const Doom = () => {
+  useAuthGuard();
     const Name=localStorage.getItem('Name');
     const n=5;
     return(

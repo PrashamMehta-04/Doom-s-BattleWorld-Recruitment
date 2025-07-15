@@ -3,6 +3,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import '../Components_CSS/Loginc.css';
 import {jwtDecode} from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
+import {setStoreValue} from 'pulsy';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +21,9 @@ const Login = () => {
       body:JSON.stringify({username,password})
     });
     if(submitNormal.ok){
+      const data=await submitNormal.json();
+      const token=data.token;
+      setStoreValue('auth',{token,user:{username}})
    navigate('./Home_Logged');
    localStorage.setItem('userName',username); 
    localStorage.setItem('Name',name);
@@ -37,6 +41,7 @@ const Login = () => {
   catch(error){
     console.error("Error", error);
   }
+  
      console.log('Email:', username, 'Password:', password);
   };
     // handle email/password login here const submitGoogle =async (e)=>{

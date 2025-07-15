@@ -1,9 +1,11 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Navbar_Login from '../Components/Navbar_Login';
 import Welcome from '../Components/Welcome';
 import Making_Profile from '../Components/making_Profile';
 import Job_Cards from '../Components/Job_Cards';
+import useAuthGuard from '../Components/useAuthGuard';
 const Home_Logged=()=>{
+  useAuthGuard();
     const jobs=[];
     const Name=localStorage.getItem('Name');
     const data=[{Title:"Quantum Energy Specialist",subTitle:"Control energy in high-stress combat zone",item1:"Knowhere, Andromeda Galaxy",item2:"80K-120K Celestial Credits",item3:"Apply Before: July 30,2025"},{Title:"Quantum Energy Specialist",subTitle:"Control energy in high-stress combat zone",item1:"Knowhere, Andromeda Galaxy",item2:"80K-120K Celestial Credits",item3:"Apply Before: July 30,2025"},{Title:"Quantum Energy Specialist",subTitle:"Control energy in high-stress combat zone",item1:"Knowhere, Andromeda Galaxy",item2:"80K-120K Celestial Credits",item3:"Apply Before: July 30,2025"},{Title:"Quantum Energy Specialist",subTitle:"Control energy in high-stress combat zone",item1:"Knowhere, Andromeda Galaxy",item2:"80K-120K Celestial Credits",item3:"Apply Before: July 30,2025"},{Title:"Quantum Energy Specialist",subTitle:"Control energy in high-stress combat zone",item1:"Knowhere, Andromeda Galaxy",item2:"80K-120K Celestial Credits",item3:"Apply Before: July 30,2025"}]

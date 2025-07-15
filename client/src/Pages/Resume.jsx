@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import '../Components_CSS/resumec.css';
 import {useNavigate} from 'react-router-dom';
+import {getStoreValue} from 'pulsy';
+import useAuthGuard from '../Components/useAuthGuard';
 const Resume=()=>{
+    useAuthGuard();
     const navigate=useNavigate();
    const[powerArr,setPowerArr]=useState(['']);
    const[battles,setBattles]=useState(['']);
@@ -12,6 +15,7 @@ const Resume=()=>{
    const wadd=()=>{
     setWeak([...weak,'']);
    }
+   const token=getStoreValue('auth')?.token;
    const wremove=(index)=>{
     if(weak.length>1){
     const update=[...weak];
@@ -60,8 +64,10 @@ const Resume=()=>{
         e.preventDefault();
         const response=await fetch('http://localhost:5000/api/resume',{
            method:'POST',
-           headers:{'Content-Type':'application/json'},
-           body:JSON.stringify({username,powerArr,bStory,battles,weak,pRole}) 
+           headers:{'Content-Type':'application/json',
+             Authorization: `Bearer ${token}`,
+           },
+           body:JSON.stringify({powerArr,bStory,battles,weak,pRole}) 
         });
         if(response.ok){
             navigate('/Home_Logged');

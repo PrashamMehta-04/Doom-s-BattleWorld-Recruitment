@@ -18,8 +18,9 @@ const Welcome=({name,jobs,applications,interviews})=>{
             <div className="ints">
                 <h1>{interviews}</h1>
             <p>Interviews</p>
-            </div>
+            </div>  
         </div>
+        
     );
 };
 export default Welcome;

@@ -1,15 +1,17 @@
-.login-bg {
+
+.jobpost-bg {
   min-height: 100vh;
   width: 100vw;
   background: radial-gradient(ellipse at 60% 40%, #6c63ff55 0%, #1a1a3b 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
   overflow: hidden;
+  text-align: center;
 }
 
-.login-glass-card {
+
+.jobpost-glass-card {
   background: rgba(30, 30, 60, 0.75);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   border-radius: 24px;
@@ -19,68 +21,71 @@
   text-align: center;
   backdrop-filter: blur(8px);
   border: 1.5px solid #6c63ff55;
+  text-align: center;
 }
 
-.login-logo {
+.jobpost-logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap:  0px;
+  gap: 0px;
   margin-bottom: 18px;
 }
 
-.login-bolt {
+.jobpost-bolt {
   font-size: 2rem;
   color: #ffb347;
 }
 
-.login-title {
+.jobpost-title {
   font-size: 1.5rem;
   font-weight: bold;
   color: #fff;
   letter-spacing: 1px;
 }
 
-.login-glass-card h2 {
+.jobpost-glass-card h2 {
   color: #fff;
   margin-bottom: 8px;
   font-size: 1.4rem;
   font-weight: 600;
+  text-align: center;
 }
 
-.login-subtitle {
+.jobpost-subtitle {
   color: #bdbdfc;
   margin-bottom: 28px;
   font-size: 1rem;
 }
 
-.login-google-btn {
-  display: flex;
-  justify-content: center;
-}
-.login-form {
+.jobpost-form {
   display: flex;
   flex-direction: column;
   gap: 14px;
   margin-bottom: 18px;
 }
 
-.login-input {
+.jobpost-input {
   padding: 10px 14px;
   border-radius: 8px;
   border: 1px solid #6c63ff55;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   color: #fff;
   font-size: 1rem;
   outline: none;
   transition: border 0.2s;
 }
 
-.login-input:focus {
+.jobpost-input:focus {
   border: 1.5px solid #6c63ff;
 }
 
-.login-btn {
+.jobpost-textarea {
+  resize: none;
+  height: 100px;
+}
+
+.jobpost-btn {
   padding: 10px 0;
   border-radius: 8px;
   border: none;
@@ -93,6 +98,14 @@
   transition: 0.2s;
 }
 
-.login-btn:hover {
+.jobpost-btn:hover {
   background: linear-gradient(90deg, #6c63ff 0%, #a58dff 100%);
+}
+
+.jobpost-label {
+  text-align: left;
+  color: #bdbdfc;
+  font-size: 0.9rem;
+  margin-top: 6px;
+  margin-bottom: -6px;
 }

@@ -5,9 +5,9 @@
     margin-right: 15px;
     display:flex;
     flex-wrap: wrap;
-    align-items:center;
+    /* align-items:center; */
     margin-top:90px;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     padding-left: 40px;
     padding-bottom: 10px;
     max-width: 100%;

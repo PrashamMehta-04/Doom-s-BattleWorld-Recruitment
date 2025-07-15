@@ -46,5 +46,35 @@ const schema2=mongoose.Schema({
     }
 });
 const heroes=mongoose.model('Heroes',schema2);
-module.exports={user,heroes};
 
+
+const doomSchema = new mongoose.Schema({
+  companyName: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  subTitle: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  lastDate: {
+    type: String,
+    required: true
+  },
+  salary: {
+    type: String,
+    required: true
+  },
+  location: {
+    type: String,
+    required: true
+  }
+});
+
+const Doom = mongoose.model('Doom', doomSchema);
+module.exports={user,heroes, Doom};

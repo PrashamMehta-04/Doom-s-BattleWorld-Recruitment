@@ -7,13 +7,18 @@ import {
 } from 'react-icons/fa';
 import '../Components_CSS/Doom_Welcomec.css';
 import CurrentOpenings from './Job_Openings';
+import { useNavigate } from 'react-router-dom';
 
 const Welcome = ({ name, stats }) => {
   const { activePositions, totalApplicants, shortlisted, activeChats } = stats;
+  const navigate = useNavigate();
+  const handlePostNewPosition = () => {
+    navigate('/job');
+  };
 
   return (
     <>
-      <div className="wel">
+      <div className="wel1">
         <h1>Welcome Back, {name}!</h1>
 
         <div className="stats-container">
@@ -40,7 +45,7 @@ const Welcome = ({ name, stats }) => {
         </div>
 
         <div className="action-buttons">
-          <button className="action-btn red">Post New Position</button>
+          <button className="action-btn red" onClick={handlePostNewPosition}>Post New Position</button>
           <button className="action-btn blue">Review Applications</button>
           <button className="action-btn purple">Manage Communications</button>
         </div>

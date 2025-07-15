@@ -6,6 +6,7 @@ import Login from './Pages/Login';
 import Sign from './Pages/Sign_Up';
 import Home_Logged from './Pages/Home_Logged';
 import Doom from './Pages/Doom';
+import Job_Post from './Pages/Job_Post';
 export default function App() {
   return (
     <>
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/sign-up" element={<Sign />} />
           <Route path="/home" element={<Home/>}/>
           <Route path="/doom" element={<Doom/>}/>
+          <Route path="/job" element={<Job_Post/>}/>
         </Routes>
       </div>
     </>

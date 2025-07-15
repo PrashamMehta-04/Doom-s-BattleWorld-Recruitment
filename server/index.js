@@ -5,7 +5,8 @@ const mongoose =require('mongoose');
 const config =require('./config');
 const PORT =config.port;
 const {user} =require('./schema');
-const {heroes}=require('./schema')
+const {heroes}=require('./schema');
+const {Doom} =require('./schema');
 app.use(cors());
 mongoose.connect(config.mongoURI,{
     useNewUrlParser:true,
@@ -80,3 +81,23 @@ app.listen(PORT,()=>{
     console.log(`Server is running on ${PORT}`);
 }
 );
+app.post('/api/job_post', async (req, res) => {
+    try{
+        const { companyName, subTitle, description, lastDate, salary, location } = req.body;
+        const newJob = new Doom({
+            companyName,
+            subTitle,
+            description,
+            lastDate: new Date(lastDate).toISOString().split('T')[0],
+            salary,
+            location
+        });
+        await newJob.save();
+        console.log("Job posted successfully!");
+        res.status(201).json({message: "Job posted successfully!"});
+    }
+    catch(error){
+        console.error("Error posting job:", error);
+        res.status(500).json({message: "Error posting job"});
+    }
+});

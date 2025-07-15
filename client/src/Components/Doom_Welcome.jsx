@@ -45,8 +45,7 @@ const Welcome = ({ name, stats }) => {
         </div>
 
         <div className="action-buttons">
-          <button className="action-btn red" onClick={handlePostNewPosition}>Post New Position</button>
-          <button className="action-btn blue">Review Applications</button>
+          <button className="action-btn red" onClick={handlePostNewPosition}>Post New Position</button> 
           <button className="action-btn purple">Manage Communications</button>
         </div>
       </div>

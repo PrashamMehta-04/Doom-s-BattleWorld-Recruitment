@@ -1,3 +1,4 @@
+
 .jobpost-bg {
   min-height: 100vh;
   width: 100vw;
@@ -5,9 +6,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
   overflow: hidden;
+  text-align: center;
 }
+
 
 .jobpost-glass-card {
   background: rgba(30, 30, 60, 0.75);
@@ -19,6 +21,7 @@
   text-align: center;
   backdrop-filter: blur(8px);
   border: 1.5px solid #6c63ff55;
+  text-align: center;
 }
 
 .jobpost-logo {
@@ -46,6 +49,7 @@
   margin-bottom: 8px;
   font-size: 1.4rem;
   font-weight: 600;
+  text-align: center;
 }
 
 .jobpost-subtitle {

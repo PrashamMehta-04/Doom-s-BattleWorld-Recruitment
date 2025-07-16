@@ -68,7 +68,7 @@ main-body p {
   margin-bottom: 10px;
 }
 
-input[type="text"], textarea {
+.rinput, .rText {
   flex: 1;
   padding: 12px 15px;
   font-size: 1rem;
@@ -80,7 +80,7 @@ input[type="text"], textarea {
   /* margin-top: 8px; */
 }
 
-textarea {
+.rText {
   width: 97%;
   height: 100px;
   resize: vertical;

@@ -130,11 +130,7 @@ app.get('/api/validate',async (req,res)=>{
             res.status(401).json({error:'Invalid token'});
         }
     }
-})
-app.listen(PORT,()=>{
-    console.log(`Server is running on ${PORT}`);
-}
-);
+});
 app.post('/api/job_post', async (req, res) => {
     try{
         const { companyName, subTitle, description, lastDate, salary, location } = req.body;
@@ -155,3 +151,27 @@ app.post('/api/job_post', async (req, res) => {
         res.status(500).json({message: "Error posting job"});
     }
 });
+app.get('/api/cards',verifyToken,async (req,res)=>{
+    try{
+        const products=await Doom.find();
+        res.json(products);
+    }
+    catch(error){
+        console.log("Failed to fetch!",error);
+        res.status(500).send(false);
+    }
+});
+app.get('/api/profile',verifyToken,async(req,res)=>{
+    const username=req.user.username;
+    const check=await heroes.findOne({Username:username});
+    if(check){
+        res.status(200).send(true);
+    }
+    else{
+        res.status(400).send(false);
+    }
+})
+app.listen(PORT,()=>{
+    console.log(`Server is running on ${PORT}`);
+}
+);

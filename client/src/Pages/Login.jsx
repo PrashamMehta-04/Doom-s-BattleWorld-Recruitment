@@ -24,7 +24,7 @@ const Login = () => {
       const data=await submitNormal.json();
       const token=data.token;
       setStoreValue('auth',{token,user:{username}})
-   navigate('./Home_Logged');
+   navigate('/home-logged');
    localStorage.setItem('userName',username); 
    localStorage.setItem('Name',name);
    setUsername('');

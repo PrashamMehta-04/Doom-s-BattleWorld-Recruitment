@@ -8,6 +8,7 @@ import Home_Logged from './Pages/Home_Logged';
 import Doom from './Pages/Doom';
 import Job_Post from './Pages/Job_Post';
 import Resume from './Pages/Resume';
+import Doom_Review from './Pages/Doom_Review';
 export default function App() {
   return (
     <>
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/doom" element={<Doom/>}/>
           <Route path="/job" element={<Job_Post/>}/>
           <Route path ='/resume' element={<Resume/>}/>
+          <Route path="/doom-review" element={<Doom_Review />} />
         </Routes>
       </div>
     </>

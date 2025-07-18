@@ -155,3 +155,15 @@ app.post('/api/job_post', async (req, res) => {
         res.status(500).json({message: "Error posting job"});
     }
 });
+
+app.get('/api/heroes', async (req, res) => {
+  try {
+    const allHeroes = await heroes.find();
+    res.json(allHeroes);
+  } catch (error) {
+    console.error("Error fetching heroes:", error);
+    res.status(500).json({ error: "Server error while fetching heroes" });
+  }
+});
+
+

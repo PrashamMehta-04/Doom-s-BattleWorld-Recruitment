@@ -163,7 +163,7 @@ app.get('/api/cards',verifyToken,async (req,res)=>{
 app.get('/api/profile',verifyToken,async(req,res)=>{
     const username=req.user.username;
     const check=await heroes.findOne({Username:username});
-    if(check){
+    if(!check?.SuperPower || check.SuperPower.length === 0){
         res.status(200).send(true);
     }
     else{

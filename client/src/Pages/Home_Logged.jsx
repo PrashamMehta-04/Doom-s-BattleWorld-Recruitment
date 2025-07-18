@@ -64,7 +64,7 @@ const Home_Logged=()=>{
   fetchCards();
 },[]);
     const Name=localStorage.getItem('Name');
-    console.log(len);
+    
     return(
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', height:"auto" }}>
         <Navbar_Login/> 

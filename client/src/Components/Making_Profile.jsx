@@ -1,7 +1,9 @@
 import React from 'react';
 import '../Components_CSS/making_Profile.css';
 import exclamation from '../Components_CSS/exclamation.png';
+import {useNavigate} from 'react-router-dom';
 const Making_Profile=()=>{
+    const navigate=useNavigate();
     return(
         <div className="Profile">
             <div>
@@ -12,7 +14,7 @@ const Making_Profile=()=>{
            <p> Complete it now to get matched with best roles!</p> 
            </div>
            <div>
-            <button className="Complete">Complete Now</button>
+            <button onClick={()=>navigate('/Resume')} className="Complete">Complete Now</button>
            </div>
         </div>
     );

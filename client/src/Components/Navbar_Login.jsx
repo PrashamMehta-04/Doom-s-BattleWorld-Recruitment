@@ -1,6 +1,8 @@
 import React from 'react';
 import '../Components_CSS/Navbarc.css';
+import{useNavigate} from 'react-router-dom';
 const Navbar_Login=()=>{
+  const navigate=useNavigate();
     return(
         <div>
         <header className="header">
@@ -10,8 +12,8 @@ const Navbar_Login=()=>{
       </div>
       <nav className="nav-links">
         <a href="#">Home</a>
-        <a href="#">Status</a>
-        <a href="#">My Profile</a>
+        <a  href="#">Status</a>
+        <a onClick={()=>navigate('/hero-profile')} href="#">My Profile</a>
         <button className="button">Logout</button>
       </nav>
     </header> 

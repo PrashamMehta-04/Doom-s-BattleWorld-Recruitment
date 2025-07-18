@@ -87,7 +87,7 @@ const Resume=()=>{
     <h2>🔋 Hero Superpower</h2>
    {powerArr.map((power,index)=>(
     <div className="field-list">
-     <input type="text" placeholder="Enter Superpower" 
+     <input type="text" placeholder="Enter Superpower"className='rinput' 
      value={power}
      onChange={(e)=>phandleChange(index,e.target.value)}
      /> 
@@ -100,7 +100,7 @@ const Resume=()=>{
   {/* Origin Story Section */}
   <section className="form-section">
     <h2>📖 Origin Story & Backstory</h2>
-    <textarea placeholder="Tell your origin story..."
+    <textarea placeholder="Tell your origin story..." className='rText'
     value={bStory}
     onChange={(e)=>setBStory(e.target.value)}
     />
@@ -111,7 +111,7 @@ const Resume=()=>{
     <h2>⚔️ Legendary Battles & Achievements</h2>
     {battles.map((battle,index)=>(
     <div className="field-list">
-      <input type="text" placeholder="Battle/Achievement Title"
+      <input type="text" placeholder="Battle/Achievement Title" className='rinput' 
       value={battle}
       onChange={((e)=>bhandleChange(index,e.target.value))}
        />
@@ -126,7 +126,7 @@ const Resume=()=>{
     <h2>⚠️ Known Limitations & Weaknesses</h2>
     {weak.map((weaks,index)=>(
     <div className="field-list">
-      <input type="text" placeholder="Enter Weakness"
+      <input type="text" placeholder="Enter Weakness" className='rinput' 
       value={weaks}
       onChange={(e)=>whandleChange(index,e.target.value)}
       />
@@ -140,7 +140,7 @@ const Resume=()=>{
   <section className="form-section">
     <h2>🔑 Preferred Roles & Positions</h2>
     <div className="field-list">
-      <input type="text" placeholder="Role Title" 
+      <input type="text" placeholder="Role Title" className='rinput' 
       value={pRole}
       onChange={(e)=>setProle(e.target.value)}
       />

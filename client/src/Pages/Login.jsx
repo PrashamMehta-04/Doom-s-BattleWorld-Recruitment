@@ -24,9 +24,12 @@ const Login = () => {
       const data=await submitNormal.json();
       const token=data.token;
       setStoreValue('auth',{token,user:{username}})
-   navigate('./Home_Logged');
+    const n=jwtDecode(token);
+    setName(n.name);
+      console.log(n.name);
+   navigate('/home-logged');
    localStorage.setItem('userName',username); 
-   localStorage.setItem('Name',name);
+   localStorage.setItem('Name',n.name);
    setUsername('');
    setPassword('');
    setName('');

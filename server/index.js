@@ -48,7 +48,6 @@ app.post('/api/login', async(req,res)=>{
     const{username,password}=req.body;
     try{
     const check=await user.findOne({Username:username});
-    console.log(check);
     if(!check){
         console.log("User not found!");
         res.status(404).send(false);
@@ -57,7 +56,7 @@ app.post('/api/login', async(req,res)=>{
       const passMatch=await bcrypt.compare(password,check.password);
       if(passMatch){
         console.log("Logged in!");
-        const token=jwt.sign({id:check.id,username:check.Username},jwt_Key,{expiresIn:'20h'})
+        const token=jwt.sign({id:check.id,username:check.Username, name:check.Name},jwt_Key,{expiresIn:'20h'})
         res.json({token});
       }
       else{
@@ -170,7 +169,18 @@ app.get('/api/profile',verifyToken,async(req,res)=>{
     else{
         res.status(400).send(false);
     }
-})
+});
+app.get('/api/heroProfile',verifyToken,async(req,res)=>{
+   const username=req.user.username;
+   const data=await heroes.findOne({Username:username});
+   if(!data){
+    console.log("Profile not Found!");
+    res.status(404).send(false);
+   } 
+   else{
+    res.json(data);
+   }
+});
 app.listen(PORT,()=>{
     console.log(`Server is running on ${PORT}`);
 }

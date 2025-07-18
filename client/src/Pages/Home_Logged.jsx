@@ -5,7 +5,9 @@ import Making_Profile from '../Components/making_Profile';
 import Job_Cards from '../Components/Job_Cards';
 import useAuthGuard from '../Components/useAuthGuard';
 import {getStoreValue} from 'pulsy';
+import {useNavigate} from 'react-router-dom';
 const Home_Logged=()=>{
+  const navigate=useNavigate();
   useAuthGuard();
     const [jobs,setJobs]=useState([]);
     const [len,setLen]=useState();

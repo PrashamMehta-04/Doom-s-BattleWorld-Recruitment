@@ -1,0 +1,344 @@
+/* GLOBAL RESET FOR WRAPPER */
+.cq-wrapper {
+  min-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* ========================== */
+/* 🔮 GLOBAL CONTAINER STYLES */
+/* ========================== */
+.cq-container {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 2rem;
+  background: linear-gradient(180deg, #10142b 0%, #1c2141 100%);
+  color: white;
+}
+
+/* ========================== */
+/* 🔹 HEADER / HERO PANEL */
+/* ========================== */
+.cq-hero-header {
+  display: flex;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, #1f2249, #2d3170);
+  border-radius: 16px;
+  padding: 1.8rem;
+  box-shadow: 0 0 20px rgba(108, 92, 231, 0.2);
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.cq-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #8f5aff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.8rem;
+  color: white;
+  box-shadow: 0 0 10px #8f5aff66;
+}
+
+.cq-hero-info {
+  flex: 1;
+}
+
+.cq-name {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.cq-username {
+  color: #aaa;
+  font-size: 0.95rem;
+  margin-top: 0.3rem;
+}
+
+.cq-status {
+  display: inline-block;
+  margin-top: 0.6rem;
+  background-color: #2ecc71;
+  color: #0e1b10;
+  padding: 0.25rem 0.7rem;
+  font-weight: 600;
+  border-radius: 12px;
+  font-size: 0.75rem;
+}
+
+.cq-stats {
+  margin-top: 0.8rem;
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  color: #d2d2d2;
+}
+
+.cq-buttons {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cq-buttons button {
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.cq-recruit-btn {
+  background: #e84393;
+  color: white;
+}
+
+.cq-msg-btn {
+  background: #4046aa;
+  color: white;
+}
+
+.cq-resume-btn {
+  background: #2d3436;
+  color: white;
+}
+
+/* ========================== */
+/* 🧠 SECTION HEADERS */
+/* ========================== */
+.cq-section-title {
+  background: linear-gradient(90deg, #2f3365, #353b85);
+  padding: 0.6rem 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ========================== */
+/* 🧠 SUPERPOWERS SECTION */
+/* ========================== */
+.cq-powers {
+  background: #232656;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 10px rgba(100, 100, 255, 0.2);
+}
+
+.cq-cards-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.cq-card {
+  background-color: #1c1f3f;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.03);
+  position: relative;
+}
+.cq-section.cq-powers h2{
+     background-color: #2e2b5f;
+     border-radius: 16px;
+     padding:10px
+}
+.cq-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.cq-card p {
+  font-size: 0.85rem;
+  color: #b2bec3;
+  margin-bottom: 0.6rem;
+}
+
+.cq-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #00cec9, #a29bfe);
+  margin-top: 0.4rem;
+}
+
+/* ========================== */
+/* 📖 ORIGIN STORY SECTION */
+/* ========================== */
+.cq-origin {
+  background: #1b1d40;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(108, 92, 231, 0.1);
+}
+
+.cq-origin-box h3 {
+  color: #ffeaa7;
+  font-size: 1.05rem;
+  margin-top: 1.2rem;
+}
+
+.cq-origin-box p {
+  color: #dfe6e9;
+  font-size: 0.88rem;
+  margin-top: 0.4rem;
+}
+/* ========================== */
+/* ⚔️ KEY BATTLES SECTION */
+/* ========================== */
+.cq-battles {
+  background: linear-gradient(135deg, #1f2249, #2d3170);
+  padding: 1.8rem;
+  gap:1.5rem;
+  box-shadow: 0 0 20px rgba(108, 92, 231, 0.2);
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 12px rgba(108, 92, 231, 0.15);
+}
+
+.cq-battles .cq-section-title {
+  background: #2e2b5f;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.cq-battles-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cq-battle-item {
+  background: #1b1d40;
+  padding: 1rem;
+  min-height: 15px;
+  border-left: 5px solid #ff7675;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.cq-battle-item:hover {
+  transform: scale(1.01);
+}
+
+.cq-battle-item strong {
+  font-size: 1.05rem;
+  color: #ffeaa7;
+}
+
+.cq-battle-item p {
+  font-size: 0.88rem;
+  color: #dfe6e9;
+  margin-top: 0.3rem;
+}
+
+/* ========================== */
+/* ⚠️ WEAKNESSES SECTION */
+/* ========================== */
+.cq-weaknesses {
+  background: #421f3a;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.cq-weakness-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.cq-weakness-list li {
+  color: #fab1a0;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.cq-weakness-list li strong {
+  color: #ff7675;
+}
+
+/* ========================== */
+/* 🎯 PREFERRED ROLES SECTION */
+/* ========================== */
+.cq-preferred-roles {
+  background: linear-gradient(135deg, #1f2249, #2d3170);
+   background: #232656;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+  box-shadow: 0 0 20px rgba(108, 92, 231, 0.2);
+}
+
+/* Section Title Styling */
+.cq-preferred-roles .cq-section-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background: #2d2860;
+  padding: 12px 16px;
+  border-radius: 10px;
+/* width: fit-content; */
+}
+.cq-section-title{
+
+}
+
+.cq-preferred-roles .cq-section-icon {
+  margin-right: 10px;
+  font-size: 24px;
+}
+
+/* Spotlight Role Card */
+.cq-featured-role-card {
+  background-color: #2b245c;
+  border-left: 6px solid #ffa94d;
+  padding: 20px;
+  border-radius: 12px;
+  color: #fff;
+  min-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.cq-featured-role-card:hover {
+  transform: scale(1.02);
+}
+
+.cq-featured-role-card h4 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.cq-featured-role-card p {
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #dcdcff;
+}
+
+.cq-featured-role-card .cq-role-tags {
+  color: #84d0ff;
+  font-size: 14px;
+}

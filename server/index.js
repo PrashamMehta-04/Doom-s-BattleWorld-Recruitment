@@ -26,18 +26,21 @@ app.use(express.json());
 app.post('/api/google',async (req,res)=>{
     const{username,password,name,type}=req.body;
     try{
-    const check=await user.findOne({username});
+    const check=await user.findOne({Username:username});
+    console.log(check);
     if(!check){
         const newData=new user({Username:username,password:password,Name:name,loginType:type});
         const heroData=new heroes({Username:username});
         await heroData.save();
        await newData.save();
         console.log("Successfully Logged in!");
-        res.status(200).send(true);
+       const token=jwt.sign({id:check.id,username:check.Username, name:check.Name},jwt_Key,{expiresIn:'20h'})
+        res.json({token});
     }
     else{
         console.log("Successfully Logged in!");
-        res.status(200).send(true);
+        const token=jwt.sign({id:check.id,username:check.Username, name:check.Name},jwt_Key,{expiresIn:'20h'})
+        res.json({token});
     }}
     catch(error){
         console.error("Server Error: ",error);

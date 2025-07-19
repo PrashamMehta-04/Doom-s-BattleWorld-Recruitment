@@ -2,6 +2,7 @@ import React,{useState,useEffect, use} from 'react';
 import '../Components_CSS/hero_Profile.css';
 import { getStoreValue } from 'pulsy';
 import Profile_SuperPower from '../Components/Profile_SuperPower';
+import Navbar_Login from '../Components/Navbar_Login';
 const Hero_profile=()=>{
     const [power,setPower]=useState([]);
     const [story,setStory]=useState('');
@@ -41,7 +42,9 @@ const Hero_profile=()=>{
     profileMatching();
     },[])
     return(
+       
         <div className="cq-wrapper">
+          <Navbar_Login/>   
         <div className="cq-container">
   <div className="cq-hero-header">
     <div className="cq-avatar">

@@ -9,6 +9,9 @@
 /* 🔮 GLOBAL CONTAINER STYLES */
 /* ========================== */
 .cq-container {
+  margin-top:100px;
+  margin-bottom:30px;
+  border-radius: 16px;
   font-family: 'Segoe UI', sans-serif;
   padding: 2rem;
   background: linear-gradient(180deg, #10142b 0%, #1c2141 100%);

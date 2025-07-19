@@ -9,7 +9,8 @@ import Doom from './Pages/Doom';
 import Job_Post from './Pages/Job_Post';
 import Resume from './Pages/Resume';
 import Doom_Review from './Pages/Doom_Review';
-import Hero_profile from './Pages/Hero_profile';
+import Hero_profile from './Pages/hero_profile';
+import Job_info from './Pages/Job_info';
 export default function App() {
   return (
     <>
@@ -25,6 +26,7 @@ export default function App() {
           <Route path ='/resume' element={<Resume/>}/>
           <Route path="/doom-review" element={<Doom_Review />} />
           <Route path='/hero-profile' element={<Hero_profile/>}/>
+          <Route path='/job-info' element={<Job_info/>}/>
         </Routes>
       </div>
     </>

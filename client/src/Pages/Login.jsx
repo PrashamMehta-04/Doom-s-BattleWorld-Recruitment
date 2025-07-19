@@ -50,6 +50,7 @@ const Login = () => {
     // handle email/password login here const submitGoogle =async (e)=>{
       const submitGoogle=async (credentialResponse)=>{
       const decode=jwtDecode(credentialResponse.credential);
+      
 
       try{
         const response=await fetch("http://localhost:5000/api/google",{
@@ -60,12 +61,18 @@ const Login = () => {
           body:JSON.stringify({username:decode.email,password:null,name:decode.name,type:"google"})
         });
         if(response.ok){
-          navigate('./Home_logged');
-          localStorage.setItem('userName',decode.email); 
-          localStorage.setItem('Name',decode.name);
-          setUsername('');
-          setPassword('');
-          setName('');
+          const data=await response.json();
+                const token=data.token;
+                setStoreValue('auth',{token,user:{username}})
+              const n=jwtDecode(token);
+              setName(n.name);
+                console.log(n.name);
+            navigate('/home-logged');
+            localStorage.setItem('userName',username); 
+            localStorage.setItem('Name',n.name);
+            setUsername('');
+            setPassword('');
+            setName('');
           console.log("Logged in Successfully");
         }
         else{
@@ -73,7 +80,7 @@ const Login = () => {
         }
       }
       catch(error){
-        console.log("Error logging in!");
+        console.log("Error logging in!",error);
       }
     }
 

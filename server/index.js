@@ -10,8 +10,14 @@ const {Doom} =require('./schema');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 const jwt_Key=config.JWTkey;
+const cloudinary=require('cloudinary').v2;
 const verifyToken=require('./Route');
 const saltRounds=10;
+cloudinary.config({
+    cloud_name:config.cloudName,
+    api_key:config.cloudKey,
+    api_secret:config.cloudSecret,
+});
 app.use(cors());
 mongoose.connect(config.mongoURI,{
     useNewUrlParser:true,
@@ -95,7 +101,7 @@ app.post('/api/signup',async(req,res)=>{
     }
 });
 app.post('/api/resume',verifyToken,async(req,res)=>{
-    const{powerArr,bStory,battles,weak,pRole}=req.body;
+    const{powerArr,bStory,battles,weak,pRole,url}=req.body;
     const username=req.user.username;
     try{
         await heroes.updateOne(
@@ -105,7 +111,8 @@ app.post('/api/resume',verifyToken,async(req,res)=>{
                     BackStory:bStory,
                     keyBattles:battles,
                     Weakness:weak,
-                    preferredRole:pRole
+                    preferredRole:pRole,
+                    Resume:url
                 }
             }
         );
@@ -196,6 +203,22 @@ app.get('/api/heroProfile',verifyToken,async(req,res)=>{
     res.json(data);
    }
 });
+app.post('/api/job-info',verifyToken,async(req,res)=>{
+    const {Title}=req.body;
+    try{
+    const data=await Doom.findOne({companyName:Title});
+    if(!data){
+        console.log("No such Title!");
+        res.status(404).send(false);
+    }
+    else{
+        res.json(data);
+    }
+    }
+    catch(error){
+        console.log(error);
+    }
+})
 app.listen(PORT,()=>{
     console.log(`Server is running on ${PORT}`);
 }

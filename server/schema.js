@@ -17,7 +17,7 @@ const schema=new mongoose.Schema({
         type:String,
         enum:['google','manual'],
         required:true
-    }
+    },
 });
 const user=mongoose.model('User',schema);
 const schema2=mongoose.Schema({
@@ -43,6 +43,9 @@ const schema2=mongoose.Schema({
     },
     preferredRole:{
         type:String,
+    },
+    Resume:{
+      type:String
     }
 });
 const heroes=mongoose.model('Heroes',schema2);

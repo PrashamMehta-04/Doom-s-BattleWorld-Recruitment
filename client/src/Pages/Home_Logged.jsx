@@ -48,7 +48,9 @@ const Home_Logged=()=>{
       subTitle={job.subTitle}
       item1={job.lastDate}
       item2={job.salary}
-      item3={job.location}/>
+      item3={job.location}
+      
+      />
      ));
      setJobs(maps);
     }

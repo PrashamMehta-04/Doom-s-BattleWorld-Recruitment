@@ -122,12 +122,19 @@
 }
 
 .job-info-deadline-box,
-.job-info-about-box,
-.job-info-apply-box {
+.job-info-about-box{
   background: #232656;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(100, 100, 255, 0.2);
+}
+.job-info-apply-box{
+  background-color: #0e1336;
+  padding: 20px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  text-align: left;
+  border: 1px solid #2c3e75;
 }
 
 .job-info-deadline-title,
@@ -139,6 +146,12 @@
   font-size: 18px;
   color: #ffeaa7;
   margin-bottom: 10px;
+  text-align: center;
+}
+.job-info-apply-title{
+  border-radius: 8px;
+  color: #78aaff;
+  font-size: 1.3rem;
 }
 
 .job-info-deadline-date {
@@ -220,6 +233,9 @@
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s;
+  min-width: 1150px;
+  width: auto;
+  align-items: center;
   margin-top: 10px;
 }
 

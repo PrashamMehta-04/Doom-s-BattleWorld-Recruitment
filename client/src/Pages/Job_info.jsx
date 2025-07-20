@@ -1,20 +1,57 @@
 import React,{useState,useEffect} from 'react';
 import '../Components_CSS/job-info.css';
 import Navbar_Login from'../Components/Navbar_Login';
+import useAuthGuard from '../Components/useAuthGuard';
+import { getStoreValue } from 'pulsy';
 const Job_info=()=>{
+    useAuthGuard();
+    const token=getStoreValue('auth')?.token;
+    const title=localStorage.getItem('jobTitle');
+    const [subTitle,setSubTitle]=useState('');
+    const [desc,setDesc]=useState('');
+    const [lDate,setLDate]=useState();
+    const [salary,setSalary]=useState('');
+    const [location,setLocation]=useState('');
+    useEffect(()=>{
+        const job_info=async()=>{
+            try{
+                const response=await fetch("http://localhost:5000/api/job-info",{
+                    method:"POST",
+                    headers:{
+                        'Content-Type':'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                    body:JSON.stringify({Title:title})
+                });
+                if(response.ok){
+                    const data=await response.json();
+                    setSubTitle(data.subTitle);
+                    setDesc(data.description);
+                    setLDate(data.lastDate);
+                    setSalary(data.salary);
+                    setLocation(data.location);
+                }
+                else{
+                    console.log("Error!");
+                }
+            }
+            catch(error){
+            console.log("Failed to fetch!",error);
+        }
+        }
+        job_info(); 
+    },[])
    return (
   <div className="job-info-container">
     <Navbar_Login/>
     <div className="job-info-header">
       <button className="job-info-back-button">← Back to Job Listings</button>
-      <h1 className="job-info-title">Senior Full-Stack Developer</h1>
+      <h1 className="job-info-title">{title}</h1>
       <p className="job-info-subtitle">
-        Join our elite team building the next generation of interdimensional web applications
+       {subTitle}
       </p>
       <div className="job-info-tags">
-        <span className="job-info-tag">Remote / Quantum Realm</span>
-        <span className="job-info-tag">$120,000 - $180,000</span>
-        <span className="job-info-tag">Full-Time</span>
+        <span className="job-info-tag">${salary}</span>
       </div>
     </div>
 
@@ -22,22 +59,7 @@ const Job_info=()=>{
       <section className="job-info-description-section">
         <h2 className="job-info-section-title">📄 Job Description</h2>
         <p className="job-info-description-text">
-          We're seeking a talented Senior Full-Stack Developer to join our interdimensional development team at BattleWorld.
-          You'll be responsible for building cutting-edge web applications that operate across multiple realities and timelines.
-          <br /><br />
-          As a key member of our engineering team, you'll work on revolutionary projects including our Quantum Hero Management System,
-          Temporal Battle Analytics Platform, and the Multiverse Communication Network. Your code will literally help save dimensions!
-          <br /><br />
-          This role offers the unique opportunity to work with advanced technologies like React Quantum, Node.js Temporal Edition, and
-          our proprietary Reality.js framework. You’ll collaborate with heroes, time travelers, and interdimensional beings to create
-          seamless user experiences across all planes of existence.
-          <br /><br />
-          The ideal candidate thrives in fast-paced, high-stakes environments where debugging might involve preventing actual timeline
-          paradoxes. Experience with conventional web technologies is required, but we’ll train you on our quantum computing systems
-          and temporal debugging tools.
-          <br /><br />
-          Join us in building the future (and past, and alternate presents!) of web development. Your work will have impact across
-          infinite dimensions and help maintain the stability of the multiverse itself.
+         {desc}
         </p>
       </section>
 
@@ -90,16 +112,14 @@ const Job_info=()=>{
       <section className="job-info-application-sidebar">
         <div className="job-info-deadline-box">
           <h3 className="job-info-deadline-title">📅 Application Deadline</h3>
-          <p className="job-info-deadline-date">March 15, 2024</p>
-          <span className="job-info-deadline-note">Only 12 days remaining!</span>
+          <p className="job-info-deadline-date">{lDate}</p>
+         
         </div>
 
         <div className="job-info-about-box">
           <h3 className="job-info-about-title">🏢 About BattleWorld</h3>
           <ul className="job-info-about-list">
-            <li>Multiverse HQ, All Dimensions</li>
-            <li>10,000+ Heroes Worldwide</li>
-            <li>Founded 2019</li>
+            <li>{location}</li>
           </ul>
           <p className="job-info-about-text">
             Leading platform connecting heroes across dimensions for world-saving missions and interdimensional collaboration.
@@ -107,16 +127,8 @@ const Job_info=()=>{
         </div>
 
         <div className="job-info-apply-box">
-          <h3 className="job-info-apply-title">🚀 Apply Now</h3>
-          <form className="job-info-form">
-            <label className="job-info-form-label">Upload Resume</label>
-            <div className="job-info-upload-box">
-              <p>Click to upload or drag and drop</p>
-              <p className="job-info-upload-note">PDF, DOC, DOCX (Max 10MB)</p>
-            </div>
-
+         
             <button type="submit" className="job-info-submit-button">Submit Application</button>
-          </form>
         </div>
       </section>
     </div>

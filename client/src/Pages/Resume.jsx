@@ -12,8 +12,18 @@ const Resume=()=>{
    const username=localStorage.getItem('userName');
    const [bStory,setBStory]=useState('');
    const[pRole,setProle]=useState('');
+   const [pdfUrl,setPdfUrl]=useState('');
    const wadd=()=>{
     setWeak([...weak,'']);
+   }
+   const handleFileChange=(e)=>{
+    const selected=e.target.files[0];
+    if(selected&&selected.size<=10*1024*1024){
+      setPdfUrl(selected);
+    }
+    else{
+      console.log("File too large!");
+    }
    }
    const token=getStoreValue('auth')?.token;
    const wremove=(index)=>{
@@ -62,19 +72,36 @@ const Resume=()=>{
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
-        const response=await fetch('http://localhost:5000/api/resume',{
+        if(!pdfUrl){
+          console.log("please upload your resume!");
+        }
+        else{
+       
+        const formData=new FormData();
+        formData.append('file',pdfUrl);
+        formData.append('upload_preset',"resume_upload");
+        const cloud=await fetch("https://api.cloudinary.com/v1_1/<yourCloudName>/auto/upload",{
+          method:'POST',
+          body:formData,
+        });
+        
+        const data=await cloud.json();
+        const url=data.secure_url;
+         const response=await fetch('http://localhost:5000/api/resume',{
            method:'POST',
            headers:{'Content-Type':'application/json',
              Authorization: `Bearer ${token}`,
            },
-           body:JSON.stringify({powerArr,bStory,battles,weak,pRole}) 
+           body:JSON.stringify({powerArr,bStory,battles,weak,pRole,url}) 
         });
         if(response.ok){
-            navigate('/Home_Logged');
+            navigate('/home-logged');
         }
         else{
             console.log("Server Error!");
         }
+      
+      }
     }
     return(
        
@@ -146,6 +173,21 @@ const Resume=()=>{
       />
     </div>
   </section>
+   <div className="job-info-apply-box">
+          <h3 className="job-info-apply-title">🚀 Apply Now</h3>
+          <form className="job-info-form">
+            <label className="job-info-form-label">Upload Resume</label>
+            <div className="job-info-upload-box">
+               <input
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  onChange={handleFileChange}
+                />
+              <p>Click to upload or drag and drop</p>
+              <p className="job-info-upload-note">PDF, DOC, DOCX (Max 10MB)</p>
+            </div>
+             </form>
+             </div>
 
   <button onClick={handleSubmit} className="btn submit">Create Profile</button>
 </div>

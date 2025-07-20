@@ -200,3 +200,23 @@ app.listen(PORT,()=>{
     console.log(`Server is running on ${PORT}`);
 }
 );
+
+
+app.get('/api/doomOpenings', async (req, res) => {
+  try {
+    const openings = await Doom.find({}, 'companyName subTitle'); // projection
+    if (!openings || openings.length === 0) {
+      console.log("No Openings Found!");
+      return res.status(404).send(false);
+    } else {
+      res.json(openings);
+    }
+  } catch (err) {
+    console.error("Error fetching doom openings:", err);
+    res.status(500).send("Server Error");
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on ${PORT}`);
+});

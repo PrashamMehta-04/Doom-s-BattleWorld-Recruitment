@@ -73,6 +73,10 @@ const doomSchema = new mongoose.Schema({
   location: {
     type: String,
     required: true
+  },
+  applicants: {
+    type: [String], 
+    default: []
   }
 });
 

@@ -1,40 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import "../Components_CSS/Job_Openingsc.css";
-const jobList = [
-  {
-    title: "BattleWorld Tactician",
-    description: "Lead strategic assaults against multiversal threats",
-    applicants: 15,
-  },
-  {
-    title: "Dimensional Guardian",
-    description: "Protect Doom's realm from interdimensional invaders",
-    applicants: 23,
-  },
-  {
-    title: "Elite Enforcer",
-    description: "Eliminate anomalies with extreme prejudice",
-    applicants: 11,
-  },
-];
 
 const CurrentOpenings = () => {
+  const [jobs, setJobs] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/doomOpenings");
+        const data = await res.json();
+        setJobs(data);
+      } catch (err) {
+        console.error("Error fetching jobs:", err);
+      }
+    };
+
+    fetchJobs();
+  }, []);
+
+  const handleReview = () => {
+    navigate("/doom-review");
+  };
+
   return (
     <div className="openings-container">
       <h2 className="openings-header">Current Openings</h2>
-      {jobList.map((job, index) => (
+      {jobs.map((job, index) => (
         <div key={index} className="job-card">
           <div className="job-info">
-            <h3 className="job-title">{job.title}</h3>
-            <p className="job-desc">{job.description}</p>
-            <span className="applicant-tag">
-              {job.applicants} Applicants
-            </span>
+            <h3 className="job-title">{job.companyName}</h3>
+            <p className="job-desc">{job.subTitle}</p>
           </div>
-          <button className="review-btn">Review</button>
+          <button className="review-btn" onClick={handleReview}>
+            Review
+          </button>
         </div>
       ))}
     </div>
   );
 };
+
 export default CurrentOpenings;

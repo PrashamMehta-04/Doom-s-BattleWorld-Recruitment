@@ -71,7 +71,17 @@ const Home_Logged=()=>{
          <Welcome name={Name} jobs={len} applications={"5"} interviews={"2"}/>
         <div>{profile}</div>
        <p style={{textAlign:'left', marginLeft:'25px', fontSize:"20px", fontWeight:'bold'}}>Recommended Jobs</p>
-        <div style={{display:"flex", flexWrap:"wrap", alignItems:"stretch", gap:"20px"}}>{jobs}</div>
+        {/* <div style={{display:"flex", flexWrap:"wrap", alignItems:"stretch", gap:"20px"}}>{jobs}</div> */}
+        <div style={{
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "20px",
+  justifyContent: "center", 
+  padding: "0 20px"
+}}>
+  {jobs}
+</div>
+
       </div>  
     )
 }

@@ -243,3 +243,27 @@ app.get('/api/doomOpenings', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });
+
+
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+
+app.post('/api/Resume', upload.single('resume'), async (req, res) => {
+  try {
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      resource_type: 'raw',
+      folder: 'hero_resumes',
+    });
+
+    const Resume = result.secure_url;
+    await heroes.findOneAndUpdate(
+      { Username: req.body.username },
+      { Resume }
+    );
+
+    res.json({ Resume });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Upload failed");
+  }
+});

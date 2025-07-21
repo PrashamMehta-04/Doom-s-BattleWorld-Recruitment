@@ -40,12 +40,12 @@ app.post('/api/google',async (req,res)=>{
         await heroData.save();
        await newData.save();
         console.log("Successfully Logged in!");
-       const token=jwt.sign({id:check.id,username:check.Username, name:check.Name},jwt_Key,{expiresIn:'20h'})
+       const token=jwt.sign({username:check.Username, name:check.Name},jwt_Key,{expiresIn:'20h'})
         res.json({token});
     }
     else{
         console.log("Successfully Logged in!");
-        const token=jwt.sign({id:check.id,username:check.Username, name:check.Name},jwt_Key,{expiresIn:'20h'})
+        const token=jwt.sign({username:newData.Username, name:newData.Name},jwt_Key,{expiresIn:'20h'})
         res.json({token});
     }}
     catch(error){

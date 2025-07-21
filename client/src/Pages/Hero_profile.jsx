@@ -108,8 +108,9 @@ const Hero_profile=()=>{
   <div className="cq-featured-role-card">
     <h4>{role}</h4>
   </div>
+  
 </div>
-
+<div><button onClick={()=>navigate('/profile-edit')} className='hero-profile-button'>Edit Profile</button></div>
 </div>
 </div>
     )

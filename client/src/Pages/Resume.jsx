@@ -76,13 +76,11 @@ const Resume=()=>{
         if(!pdfUrl){
           console.log("please upload your resume!");
         }
-        else{
-       
+        else{       
         const formData=new FormData();
         formData.append('file',pdfUrl);
-        formData.append('upload_preset',"resume_upload");
-        formData.append("resource_type", "raw");
-        const cloud=await fetch("https://api.cloudinary.com/v1_1/dtcncy5ks/raw/upload",{
+        formData.append('upload_preset',"doom-s_battleworld");
+        const cloud=await fetch("https://api.cloudinary.com/v1_1/dgkaav5s7/raw/upload",{
           method:'POST',
           body:formData,
         });

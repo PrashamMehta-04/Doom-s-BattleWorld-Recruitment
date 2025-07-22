@@ -19,6 +19,7 @@ const Resume=()=>{
    const handleFileChange=(e)=>{
     const selected=e.target.files[0];
     if(selected&&selected.size<=10*1024*1024){
+      console.log(selected);
       setPdfUrl(selected);
     }
     else{
@@ -80,13 +81,16 @@ const Resume=()=>{
         const formData=new FormData();
         formData.append('file',pdfUrl);
         formData.append('upload_preset',"resume_upload");
+        formData.append("resource_type", "raw");
         const cloud=await fetch("https://api.cloudinary.com/v1_1/dtcncy5ks/raw/upload",{
           method:'POST',
           body:formData,
         });
         
         const data=await cloud.json();
+        console.log(data);
         const url=data.secure_url;
+        console.log(url);
          const response=await fetch('http://localhost:5000/api/resume',{
            method:'POST',
            headers:{'Content-Type':'application/json',

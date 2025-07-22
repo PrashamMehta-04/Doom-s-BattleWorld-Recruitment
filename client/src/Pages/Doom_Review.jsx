@@ -183,6 +183,14 @@ const Doom_Review = () => {
 
   const currentHero = heroData[currentIndex];
   console.log(currentHero.Resume);
+  const rawUrl = currentHero.Resume;
+  let downloadUrl='';
+  if(rawUrl!=null){
+ downloadUrl = rawUrl.replace(
+  '/upload/',
+  '/upload/fl_attachment/'
+);
+}
   return (
     <div
       className="swipe-card"
@@ -221,7 +229,7 @@ const Doom_Review = () => {
 
       {currentHero.Resume && (
         <a
-          href={currentHero.Resume}
+          href={downloadUrl}
           className="download-button"
           target="_blank"
           rel="noopener noreferrer"

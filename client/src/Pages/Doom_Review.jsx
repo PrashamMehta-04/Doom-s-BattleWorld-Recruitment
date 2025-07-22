@@ -182,6 +182,7 @@ const Doom_Review = () => {
   }
 
   const currentHero = heroData[currentIndex];
+  console.log(currentHero.Resume);
   return (
     <div
       className="swipe-card"

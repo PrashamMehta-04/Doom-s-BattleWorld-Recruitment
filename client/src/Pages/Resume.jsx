@@ -80,7 +80,7 @@ const Resume=()=>{
         const formData=new FormData();
         formData.append('file',pdfUrl);
         formData.append('upload_preset',"resume_upload");
-        const cloud=await fetch("https://api.cloudinary.com/v1_1/dtcncy5ks/auto/upload",{
+        const cloud=await fetch("https://api.cloudinary.com/v1_1/dtcncy5ks/raw/upload",{
           method:'POST',
           body:formData,
         });

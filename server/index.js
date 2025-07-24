@@ -12,13 +12,18 @@ const jwt=require('jsonwebtoken');
 const jwt_Key=config.JWTkey;
 const cloudinary=require('cloudinary').v2;
 const verifyToken=require('./Route');
+const { Message } = require('./schema');
+app.use(cors({
+  origin: 'http://localhost:5173', // your frontend origin
+  credentials: true
+}));
 const saltRounds=10;
 cloudinary.config({
     cloud_name:config.cloudName,
     api_key:config.cloudKey,
     api_secret:config.cloudSecret,
 });
-app.use(cors());
+// app.use(cors());
 mongoose.connect(config.mongoURI,{
     useNewUrlParser:true,
     useUnifiedTopology:true
@@ -248,6 +253,82 @@ app.get('/api/doomOpenings', async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+const http = require('http');
+const { Server } = require('socket.io');
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:5173',
+    credentials: true
+  },
+});
+
+const users = {}; // { username: socket.id }
+
+io.on('connection', (socket) => {
+  console.log('User connected:', socket.id);
+
+  // Register user and save socket ID
+  socket.on('register', (username) => {
+    users[username] = socket.id;
+    console.log(`${username} registered with socket ID ${socket.id}`);
+  });
+
+  socket.on('requestHistory', async ({ sender, recipient }) => {
+    try {
+      const messages = await Message.find({
+        $or: [
+          { sender, recipient },
+          { sender: recipient, recipient: sender }
+        ]
+      }).sort({ timestamp: 1 });
+      socket.emit('chatHistory', messages);
+    } catch (err) {
+      console.error('Error fetching history:', err);
+    }
+  });
+
+  socket.on('sendMessage', async (msg) => {
+    try {
+      const saved = await Message.create(msg);
+
+      const recipientSocket = users[msg.recipient];
+      if (recipientSocket) {
+        io.to(recipientSocket).emit('receiveMessage', saved);
+      }
+
+      socket.emit('receiveMessage', saved);
+    } catch (err) {
+      console.error('Error saving message:', err);
+    }
+  });
+
+  socket.on('disconnect', () => {
+    for (const [username, id] of Object.entries(users)) {
+      if (id === socket.id) {
+        delete users[username];
+        console.log(`${username} disconnected`);
+        break;
+      }
+    }
+  });
+});
+
+
+app.get('/api/users', async (req, res) => {
+  try {
+    const usersList = await user.find({}, 'Username');
+    const formatted = usersList.map(u => ({ username: u.Username }));
+    res.json(formatted);
+  } catch (error) {
+    res.status(500).json({ error: "Server error while fetching users" });
+  }
+});
+
+server.listen(PORT, () => {
+  console.log(`Server is running with Socket.IO on http://localhost:${PORT}`);
+});
+
 app.post('/api/hero-user',verifyToken,async(req,res)=>{
     const username=req.user.username;
     const {title}=req.body;

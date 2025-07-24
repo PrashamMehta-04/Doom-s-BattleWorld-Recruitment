@@ -93,5 +93,15 @@ const doomSchema = new mongoose.Schema({
   }
 });
 
+
+const MessageSchema = new mongoose.Schema({
+  sender: { type: String, required: true },
+  recipient: { type: String, required: true },
+  content: { type: String, required: true },
+  timestamp: { type: Date, default: Date.now }
+});
+
+
+const Message = mongoose.model("Message", MessageSchema);
 const Doom = mongoose.model('Doom', doomSchema);
-module.exports={user,heroes, Doom};
+module.exports={user,heroes, Doom, Message};

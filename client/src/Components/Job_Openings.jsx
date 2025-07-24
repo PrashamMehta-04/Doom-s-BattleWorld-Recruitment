@@ -20,7 +20,8 @@ const CurrentOpenings = () => {
     fetchJobs();
   }, []);
 
-  const handleReview = () => {
+  const handleReview = (title) => {
+    localStorage.setItem('Title',title);
     navigate("/doom-review");
   };
 
@@ -33,7 +34,7 @@ const CurrentOpenings = () => {
             <h3 className="job-title">{job.companyName}</h3>
             <p className="job-desc">{job.subTitle}</p>
           </div>
-          <button className="review-btn" onClick={handleReview}>
+          <button className="review-btn" onClick={()=>handleReview(job.companyName)}>
             Review
           </button>
         </div>

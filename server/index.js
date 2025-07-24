@@ -142,14 +142,15 @@ app.get('/api/validate',async (req,res)=>{
 });
 app.post('/api/job_post', async (req, res) => {
     try{
-        const { companyName, subTitle, description, lastDate, salary, location } = req.body;
+        const { companyName, subTitle, description, lastDate, salary, location,requirements } = req.body;
         const newJob = new Doom({
             companyName,
             subTitle,
+             requirements,
             description,
             lastDate: new Date(lastDate).toISOString().split('T')[0],
             salary,
-            location
+            location,
         });
         await newJob.save();
         console.log("Job posted successfully!");
@@ -162,9 +163,15 @@ app.post('/api/job_post', async (req, res) => {
 });
 
 app.get('/api/heroes', async (req, res) => {
+    const title=req.query.name;
+    const result=[];
   try {
-    const allHeroes = await heroes.find();
-    res.json(allHeroes);
+    const allHeroes = await Doom.findOne({companyName:title});
+    for(const user of allHeroes.users){
+        const userData=await heroes.findOne({Username:user});
+        result.push(userData);
+    }
+    res.json(result);
   } catch (error) {
     console.error("Error fetching heroes:", error);
     res.status(500).json({ error: "Server error while fetching heroes" });
@@ -173,9 +180,16 @@ app.get('/api/heroes', async (req, res) => {
 
 
 app.get('/api/cards',verifyToken,async (req,res)=>{
+    const username=req.user.username;
     try{
-        const products=await Doom.find();
-        res.json(products);
+        const data=await Doom.find();
+        const result=[];
+        const user=await heroes.findOne({Username:username});
+        for(const jobs of user.AppliedJobs){
+           result.push(jobs);
+        }
+        //console.log(products);
+        res.json({data,result});
     }
     catch(error){
         console.log("Failed to fetch!",error);
@@ -234,11 +248,31 @@ app.get('/api/doomOpenings', async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
+app.post('/api/hero-user',verifyToken,async(req,res)=>{
+    const username=req.user.username;
+    const {title}=req.body;
+    try{
+        await Doom.updateOne(
+            {companyName:title},{
+                $push:{
+                    users:username
+                }
+            }
+        );
+        await heroes.updateOne(
+            {Username:username},{
+                $push:{
+                    AppliedJobs:title
+                }
+            }
+        );
+        res.status(200).send(true);
+    }
+    catch(error){
+        console.log("Error! ",error);
+    }
+});
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });
-app.listen(PORT,()=>{
-    console.log(`Server is running on ${PORT}`);
-}
-);
+

@@ -3,8 +3,11 @@ import '../Components_CSS/job-info.css';
 import Navbar_Login from'../Components/Navbar_Login';
 import useAuthGuard from '../Components/useAuthGuard';
 import { getStoreValue } from 'pulsy';
+import {useNavigate} from 'react-router-dom';
+
 const Job_info=()=>{
     useAuthGuard();
+    const navigate=useNavigate();
     const token=getStoreValue('auth')?.token;
     const title=localStorage.getItem('jobTitle');
     const [subTitle,setSubTitle]=useState('');
@@ -12,6 +15,20 @@ const Job_info=()=>{
     const [lDate,setLDate]=useState();
     const [salary,setSalary]=useState('');
     const [location,setLocation]=useState('');
+    const [requirements,setRequirements]=useState([]);
+    const handleSubmit=async()=>{
+        const response=await fetch('http://localhost:5000/api/hero-user',{
+            method:'POST',
+            headers:{'Content-Type':'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body:JSON.stringify({title})
+        });
+        if(response.ok){
+            console.log("Applied");
+            navigate('/home-logged');
+        }
+    }
     useEffect(()=>{
         const job_info=async()=>{
             try{
@@ -30,6 +47,7 @@ const Job_info=()=>{
                     setLDate(data.lastDate);
                     setSalary(data.salary);
                     setLocation(data.location);
+                    setRequirements(data.requirements);
                 }
                 else{
                     console.log("Error!");
@@ -65,48 +83,13 @@ const Job_info=()=>{
 
       <section className="job-info-requirements-section">
         <h2 className="job-info-section-title">✅ Requirements</h2>
+        {requirements.map((req, index) => (
         <div className="job-info-requirements-grid">
           <div className="job-info-requirement-column">
-            <h3 className="job-info-requirement-title">Technical Skills</h3>
-            <ul className="job-info-requirement-list">
-              <li>5+ years React.js experience</li>
-              <li>4+ years Node.js & Express</li>
-              <li>MongoDB/PostgreSQL expertise</li>
-              <li>TypeScript proficiency</li>
-              <li>RESTful API development</li>
-            </ul>
-          </div>
-          <div className="job-info-requirement-column">
-            <h3 className="job-info-requirement-title">Quantum Skills</h3>
-            <ul className="job-info-requirement-list">
-              <li>Temporal debugging experience</li>
-              <li>Reality.js framework knowledge</li>
-              <li>Multiverse deployment skills</li>
-              <li>Paradox prevention protocols</li>
-              <li>Quantum state management</li>
-            </ul>
-          </div>
-          <div className="job-info-requirement-column">
-            <h3 className="job-info-requirement-title">Soft Skills</h3>
-            <ul className="job-info-requirement-list">
-              <li>Strong problem-solving abilities</li>
-              <li>Excellent communication skills</li>
-              <li>Team collaboration experience</li>
-              <li>Adaptability to new dimensions</li>
-              <li>Crisis management under pressure</li>
-            </ul>
-          </div>
-          <div className="job-info-requirement-column">
-            <h3 className="job-info-requirement-title">Preferred</h3>
-            <ul className="job-info-requirement-list">
-              <li>AWS/Azure cloud experience</li>
-              <li>Docker & Kubernetes</li>
-              <li>GraphQL knowledge</li>
-              <li>Previous hero team experience</li>
-              <li>Interdimensional travel clearance</li>
-            </ul>
+            <h3 className="job-info-requirement-title">req</h3>
           </div>
         </div>
+          ))}
       </section>
 
       <section className="job-info-application-sidebar">
@@ -128,7 +111,7 @@ const Job_info=()=>{
 
         <div className="job-info-apply-box">
          
-            <button type="submit" className="job-info-submit-button">Submit Application</button>
+            <button type="submit" className="job-info-submit-button" onClick={handleSubmit}>Submit Application</button>
         </div>
       </section>
     </div>

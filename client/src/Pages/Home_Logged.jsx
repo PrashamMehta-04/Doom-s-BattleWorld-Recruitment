@@ -40,18 +40,22 @@ const Home_Logged=()=>{
       }
     });
     if(response.ok){
-     const data=await response.json();
+     const {data,result}=await response.json();
+     const set=new Set(result);
      setLen(data.length);
-     const maps=data.map((job,i)=>(
+     const maps=data.map((job,i)=>{
+     if(!set.has(job.companyName)){
+      return(
       <Job_Cards
       Title={job.companyName}
       subTitle={job.subTitle}
       item1={job.lastDate}
       item2={job.salary}
       item3={job.location}
-      
-      />
-     ));
+     
+      />)
+     }
+    });
      setJobs(maps);
     }
     else{

@@ -74,6 +74,9 @@
   font-size: 1rem;
   outline: none;
   transition: border 0.2s;
+  margin-left: 0;
+  width:auto;
+  min-width:215px;
 }
 
 .jobpost-input:focus {
@@ -108,4 +111,23 @@
   font-size: 0.9rem;
   margin-top: 6px;
   margin-bottom: -6px;
+}
+.job-post-btn-add,
+.job-post-btn-remove {
+ font-size: 0.75rem; /* Smaller text */
+  padding: 4px 8px;   /* Compact size */
+  width: 23%;
+  border-radius: 6px;
+  background-color: #6c63ff;
+  color: white;
+  transition: all 0.3s ease;
+}
+.job-post-btn-remove{
+  margin-left: 15px;
+  padding:10px 14px;
+  font-size: 0.9rem;
+  width:25%;
+}
+.job-post-btn-add:hover, .job-post-btn-remove:hover{
+  transform:scale(1.05);
 }

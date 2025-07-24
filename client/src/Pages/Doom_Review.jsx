@@ -9,9 +9,9 @@ const Doom_Review = () => {
   const [accepted, setAccepted] = useState([]);
   const [rejected, setRejected] = useState([]);
   const [heroData, setHeroData] = useState([]);
-
+  const title=localStorage.getItem('Title');
   useEffect(() => {
-    axios.get('http://localhost:5000/api/heroes')
+    axios.get(`http://localhost:5000/api/heroes?name=${title}`)
       .then(res => setHeroData(res.data))
       .catch(err => console.error("Error fetching heroes:", err));
   }, []);

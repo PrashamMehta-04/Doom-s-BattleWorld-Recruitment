@@ -46,6 +46,10 @@ const schema2=mongoose.Schema({
     },
     Resume:{
       type:String
+    },
+    AppliedJobs:{
+      type:Array,
+      default:[]
     }
 });
 const heroes=mongoose.model('Heroes',schema2);
@@ -61,6 +65,12 @@ const doomSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  requirements:{
+    type:Array,
+    required:true,
+    default: []
+  },
+
   description: {
     type: String,
     required: true
@@ -77,9 +87,9 @@ const doomSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  applicants: {
-    type: [String], 
-    default: []
+  users:{
+    type:Array,
+    default:[],
   }
 });
 

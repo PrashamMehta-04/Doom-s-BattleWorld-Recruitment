@@ -12,7 +12,7 @@ import Welcome from '../Components/Doom_Welcome';
 import useAuthGuard from '../Components/useAuthGuard';
 
 const Doom = () => {
-  useAuthGuard();
+    
     const Name=localStorage.getItem('Name');
     const n=5;
     return(

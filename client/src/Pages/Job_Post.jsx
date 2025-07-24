@@ -9,8 +9,23 @@ const Job_Post = () => {
   const [lastDate, setLastDate] = useState('');
   const [salary, setSalary] = useState('');
   const [location, setLocation] = useState('');
+  const [requirements, setRequirements] = useState([""]);
   const navigate = useNavigate();
-
+  const radd=()=>{
+    setRequirements([...requirements, '']);
+  }
+  const rremove=(index)=>{
+    if(requirements.length>1){
+      const updated=[...requirements];
+      updated.splice(index,1);
+      setRequirements(updated);
+    }
+  }
+  const rhandleChange=(index,req)=>{
+    const updated=[...requirements];
+    updated[index]=req;
+    setRequirements(updated);
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -19,7 +34,7 @@ const Job_Post = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ companyName, subTitle, description, lastDate, salary, location })
+            body: JSON.stringify({ companyName, subTitle, description, lastDate, salary, location,requirements })
         });
         if (response.ok) {
         alert("Job Posted Successfully!");
@@ -67,6 +82,22 @@ const Job_Post = () => {
             required
             className="jobpost-input"
           />
+           <label className="jobpost-label">Job Requirements</label>
+           {requirements.map((requirements,index)=>(
+            <div>
+          <input
+            type="text"
+            placeholder="Enter Job Requirement"
+            value={requirements}
+            onChange={(e) => rhandleChange(index,e.target.value)}
+            required
+            className="jobpost-input"
+          />
+           <button className="job-post-btn-remove" onClick={()=>rremove(index)}>Remove</button>
+          </div>
+          ))}
+          <button className="job-post-btn-add" onClick={radd}>Add</button>
+         
 
           <label className="jobpost-label">Post Description</label>
           <textarea

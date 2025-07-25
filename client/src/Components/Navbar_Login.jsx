@@ -4,7 +4,7 @@ import{useNavigate} from 'react-router-dom';
 const Navbar_Login=()=>{
   const navigate=useNavigate();
     return(
-        <div>
+        <div className="navbar-main">
         <header className="header">
       <div className="logo">
         <span className='logo-icon'>⚡</span>
@@ -12,7 +12,7 @@ const Navbar_Login=()=>{
       </div>
       <nav className="nav-links">
         <a onClick={()=>navigate('/home-logged')}href="#">Home</a>
-        <a  href="#">Status</a>
+        <a  onClick={()=>navigate('/status')} href="#">Status</a>
         <a onClick={()=>navigate('/hero-profile')} href="#">My Profile</a>
         <button className="button">Logout</button>
       </nav>

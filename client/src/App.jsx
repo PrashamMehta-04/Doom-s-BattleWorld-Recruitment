@@ -14,6 +14,7 @@ import Hero_profile from './Pages/hero_profile';
 import Job_info from './Pages/Job_info';
 import Video_Call_room from './Pages/Video_Call_room';
 import Chat from './Pages/Doom_Chat';
+import HeroStatus from './Pages/HeroStatus';
 export default function App() {
   const [username, setUsername] = useState('');
 
@@ -42,6 +43,7 @@ export default function App() {
           <Route path='/job-info' element={<Job_info/>}/>
           <Route path='/video-call' element={<Video_Call_room/>}/>
           <Route path='/chat' element={username ? <Chat currentUser={username} /> : <div>Loading...</div>} />
+          <Route path='/status' element={<HeroStatus/>}/>
         </Routes>
       </div>
     </>

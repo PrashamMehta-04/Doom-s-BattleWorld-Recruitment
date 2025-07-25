@@ -34,27 +34,28 @@ db.once('open',()=>{
     console.log("Connected to database");
 })
 app.use(express.json());
-app.post('/api/google',async (req,res)=>{
-    const{username,password,name,type}=req.body;
-    try{
-    const check=await user.findOne({Username:username});
-    console.log(check);
-    if(!check){
-        const newData=new user({Username:username,password:password,Name:name,loginType:type});
-        const heroData=new heroes({Username:username});
-        await heroData.save();
-       await newData.save();
-        console.log("Successfully Logged in!");
-       const token=jwt.sign({username:check.Username, name:check.Name},jwt_Key,{expiresIn:'20h'})
-        res.json({token});
-    }
-    else{
-        console.log("Successfully Logged in!");
-        const token=jwt.sign({username:newData.Username, name:newData.Name},jwt_Key,{expiresIn:'20h'})
-        res.json({token});
-    }}
-    catch(error){
-        console.error("Server Error: ",error);
+
+app.post('/api/google', async (req, res) => {
+    const { username, password, name, type } = req.body;
+    try {
+        let check = await user.findOne({ Username: username });
+        if (!check) {
+            const newData = new user({ Username: username, password: password, Name: name, loginType: type });
+            const heroData = new heroes({ Username: username });
+            await heroData.save();
+            await newData.save();
+            console.log("Successfully Registered and Logged in!");
+            // Use newData for token
+            const token = jwt.sign({ username: newData.Username, name: newData.Name }, jwt_Key, { expiresIn: '20h' });
+            res.json({ token });
+        } else {
+            console.log("Successfully Logged in!");
+            // Use check for token
+            const token = jwt.sign({ username: check.Username, name: check.Name }, jwt_Key, { expiresIn: '20h' });
+            res.json({ token });
+        }
+    } catch (error) {
+        console.error("Server Error: ", error);
         res.status(500).send("Server Error");
     }
 });
@@ -324,10 +325,23 @@ app.get('/api/users', async (req, res) => {
     res.status(500).json({ error: "Server error while fetching users" });
   }
 });
+// In your backend (index.js)
 
+app.get('/api/current-user', async (req, res) => {
+  const authHeader = req.header('Authorization');
+  if (!authHeader) return res.status(401).json({ error: 'No token provided' });
+  const token = authHeader.replace('Bearer ', '');
+  try {
+    const decoded = jwt.verify(token, jwt_Key);
+    res.json({ username: decoded.username });
+  } catch (err) {
+    res.status(401).json({ error: 'Invalid token' });
+  }
+});
 server.listen(PORT, () => {
   console.log(`Server is running with Socket.IO on http://localhost:${PORT}`);
 });
+
 
 app.post('/api/hero-user',verifyToken,async(req,res)=>{
     const username=req.user.username;

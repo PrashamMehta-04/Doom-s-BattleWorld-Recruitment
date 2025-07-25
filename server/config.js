@@ -7,3 +7,4 @@ module.exports={
     cloudName:process.env.CLOUDINARY_NAME,
     port:process.env.PORT || 5000,
 };
+const DOOM_USERNAME = "prashammehta360@gmail.com";

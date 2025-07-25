@@ -23,6 +23,7 @@ const Login = () => {
     if(submitNormal.ok){
       const data=await submitNormal.json();
       const token=data.token;
+      localStorage.setItem('token', token);
       setStoreValue('auth',{token,user:{username}})
     const n=jwtDecode(token);
     setName(n.name);
@@ -63,6 +64,7 @@ const Login = () => {
         if(response.ok){
           const data=await response.json();
                 const token=data.token;
+                localStorage.setItem('token', token);
                 setStoreValue('auth',{token,user:{username}})
               const n=jwtDecode(token);
               setName(n.name);

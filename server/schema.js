@@ -47,10 +47,12 @@ const schema2=mongoose.Schema({
     Resume:{
       type:String
     },
-    AppliedJobs:{
-      type:Array,
-      default:[]
-    }
+    AppliedJobs:[
+      {
+        name:String,
+        status:String, enum:['Pending', 'Accepted', 'Rejected'],
+      }
+    ]
 });
 const heroes=mongoose.model('Heroes',schema2);
 

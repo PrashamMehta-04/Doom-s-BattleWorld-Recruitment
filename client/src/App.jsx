@@ -15,6 +15,7 @@ import Job_info from './Pages/Job_info';
 import Video_Call_room from './Pages/Video_Call_room';
 import Chat from './Pages/Doom_Chat';
 import UserChat from './Pages/User_Chat';
+import HeroStatus from './Pages/HeroStatus';
 export default function App() {
   const [username, setUsername] = useState('');
   const [role, setRole] = useState('');
@@ -64,6 +65,7 @@ useEffect(() => {
           <Route path='/video-call' element={<Video_Call_room/>}/>
           <Route path='/chat' element={username ? <Chat currentUser={username} /> : <div>Loading...</div>} />
           <Route path="/chat-user" element={username ? <UserChat currentUser={username} /> : <div>Loading...</div>} />
+          <Route path='/status' element={<HeroStatus/>}/>
         </Routes>
       </div>
     </>

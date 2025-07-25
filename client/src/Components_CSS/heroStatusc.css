@@ -1,0 +1,167 @@
+.heroStatus-container {
+  background-color: #0e0d2b;
+  color: #fff;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.heroStatus-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #b084f9;
+  text-align: center;
+}
+
+.heroStatus-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  color: #aaa;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.heroStatus-stats {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.heroStatus-card {
+  flex: 1 1 200px;
+  background: #1e1c40;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.heroStatus-count {
+  display: block;
+  font-size: 2rem;
+  color: #f0e130;
+}
+
+.heroStatus-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.heroStatus-tab {
+  background: #2a275e;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.heroStatus-tab.active {
+  background: #7e5bef;
+  color: white;
+}
+
+.heroStatus-applications {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.heroStatus-jobCard {
+  background: #1c1a3f;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+.heroStatus-jobCard.accepted {
+  border-left: 6px solid #4ade80;
+}
+
+.heroStatus-jobCard.pending {
+  border-left: 6px solid #facc15;
+}
+
+.heroStatus-jobCard.rejected {
+  border-left: 6px solid #f87171;
+}
+
+.heroStatus-jobTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+
+.heroStatus-company {
+  display: inline-block;
+  font-size: 0.95rem;
+  color: #8fbdfc;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+}
+
+.heroStatus-appliedDate {
+  font-size: 0.85rem;
+  color: #bbb;
+  margin-bottom: 0.5rem;
+}
+
+.heroStatus-description {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.heroStatus-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.heroStatus-btn {
+  flex: 1 1 auto;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.heroStatus-btn.view {
+  background: #4c4cff;
+}
+
+.heroStatus-btn.accepted {
+  background: #16a34a;
+}
+
+.heroStatus-btn.pending {
+  background: #eab308;
+}
+
+.heroStatus-btn.rejected {
+  background: #dc2626;
+}
+
+.heroStatus-btn.chat {
+  background: #7c3aed;
+}
+
+.heroStatus-btn.video {
+  background: #2563eb;
+}
+
+.heroStatus-btn.disabled {
+  background: #555;
+  opacity: 0.6;
+  cursor: not-allowed;
+}

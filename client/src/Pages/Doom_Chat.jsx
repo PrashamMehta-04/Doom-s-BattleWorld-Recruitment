@@ -5,6 +5,8 @@ import "../Components_CSS/Doom_Chatc.css";
 
 const socket = io("http://localhost:5000");
 
+
+
 const Chat = ({ currentUser }) => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);

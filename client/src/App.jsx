@@ -37,12 +37,12 @@ useEffect(() => {
     .then(data => {
       console.log("Current user API response:", data);
       setUsername(data.username);
-      if (data.username === "prashammehta360@gmail.com") {
-        navigate('/chat'); // Doom_Chat
-      } else {
-        navigate('/chat-user'); // User_Chat
-      }
-    })
+    //   if (data.username === "prashammehta360@gmail.com") {
+    //     navigate('/chat'); // Doom_Chat
+    //   } else {
+    //     navigate('/chat-user'); // User_Chat
+    //   }
+     })
     .catch(err => {
       console.error("Fetch error:", err);
     });

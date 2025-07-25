@@ -80,8 +80,8 @@ const HeroStatus=()=>{
       <div className="heroStatus-buttons">
         <button className="heroStatus-btn view" onClick={()=>navigate('/job-info')}>📄 View More</button>
         <button className="heroStatus-btn pending">⏳ Pending</button>
-        <button className="heroStatus-btn disabled">💬 Chat</button>
-        <button className="heroStatus-btn disabled">🎥 Video Call</button>
+        <button className="heroStatus-btn disabled" disabled>💬 Chat</button>
+        <button className="heroStatus-btn disabled" disabled>🎥 Video Call</button>
       </div>
     </div>
     ))}

@@ -23,26 +23,38 @@ const Chat = ({ currentUser }) => {
   }, [currentUser]);
 
   useEffect(() => {
-    if (recipient) {
-      socket.emit("requestHistory", { sender: currentUser, recipient });
-      socket.on("chatHistory", (msgs) => setMessages(msgs));
+  if (!currentUser) return;
+  socket.emit("register", currentUser);
+
+  const handleReceive = (msg) => {
+    if (
+      (msg.sender === currentUser && msg.recipient === recipient) ||
+      (msg.sender === recipient && msg.recipient === currentUser)
+    ) {
+      setMessages((prev) => [...prev, msg]);
     }
+  };
 
-    const handleReceive = (msg) => {
-      if (
-        (msg.sender === currentUser && msg.recipient === recipient) ||
-        (msg.sender === recipient && msg.recipient === currentUser)
-      ) {
-        setMessages((prev) => [...prev, msg]);
-      }
-    };
-    socket.on("receiveMessage", handleReceive);
+  socket.on("receiveMessage", handleReceive);
 
-    return () => {
-      socket.off("chatHistory");
-      socket.off("receiveMessage", handleReceive);
-    };
-  }, [recipient, currentUser]);
+  return () => {
+    socket.off("receiveMessage", handleReceive);
+  };
+}, [currentUser, recipient]);
+
+useEffect(() => {
+  if (recipient) {
+    socket.emit("requestHistory", { sender: currentUser, recipient });
+  }
+
+  const handleHistory = (msgs) => setMessages(msgs);
+  socket.on("chatHistory", handleHistory);
+
+  return () => {
+    socket.off("chatHistory", handleHistory);
+  };
+}, [recipient]);
+
 
   
   const sendMessage = () => {

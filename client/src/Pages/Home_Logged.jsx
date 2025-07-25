@@ -41,6 +41,7 @@ const Home_Logged=()=>{
     });
     if(response.ok){
      const {data,result}=await response.json();
+     console.log(result);
      const set=new Set(result);
      setLen(data.length);
      const maps=data.map((job,i)=>{

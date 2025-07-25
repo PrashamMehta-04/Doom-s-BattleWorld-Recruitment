@@ -192,7 +192,7 @@ app.get('/api/cards',verifyToken,async (req,res)=>{
         const result=[];
         const user=await heroes.findOne({Username:username});
         for(const jobs of user.AppliedJobs){
-           result.push(jobs);
+           result.push(jobs.name);
         }
         //console.log(products);
         res.json({data,result});
@@ -367,32 +367,33 @@ app.post('/api/hero-user',verifyToken,async(req,res)=>{
         console.log("Error! ",error);
     }
 });
-// app.get('/api/status-applications',async(req,res)=>{
-//     const username=req.user.username;
-//     try{
-//         const applications=await heroes.findOne({Username:username});
-//         res.json(applications.AppliedJobs);
-//     }
-//     catch(error){
-//         console.error("Error fetching applications:", error);
-//         res.status(500).send("Server Error");
-//     }
-// })
-// app.post('/api/hero-status',verifyToken,async(req,res)=>{
-//     const {jTitle}=req.body;
-//     const result=[];
-//     try{
-//     for(const title of jTitle){
-//         const data=await Doom.findOne({companyName:title.name});
-//         result.push(data);
-//     }
-//     res.json(result);
-// }
-// catch(error){
-//     console.error("Error fetching hero status ",error);
-//     res.status(500).send(false);
-// }
-// });
+app.get('/api/status-applications',verifyToken,async(req,res)=>{
+    const username=req.user.username;
+    try{
+        const applications=await heroes.findOne({Username:username});
+        res.json(applications.AppliedJobs);
+    }
+    catch(error){
+        console.error("Error fetching applications:", error);
+        res.status(500).send("Server Error");
+    }
+});
+app.post('/api/hero-status',verifyToken,async(req,res)=>{
+    const {applications}=req.body;
+    console.log(applications);
+    const result=[];
+    try{
+    for(const title of applications){
+        const data=await Doom.findOne({companyName:title.name});
+        result.push(data);
+    }
+    res.json(result);
+}
+catch(error){
+    console.error("Error fetching hero status ",error);
+    res.status(500).send(false);
+}
+});
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });

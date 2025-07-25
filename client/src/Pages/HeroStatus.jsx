@@ -18,35 +18,35 @@ const HeroStatus=()=>{
                 method:'GET',
                 headers:{
                     'Content-Type':'application/json',
+                    'Authorization': `Bearer ${token}`,
                 }
             });
             if(response.ok){
                 const data=await response.json();
                 setApplications(data);
-            }
-            else{
-                console.log("Failed to fetch appliactions");
-            }
-        }
-        const fetchJobs=async()=>{
-         const response=await fetch('http://localhost:5000/api/hero-status',{
+                 const response2=await fetch('http://localhost:5000/api/hero-status',{
             method:'POST',
             headers:{'Content-Type':'application/json',
                 'Authorization': `Bearer ${token}`,
             },
-            body:JSON.stringify({applications})
+            body:JSON.stringify({applications:data})
         });
-        if(response.ok){
-            const data=await response.json();
+        if(response2.ok){
+            const data=await response2.json();
             setJobs(data);
             setJobNum(data.length);
         }
         else{
             console.log("Failed to fetch jobs");
         }
-    }
+            }
+            else{
+                console.log("Failed to fetch appliactions");
+            }
+        }
+       
+        
         fecthApplications();
-        fetchJobs();     
     },[]);
     return(
         <div className="heroStatus-container">
@@ -73,10 +73,10 @@ const HeroStatus=()=>{
     
        {jobs.map((job,index)=>(
     <div className="heroStatus-jobCard pending">
-      <h3 className="heroStatus-jobTitle">job.companyName</h3>
+      <h3 className="heroStatus-jobTitle">{job.companyName}</h3>
       
       <p className="heroStatus-appliedDate">Applied: March 5, 2024</p>
-      <p className="heroStatus-description">job.subTitle</p>
+      <p className="heroStatus-description">{job.subTitle}</p>
       <div className="heroStatus-buttons">
         <button className="heroStatus-btn view" onClick={()=>navigate('/job-info')}>📄 View More</button>
         <button className="heroStatus-btn pending">⏳ Pending</button>

@@ -50,7 +50,7 @@ const schema2=mongoose.Schema({
     AppliedJobs:[
       {
         name:String,
-        status:String, enum:['Pending', 'Accepted', 'Rejected'],
+        status:{type:String, enum:['Pending', 'Accepted', 'Rejected']},
       }
     ]
 });

@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef} from "react";
 import { io } from "socket.io-client";
 import Navbar_Login from "../Components/Doom_Navbar";
 import "../Components_CSS/Doom_Chatc.css";
 
-const socket = io("http://localhost:5000");
-
+// const socket = io("http://localhost:5000");
 
 
 const Chat = ({ currentUser }) => {
+  const socketRef = useRef(null);
+
+useEffect(() => {
+  socketRef.current = io("http://localhost:5000");
+  return () => socketRef.current.disconnect();
+}, []);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
@@ -15,7 +20,8 @@ const Chat = ({ currentUser }) => {
 
   useEffect(() => {
     if (currentUser) {
-      socket.emit("register", currentUser);
+      // socket.emit("register", currentUser);
+      socketRef.current.emit("register", currentUser);
     }
     fetch("http://localhost:5000/api/users")
       .then((res) => res.json())
@@ -24,7 +30,8 @@ const Chat = ({ currentUser }) => {
 
   useEffect(() => {
   if (!currentUser) return;
-  socket.emit("register", currentUser);
+  // socket.emit("register", currentUser);
+  socketRef.current.emit("register", currentUser);
 
   const handleReceive = (msg) => {
     if (
@@ -35,23 +42,28 @@ const Chat = ({ currentUser }) => {
     }
   };
 
-  socket.on("receiveMessage", handleReceive);
+  // socket.on("receiveMessage", handleReceive);
+socketRef.current.on("receiveMessage", handleReceive);
 
   return () => {
-    socket.off("receiveMessage", handleReceive);
+    // socket.off("receiveMessage", handleReceive);
+    socketRef.current.off("receiveMessage", handleReceive);
   };
 }, [currentUser, recipient]);
 
 useEffect(() => {
   if (recipient) {
-    socket.emit("requestHistory", { sender: currentUser, recipient });
+    // socket.emit("requestHistory", { sender: currentUser, recipient });
+    socketRef.current.emit("requestHistory", { sender: currentUser, recipient });
   }
 
   const handleHistory = (msgs) => setMessages(msgs);
-  socket.on("chatHistory", handleHistory);
+  // socket.on("chatHistory", handleHistory);
+  socketRef.current.on("chatHistory", handleHistory);
 
   return () => {
-    socket.off("chatHistory", handleHistory);
+    // socket.off("chatHistory", handleHistory);
+    socketRef.current.off("chatHistory", handleHistory);
   };
 }, [recipient]);
 
@@ -59,7 +71,13 @@ useEffect(() => {
   
   const sendMessage = () => {
     if (!input.trim() || !recipient) return;
-    socket.emit("sendMessage", {
+    // socket.emit("sendMessage", {
+    //   sender: currentUser,
+    //   recipient,
+    //   content: input,
+    //   timestamp: new Date().toISOString(),
+    // });
+    socketRef.current.emit("sendMessage", {
       sender: currentUser,
       recipient,
       content: input,

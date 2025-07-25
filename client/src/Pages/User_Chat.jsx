@@ -1,11 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef} from "react";
 import { io } from "socket.io-client";
 import Navbar_Login from "../Components/Doom_Navbar";
 import "../Components_CSS/Doom_Chatc.css";
 
-const socket = io("http://localhost:5000");
+// const socket = io("http://localhost:5000");
+
+
 
 const UserChat = ({ currentUser }) => {
+  const socketRef = useRef(null);
+
+useEffect(() => {
+  socketRef.current = io("http://localhost:5000");
+  return () => socketRef.current.disconnect();
+}, []);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const doomUsername = "prashammehta360@gmail.com"; // fixed recipient
@@ -13,8 +21,8 @@ const UserChat = ({ currentUser }) => {
   useEffect(() => {
   if (!currentUser) return;
 
-  socket.emit("register", currentUser);
-  socket.emit("requestHistory", { sender: currentUser, recipient: doomUsername });
+  socketRef.current.emit("register", currentUser);
+  socketRef.current.emit("requestHistory", { sender: currentUser, recipient: doomUsername });
 
   const handleReceive = (msg) => {
     if (
@@ -27,19 +35,19 @@ const UserChat = ({ currentUser }) => {
 
   const handleHistory = (msgs) => setMessages(msgs);
 
-  socket.on("receiveMessage", handleReceive);
-  socket.on("chatHistory", handleHistory);
+  socketRef.current.on("receiveMessage", handleReceive);
+  socketRef.current.on("chatHistory", handleHistory);
 
   return () => {
-    socket.off("receiveMessage", handleReceive);
-    socket.off("chatHistory", handleHistory);
+    socketRef.current.off("receiveMessage", handleReceive);
+    socketRef.current.off("chatHistory", handleHistory);
   };
 }, [currentUser]);
 
   const sendMessage = () => {
     if (!input.trim()) return;
 
-    socket.emit("sendMessage", {
+    socketRef.current.emit("sendMessage", {
       sender: currentUser,
       recipient: doomUsername,
       content: input,

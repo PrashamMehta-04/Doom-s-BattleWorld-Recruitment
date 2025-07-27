@@ -51,6 +51,7 @@ const schema2=mongoose.Schema({
       {
         name:String,
         status:{type:String, enum:['Pending', 'Accepted', 'Rejected']},
+        Date:{type:String}
       }
     ]
 });

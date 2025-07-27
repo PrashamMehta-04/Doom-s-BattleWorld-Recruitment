@@ -7,6 +7,8 @@ import {useNavigate} from 'react-router-dom';
 
 const Job_info=()=>{
     useAuthGuard();
+    const today=new Date();
+    
     const navigate=useNavigate();
     const token=getStoreValue('auth')?.token;
     const title=localStorage.getItem('jobTitle');
@@ -86,7 +88,7 @@ const Job_info=()=>{
         {requirements.map((req, index) => (
         <div className="job-info-requirements-grid">
           <div className="job-info-requirement-column">
-            <h3 className="job-info-requirement-title">req</h3>
+            <h3 className="job-info-requirement-title">{req}</h3>
           </div>
         </div>
           ))}

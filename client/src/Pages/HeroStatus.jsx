@@ -10,6 +10,7 @@ const HeroStatus=()=>{
     const [applications, setApplications] = useState([{}]);
     const [jobs,setJobs]=useState([]);
     const [jobNum,setJobNum]=useState(0);
+    const [chatButton,setChatButton]=useState(false);
     const token=getStoreValue('auth')?.token;
     useEffect(()=>{
         
@@ -23,6 +24,7 @@ const HeroStatus=()=>{
             });
             if(response.ok){
                 const data=await response.json();
+                console.log(data);
                 setApplications(data);
                  const response2=await fetch('http://localhost:5000/api/hero-status',{
             method:'POST',
@@ -32,9 +34,11 @@ const HeroStatus=()=>{
             body:JSON.stringify({applications:data})
         });
         if(response2.ok){
-            const data=await response2.json();
-            setJobs(data);
-            setJobNum(data.length);
+            const data1=await response2.json();
+            setJobs(data1);
+            console.log(data1);
+            setJobNum(data1.length);
+            
         }
         else{
             console.log("Failed to fetch jobs");
@@ -48,6 +52,17 @@ const HeroStatus=()=>{
         
         fecthApplications();
     },[]);
+    const statusMap=new Map();
+    const buttonMap=new Map();
+    applications.forEach((app) => {
+        statusMap.set(app.name,app.status);
+        if(app.status=='Pending'||app.status=='Rejected'){
+           buttonMap.set(app.name, <button className="heroStatus-btn disabled" disabled>💬 Chat</button>);
+        }
+        else{
+            buttonMap.set(app.name, <button className="heroStatus-btn" onClick={()=>{localStorage.setItem('jobTitle',app.name);navigate('/chat-user')}}>💬 Chat</button>);
+        }
+    });
     return(
         <div className="heroStatus-container">
             <Navbar_Login/>
@@ -78,9 +93,9 @@ const HeroStatus=()=>{
       <p className="heroStatus-appliedDate">Applied: March 5, 2024</p>
       <p className="heroStatus-description">{job.subTitle}</p>
       <div className="heroStatus-buttons">
-        <button className="heroStatus-btn view" onClick={()=>navigate('/job-info')}>📄 View More</button>
-        <button className="heroStatus-btn pending">⏳ Pending</button>
-        <button className="heroStatus-btn disabled" disabled>💬 Chat</button>
+        <button className="heroStatus-btn view" onClick={()=>{localStorage.setItem('jobTitle',job.companyName);navigate('/job-info')}}>📄 View More</button>
+        <button className="heroStatus-btn pending">⏳ {statusMap.get(job.companyName)}</button>
+        {buttonMap.get(job.companyName)}
         <button className="heroStatus-btn disabled" disabled>🎥 Video Call</button>
       </div>
     </div>

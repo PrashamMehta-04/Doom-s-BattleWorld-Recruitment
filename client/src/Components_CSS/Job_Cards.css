@@ -1,38 +1,53 @@
-.Cards{
-    background:linear-gradient(90deg, #211e57 0%, #2d1a67 100%) ;
-    width:250px;
-    height: 290px;
-    margin-left:15px;
-    border-radius: 16px;
-    margin-top:15px; 
-    text-align: left;
-    margin-right: 30px;
-    transition:all 0.3s ease;
-    border:2px solid transparent;
+ .Cards {
+  background: linear-gradient(90deg, #211e57 0%, #2d1a67 100%);
+  width: 250px;
+  margin-left: 15px;
+  margin-top: 15px;
+  text-align: left;
+  margin-right: 30px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+  height: auto; 
 }
-.Cards:hover{
-    transform:translateY(-7px);
-    border-color:rgba(73, 85, 213, 0.942); 
+
+.Cards:hover {
+  transform: translateY(-7px);
+  border-color: rgba(73, 85, 213, 0.942);
   box-shadow: 0 12px 30px rgba(255, 255, 255, 0.2);
 }
-.Cards .head{
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom: 10px;
+
+.Cards .head {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
-.Cards .card-subtitle, .card-text{
-    font-size:12px;
+
+.Cards .card-subtitle,
+.card-text {
+  font-size: 12px;
 }
-.Cards .card-subtitle{
-    margin-bottom: 25px;
+
+.Cards .card-subtitle {
+  margin-bottom: 25px;
 }
-.Cards .Last{
-    margin-bottom:30px;
+
+.Cards .Last {
+  margin-bottom: 30px;
 }
-.Cards button{
-    background-color: orangered;
-    transition: all 0.3s ease;
+
+.Cards button {
+  background-color: orangered;
+  transition: all 0.3s ease;
+  width: 100%;
+  align-self: center;
 }
-.Cards button:hover{
-    transform:scale(1.06);
+
+.Cards button:hover {
+  transform: scale(1.06);
 }

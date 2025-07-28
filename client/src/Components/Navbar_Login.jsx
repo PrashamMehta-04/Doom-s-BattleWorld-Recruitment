@@ -13,7 +13,7 @@ const Navbar_Login=()=>{
       <nav className="nav-links">
         <a onClick={()=>navigate('/home-logged')}href="#">Home</a>
         <a  onClick={()=>navigate('/status')} href="#">Status</a>
-        <a onClick={()=>navigate('/hero-profile')} href="#">My Profile</a>
+        <a onClick={()=>navigate('/hero-profile-edit')} href="#">My Profile</a>
         <button className="button">Logout</button>
       </nav>
     </header> 

@@ -403,6 +403,7 @@ app.get('/api/status-applications',verifyToken,async(req,res)=>{
     const username=req.user.username;
     try{
         const applications=await heroes.findOne({Username:username});
+        console.log(applications.AppliedJobs);
         res.json(applications.AppliedJobs);
     }
     catch(error){
@@ -412,7 +413,6 @@ app.get('/api/status-applications',verifyToken,async(req,res)=>{
 });
 app.post('/api/hero-status',verifyToken,async(req,res)=>{
     const {applications}=req.body;
-    console.log(applications);
     const result=[];
     try{
     for(const title of applications){
@@ -426,6 +426,23 @@ catch(error){
     res.status(500).send(false);
 }
 });
+app.post('/api/hero-update',async(req,res)=>{
+    const {username,status,title}=req.body;
+    try{
+        await heroes.updateOne({Username:username,"AppliedJobs.name":title},{
+            $set:{
+                "AppliedJobs.$.status":status
+            }
+        });
+        await Doom.updateOne({companyName:title},{
+            $pull:{users:username}
+        })
+        req.status(200).send(true);
+    }
+    catch(error){
+        console.error("Error updating",error);
+    }
+})
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });

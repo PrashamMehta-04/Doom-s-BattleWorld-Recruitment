@@ -20,6 +20,20 @@ const Doom_Review = () => {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     setStartX(clientX);
   };
+   const update=async(username,status)=>{
+        const response =await fetch(`http://localhost:5000/api/hero-update`,{
+          method:'POST',
+          headers:{
+          'Content-Type':'application/json',},
+          body:JSON.stringify({username,status,title})
+        });
+        if(response.ok){
+          console.log("Accepted/Rejected");
+        }
+        else{
+          console.log("Failed to update!!!");
+        }
+      }
 
   const handleEnd = (e) => {
     if (startX === null) return;
@@ -32,11 +46,16 @@ const Doom_Review = () => {
       card.style.transform = 'translateX(150%) rotate(10deg)';
       card.style.transition = 'transform 0.4s ease';
       setAccepted([...accepted, heroData[currentIndex]]);
+      console.log(heroData[currentIndex].Username);
+      update(heroData[currentIndex].Username,'Accepted');
+     
       nextCard();
     } else if (diffX < -100) {
       card.style.transform = 'translateX(-150%) rotate(-10deg)';
       card.style.transition = 'transform 0.4s ease';
       setRejected([...rejected, heroData[currentIndex]]);
+      console.log(heroData[currentIndex].Username);
+      update(heroData[currentIndex].Username,'Rejected');
       nextCard();
     } else {
       card.style.transform = 'translateX(0)';

@@ -165,3 +165,11 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+.heroStatus-btn{
+    background:orangered;
+    transition: all 0.3s ease;
+}
+.heroStatus-btn:hover{
+    transform:scale(1.05);
+}
+

@@ -9,8 +9,8 @@ const Navbar_Login=()=>{
         <span className="logo-text">BattleWorld</span>
       </div>
       <nav className="nav-links">
-        <a href="#">Home</a>
-        <a href="#">My Profile</a>
+        <a href="">Home</a>
+        <a href="">My Profile</a>
         <button className="button">Logout</button>
       </nav>
     </header> 

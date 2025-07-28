@@ -16,7 +16,7 @@ useEffect(() => {
 }, []);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
-  const doomUsername = "prashammehta360@gmail.com"; // fixed recipient
+  const doomUsername = "Doom007"; // fixed recipient
 
   useEffect(() => {
   if (!currentUser) return;

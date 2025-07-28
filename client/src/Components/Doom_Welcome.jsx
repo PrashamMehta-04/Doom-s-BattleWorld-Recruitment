@@ -9,6 +9,7 @@ import '../Components_CSS/Doom_Welcomec.css';
 import CurrentOpenings from './Job_Openings';
 import { useNavigate } from 'react-router-dom';
 
+
 const Welcome = ({ name, stats }) => {
   const { activePositions, totalApplicants, shortlisted, activeChats } = stats;
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ const Welcome = ({ name, stats }) => {
 
         <div className="action-buttons">
           <button className="action-btn red" onClick={handlePostNewPosition}>Post New Position</button> 
-          <button className="action-btn purple">Manage Communications</button>
+          <button className="action-btn purple" onClick={()=>navigate('/chat')}>Manage Communications</button>
         </div>
       </div>
       <div>

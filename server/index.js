@@ -188,7 +188,13 @@ app.get('/api/heroes', async (req, res) => {
 app.get('/api/cards',verifyToken,async (req,res)=>{
     const username=req.user.username;
     try{
-        const data=await Doom.find();
+        const data=await Doom.find({
+            Accepted:{
+                $not:{
+                    $elemMatch:{Username:username}
+                }
+            }
+        });
         const result=[];
         const user=await heroes.findOne({Username:username});
         for(const jobs of user.AppliedJobs){
@@ -318,7 +324,9 @@ io.on('connection', (socket) => {
 
 app.get('/api/users', async (req, res) => {
   try {
-    const usersList = await user.find({}, 'Username');
+    const usersList = await heroes.find({
+        AppliedJobs:{$elemMatch:{status:'Accepted'}}
+    });
     const formatted = usersList.map(u => ({ username: u.Username }));
     res.json(formatted);
   } catch (error) {
@@ -404,7 +412,12 @@ app.post('/api/hero-update',async(req,res)=>{
         });
         await Doom.updateOne({companyName:title},{
             $pull:{users:username}
-        })
+        });
+        if(status=='Accepted'){
+        await Doom.updateOne({companyName:title},{
+            $push:{Accepted:{username:username,status}}
+        });
+    }
         req.status(200).send(true);
     }
     catch(error){

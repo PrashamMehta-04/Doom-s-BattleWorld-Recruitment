@@ -6,6 +6,7 @@ import Job_Cards from '../Components/Job_Cards';
 import useAuthGuard from '../Components/useAuthGuard';
 import {getStoreValue} from 'pulsy';
 import {useNavigate} from 'react-router-dom';
+import JobList from '../Components/Job_List';
 const Home_Logged=()=>{
   const navigate=useNavigate();
   useAuthGuard();
@@ -78,7 +79,9 @@ const Home_Logged=()=>{
          <Welcome name={Name} jobs={len} applications={"5"} interviews={"2"}/>
         <div>{profile}</div>
        <p style={{textAlign:'left', marginLeft:'25px', fontSize:"20px", fontWeight:'bold'}}>Recommended Jobs</p>
-        <div style={{display:"flex", flexWrap:"wrap", alignItems:"stretch", gap:"20px"}}>{jobs}</div>
+        {/* <div style={{display:"flex", flexWrap:"wrap", alignItems:"stretch", gap:"20px"}}>{jobs}</div> */}
+        <JobList jobs={jobs} />
+
         {/* <div style={{
   display: "flex",
   flexWrap: "wrap",

@@ -223,6 +223,30 @@ app.get('/api/heroProfile',verifyToken,async(req,res)=>{
     res.json(data);
    }
 });
+app.get('/api/editprofile', verifyToken, async (req, res) => {
+  try {
+    const username = req.user.username; // assuming you attach `username` in verifyToken middleware
+    const hero = await heroes.findOne({ Username: username });
+
+    if (!hero) {
+      return res.status(404).json({ error: 'Hero not found' });
+    }
+
+    res.status(200).json({
+      SuperPower: hero.SuperPower || [],
+      Battles: hero.keyBattles || [],
+      Weakness: hero.Weakness || [],
+      BackStory: hero.BackStory || '',
+      PreferredRole: hero.preferredRole || '',
+      ResumeURL: hero.ResumeURL || ''
+    });
+  } catch (error) {
+    console.error('Edit Profile Fetch Error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+module.exports = app;
 app.post('/api/job-info',verifyToken,async(req,res)=>{
     const {Title}=req.body;
     try{
@@ -254,9 +278,14 @@ app.get('/api/doomOpenings', async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
 const http = require('http');
-const { Server } = require('socket.io');
+
+app.use(cors());
+app.use(express.json());
+
 const server = http.createServer(app);
+const { Server } = require('socket.io');
 const io = new Server(server, {
   cors: {
     origin: 'http://localhost:5173',
@@ -264,12 +293,13 @@ const io = new Server(server, {
   },
 });
 
+// In-memory map to store socket connections
 const users = {}; // { username: socket.id }
 
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
 
-  // Register user and save socket ID
+  // Register user to socket ID
   socket.on('register', (username) => {
     users[username] = socket.id;
     console.log(`${username} registered with socket ID ${socket.id}`);
@@ -283,6 +313,7 @@ io.on('connection', (socket) => {
           { sender: recipient, recipient: sender }
         ]
       }).sort({ timestamp: 1 });
+
       socket.emit('chatHistory', messages);
     } catch (err) {
       console.error('Error fetching history:', err);
@@ -315,7 +346,6 @@ io.on('connection', (socket) => {
   });
 });
 
-
 app.get('/api/users', async (req, res) => {
   try {
     const usersList = await user.find({}, 'Username');
@@ -325,11 +355,11 @@ app.get('/api/users', async (req, res) => {
     res.status(500).json({ error: "Server error while fetching users" });
   }
 });
-// In your backend (index.js)
 
 app.get('/api/current-user', async (req, res) => {
   const authHeader = req.header('Authorization');
   if (!authHeader) return res.status(401).json({ error: 'No token provided' });
+
   const token = authHeader.replace('Bearer ', '');
   try {
     const decoded = jwt.verify(token, jwt_Key);
@@ -338,9 +368,11 @@ app.get('/api/current-user', async (req, res) => {
     res.status(401).json({ error: 'Invalid token' });
   }
 });
+
 server.listen(PORT, () => {
   console.log(`Server is running with Socket.IO on http://localhost:${PORT}`);
 });
+
 
 
 app.post('/api/hero-user',verifyToken,async(req,res)=>{

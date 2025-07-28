@@ -1,4 +1,4 @@
- .wel {
+ /* .wel {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -6,6 +6,71 @@
   gap: 20px;
   padding: 20px 30px;
   margin: 90px 15px 0;
+  background: linear-gradient(90deg, #211e57 0%, #2d1a67 100%);
+  border-radius: 12px;
+  color: white;
+  margin-right: 30px;
+}
+
+.welcome-section {
+  flex: 1 1 300px;
+  min-width: 200px;
+  text-align: left;
+}
+
+.welcome-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.welcome-subtext {
+  margin-top: 5px;
+  font-size: 16px;
+  color: #d1c4e9;
+}
+
+.stat {
+  flex: 0 1 150px;
+  text-align: center;
+}
+
+.stat h1 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  margin: 0;
+}
+
+.stat p {
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .wel {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stat {
+    text-align: left;
+    width: 100%;
+  }
+
+  .welcome-heading {
+    white-space: normal;
+  }
+} */
+
+.wel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 30px;
+  margin: clamp(40px, 6vw, 80px) 15px 0; /* Responsive top margin */
   background: linear-gradient(90deg, #211e57 0%, #2d1a67 100%);
   border-radius: 12px;
   color: white;

@@ -1,8 +1,10 @@
 import React from "react";
 import '../Components_CSS/PrivacyTermsc.css';
+import Navbar from "../Components/Navbar";
 const PrivacyTerms = () => {
   return (
     <div className="privacy-container">
+      <Navbar/>
       <h1 className="privacy-title">Privacy Policy & Terms of Battle</h1>
       <p className="privacy-intro">
         By entering the realm of BattleWorld, you agree to Doom’s eternal wisdom, along with the following terms and conditions.

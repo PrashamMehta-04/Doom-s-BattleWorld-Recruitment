@@ -1,9 +1,10 @@
 import React from "react";
 import '../Components_CSS/Aboutc.css';
-
+import Navbar from "../Components/Navbar";
 const About = () => {
   return (
     <div className="about-container">
+      <Navbar/>
       <h1 className="about-title">What is BattleWorld?</h1>
       <p className="about-description">
         BattleWorld is a multiversal recruitment arena built by Doom himself — designed to match elite heroes and villains

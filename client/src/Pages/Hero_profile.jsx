@@ -3,7 +3,9 @@ import '../Components_CSS/hero_Profile.css';
 import { getStoreValue } from 'pulsy';
 import Profile_SuperPower from '../Components/Profile_SuperPower';
 import Navbar_Login from '../Components/Navbar_Login';
+import { useNavigate } from 'react-router-dom';
 const Hero_profile=()=>{
+  const navigate=useNavigate();
     const [power,setPower]=useState([]);
     const [story,setStory]=useState('');
     const [weakness,setWeakness]=useState([]);
@@ -110,7 +112,7 @@ const Hero_profile=()=>{
   </div>
   
 </div>
-<div><button onClick={()=>navigate('/profile-edit')} className='hero-profile-button'>Edit Profile</button></div>
+<div ><button onClick={()=>navigate('/hero-profile-edit')} className='hero-profile-button'>Edit Profile</button></div>
 </div>
 </div>
     )

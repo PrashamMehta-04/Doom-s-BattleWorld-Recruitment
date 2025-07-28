@@ -8,7 +8,7 @@ const Navbar = () => {
     <header className="header">
       <div className="logo">
         <span className='logo-icon'>⚡</span>
-        <span className="logo-text">BattleWorld</span>
+        <span className="logo-text" onClick={()=>navigate('/')} href="">BattleWorld</span>
       </div>
       <nav className="nav-links">
         <a onClick={() => navigate('/about')} href="">About</a>

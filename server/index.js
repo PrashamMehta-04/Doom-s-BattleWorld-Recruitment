@@ -450,7 +450,7 @@ app.post('/api/hero-update',async(req,res)=>{
             $push:{Accepted:{username:username,status}}
         });
     }
-        req.status(200).send(true);
+        res.status(200).send(true);
     }
     catch(error){
         console.error("Error updating",error);

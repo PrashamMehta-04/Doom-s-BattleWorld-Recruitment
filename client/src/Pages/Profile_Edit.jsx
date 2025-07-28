@@ -12,24 +12,36 @@ const HeroProfileEdit = () => {
   const [weak, setWeak] = useState(['']);
   const [bStory, setBStory] = useState('');
   const [pRole, setProle] = useState('');
-  const [url, setUrl] = useState('');
+  const [pdfUrl, setPdfUrl] = useState('');
   const token = getStoreValue('auth')?.token;
   const navigate = useNavigate();
+  const handleFileChange=(e)=>{
+    const selected=e.target.files[0];
+    if(selected&&selected.size<=10*1024*1024){
+      console.log(selected);
+      setPdfUrl(selected);
+    }
+    else{
+      console.log("File too large!");
+    }
+   }
 useEffect(() => {
   const fetchProfile = async () => {
     try {
       const res = await fetch('http://localhost:5000/api/editprofile', {
+        method:'GET',
         headers: {
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       });
       const data = await res.json();
+      console.log(data);
       setPowerArr(data.SuperPower || ['']);
       setBattles(data.Battles || ['']);
       setWeak(data.Weakness || ['']);
       setBStory(data.BackStory || '');
       setProle(data.PreferredRole || '');
-      setUrl(data.ResumeURL || '');
     } catch (err) {
       console.error(err);
     }
@@ -39,6 +51,21 @@ useEffect(() => {
 
 
   const handleUpdate = async () => {
+    if(!pdfUrl){
+          console.log("please upload your resume!");
+        }
+        else{       
+        const formData=new FormData();
+        formData.append('file',pdfUrl);
+        formData.append('upload_preset',"doom-s_battleworld");
+        const cloud=await fetch("https://api.cloudinary.com/v1_1/dgkaav5s7/raw/upload",{
+          method:'POST',
+          body:formData,
+        });
+        
+        const data=await cloud.json();
+        console.log(data);
+        const url=data.secure_url;
     const response = await fetch('http://localhost:5000/api/resume', {
       method: 'POST',
       headers: {
@@ -49,6 +76,7 @@ useEffect(() => {
     });
     if (response.ok) navigate('/home-logged');
   };
+}
 
   return (
     <div className="base-container">
@@ -131,9 +159,20 @@ useEffect(() => {
       </section>
 
       <div className="job-info-apply-box">
-        <h3 className="job-info-apply-title">Resume</h3>
-        {url ? <a href={url} target="_blank" rel="noopener noreferrer">View Uploaded Resume</a> : <p>No resume uploaded.</p>}
-      </div>
+          <h3 className="job-info-apply-title">🚀 Apply Now</h3>
+          <form className="job-info-form">
+            <label className="job-info-form-label">Upload Resume</label>
+            <div className="job-info-upload-box">
+               <input
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  onChange={handleFileChange}
+                />
+              <p>Click to upload or drag and drop</p>
+              <p className="job-info-upload-note">PDF, DOC, DOCX (Max 10MB)</p>
+            </div>
+             </form>
+             </div>
 
       <button onClick={handleUpdate} className="btn submit">Update Profile</button>
     </div>

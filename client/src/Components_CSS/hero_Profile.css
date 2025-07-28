@@ -345,3 +345,14 @@
   color: #84d0ff;
   font-size: 14px;
 }
+.hero-profile-button{
+  background-color: orangered;
+  color:white;
+  padding:10px 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin-top:20px;
+}
+.hero-profile-button:hover{
+  transform:scale(1.05);
+}

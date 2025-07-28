@@ -46,7 +46,7 @@ const Welcome = ({ name, stats }) => {
 
         <div className="action-buttons">
           <button className="action-btn red" onClick={handlePostNewPosition}>Post New Position</button> 
-          <button className="action-btn purple">Manage Communications</button>
+          <button className="action-btn purple" onClick={() => navigate('/chat')}>Manage Communications</button>
         </div>
       </div>
       <div>

@@ -13,6 +13,7 @@ const jwt_Key=config.JWTkey;
 const cloudinary=require('cloudinary').v2;
 const verifyToken=require('./Route');
 const { Message } = require('./schema');
+const nodemailer=require('nodemailer');
 app.use(cors({
   origin: 'http://localhost:5173', // your frontend origin
   credentials: true
@@ -40,7 +41,7 @@ app.post('/api/google', async (req, res) => {
     try {
         let check = await user.findOne({ Username: username });
         if (!check) {
-            const newData = new user({ Username: username, password: password, Name: name, loginType: type });
+            const newData = new user({ Username: username, password: password, Name: name, loginType: type,email:username });
             const heroData = new heroes({ Username: username });
             await heroData.save();
             await newData.save();
@@ -85,7 +86,7 @@ app.post('/api/login', async(req,res)=>{
     }
 });
 app.post('/api/signup',async(req,res)=>{
-    const{username,password,name,type}=req.body;
+    const{username,password,name,type,Email}=req.body;
     try{
         const check=await user.findOne({username});
         if(check){
@@ -93,7 +94,7 @@ app.post('/api/signup',async(req,res)=>{
         }
         else{
             const hash=await bcrypt.hash(password,saltRounds);
-            const newUser=new user({Username:username,password:hash,Name:name,loginType:type});
+            const newUser=new user({Username:username,password:hash,Name:name,loginType:type,email:Email});
             const newHero=new heroes({Username:username});
             await newHero.save();
             await newUser.save();
@@ -358,6 +359,7 @@ app.get('/api/users', async (req, res) => {
         AppliedJobs:{$elemMatch:{status:'Accepted'}}
     });
     const formatted = usersList.map(u => ({ username: u.Username }));
+    console.log(formatted);
     res.json(formatted);
   } catch (error) {
     res.status(500).json({ error: "Server error while fetching users" });
@@ -454,6 +456,44 @@ app.post('/api/hero-update',async(req,res)=>{
     }
     catch(error){
         console.error("Error updating",error);
+    }
+});
+app.post('/api/video-call',async(req,res)=>{
+    const{recipient,to,subject,text}=req.body;
+    try{
+        await heroes.updateOne({Username:recipient,"AppliedJobs.$.status":'Accepted'},{
+            $set:{
+                "AppliedJobs.$.videoCall":true
+            }
+        });
+        const transporter = nodemailer.createTransport({
+            service:'gmail',
+            auth:{
+                user:config.Gmail,
+                pass:config.Gmail_APP,
+            }
+        });
+        const MailOptions={
+            from:config.Gmail,
+            to,
+            subject,text
+        }
+        await transporter.sendMail(MailOptions);
+        res.status(200).send(true);
+    }
+    catch(error){
+        console.log("Error video call",error);
+        res.status(500).send("Server Error");
+    }
+});
+app.post('/api/email',async(req,res)=>{
+    const {recipient}=req.body;
+    try{
+    const data=await user.findOne({Username:recipient});
+    res.json(data);}
+    catch(error){
+        console.log("error fetching email",error);
+        res.status(500).send(false);
     }
 })
 app.listen(PORT, () => {

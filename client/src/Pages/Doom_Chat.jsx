@@ -2,13 +2,14 @@ import React, { useState, useEffect, useRef} from "react";
 import { io } from "socket.io-client";
 import Navbar_Login from "../Components/Doom_Navbar";
 import "../Components_CSS/Doom_Chatc.css";
+import {useNavigate} from 'react-router-dom';
 
 // const socket = io("http://localhost:5000");
 
 
 const Chat = ({ currentUser }) => {
   const socketRef = useRef(null);
-
+  const navigate=useNavigate();
 useEffect(() => {
   socketRef.current = io("http://localhost:5000");
   return () => socketRef.current.disconnect();
@@ -17,6 +18,7 @@ useEffect(() => {
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
   const [recipient, setRecipient] = useState(null);
+  const [email,setEmail]=useState('');
 
   useEffect(() => {
     if (currentUser) {
@@ -60,11 +62,26 @@ useEffect(() => {
   const handleHistory = (msgs) => setMessages(msgs);
   // socket.on("chatHistory", handleHistory);
   socketRef.current.on("chatHistory", handleHistory);
-
+ const fetchEmail=async()=>{
+  console.log(recipient);
+    const response=await fetch('http://localhost:5000/api/email',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+      },
+      body:JSON.stringify({recipient})
+  });
+  if(response.ok){
+    const data=await response.json();
+    setEmail(data.email);
+  }
+};
+  fetchEmail();
   return () => {
     // socket.off("chatHistory", handleHistory);
     socketRef.current.off("chatHistory", handleHistory);
   };
+ 
 }, [recipient]);
 
 
@@ -85,7 +102,26 @@ useEffect(() => {
     });
     setInput("");
   };
-
+  const videoRef=async()=>{
+    try{
+    const response=await fetch('http://localhost:5000/api/video-call',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+      },
+      body:JSON.stringify({recipient,to:email,subject:"Interview Video Call",text:`Hello ${recipient},\n\nYou have a video call scheduled for an interview with Doom's BattleWorld. Please join the call right now.\n\nBest regards,\nDoom's BattleWorld Team `})
+    });
+    if(response.ok){
+      navigate('/video-call');
+    }
+    else{
+      console.log("Server Error");
+    }
+  }
+  catch(error){
+    console.error("Failed!!!!",error);
+  }
+  }
   return (
     <div className="battleworld-wrapper">
       <Navbar_Login />
@@ -145,7 +181,22 @@ useEffect(() => {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && sendMessage()}
                 />
+                
                 <button onClick={sendMessage}>➤</button>
+                <button onClick={videoRef}><svg xmlns="http://www.w3.org/2000/svg" 
+                        width="24" 
+                        height="24" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        stroke-width="2" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round" 
+                        class="lucide lucide-video">
+                      <path d="M22 8L16 12L22 16V8Z" />
+                      <rect x="2" y="6" width="14" height="12" rx="2" ry="2" />
+                    </svg>
+                    </button>
               </div>
             </>
           ) : (

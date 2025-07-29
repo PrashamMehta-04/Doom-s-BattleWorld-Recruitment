@@ -54,6 +54,7 @@ const HeroStatus=()=>{
     },[]);
     const statusMap=new Map();
     const buttonMap=new Map();
+    const videoButton=new Map();
     applications.forEach((app) => {
         statusMap.set(app.name,app.status);
         if(app.status=='Pending'||app.status=='Rejected'){
@@ -61,6 +62,12 @@ const HeroStatus=()=>{
         }
         else{
             buttonMap.set(app.name, <button className="heroStatus-btn" onClick={()=>{localStorage.setItem('jobTitle',app.name);navigate('/chat-user')}}>💬 Chat</button>);
+        }
+        if(app.videoCall){
+            videoButton.set(app.name, <button className="heroStatus-btn" onClick={()=>navigate('/video-call')}>🎥 Video Call</button>)
+        }
+        else{
+            videoButton.set(app.name, <button className="heroStatus-btn disabled" disabled>🎥 Video Call</button>);
         }
     });
     return(

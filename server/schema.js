@@ -18,6 +18,10 @@ const schema=new mongoose.Schema({
         enum:['google','manual'],
         required:true
     },
+    email:{
+      type:String,
+      required:true,
+    }
 });
 const user=mongoose.model('User',schema);
 const schema2=mongoose.Schema({
@@ -51,7 +55,8 @@ const schema2=mongoose.Schema({
       {
         name:String,
         status:{type:String, enum:['Pending', 'Accepted', 'Rejected']},
-        Date:{type:String}
+        Date:{type:String},
+        videoCall:{type:Boolean,default:false}
       }
     ]
 });

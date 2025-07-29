@@ -11,7 +11,7 @@ const Sign_Up = () => {
     username: '',
     password: '',
     confirmPassword: '',
-    superPower: ''
+    Email: ''
   });
   const[type,setType]=useState('');
 
@@ -35,7 +35,7 @@ const Sign_Up = () => {
       headers:{
       'Content-Type':'application/json'
       },
-      body:JSON.stringify({username,password,name,type:'manual'})
+      body:JSON.stringify({username,password,name,type:'manual',Email:form.Email})
     });
     if(response.ok){
       navigate('/login');
@@ -83,6 +83,15 @@ const Sign_Up = () => {
             type="text"
             name="username"
             placeholder="Username"
+            value={form.Email}
+            onChange={handleChange}
+            required
+            className="login-input"
+          />
+            <input
+            type="email"
+            name="username"
+            placeholder="Email ID"
             value={form.username}
             onChange={handleChange}
             required

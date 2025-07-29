@@ -19,6 +19,8 @@ import HeroStatus from './Pages/HeroStatus';
 import About from './Pages/About';
 import PrivacyTerms from './Pages/PrivacyTerms';
 import HeroProfileEdit from './Pages/Profile_Edit';
+import Contact from './Pages/ContactUs';
+import Doom_Login from './Pages/Doom_Login';
 export default function App() {
   const [username, setUsername] = useState('');
   const [role, setRole] = useState('');
@@ -72,6 +74,8 @@ useEffect(() => {
           <Route path='/about' element={<About/>}/>
           <Route path='/privacy-terms' element={<PrivacyTerms/>}/>
           <Route path='/hero-profile-edit' element={<HeroProfileEdit/>}/>
+          <Route path='/contact' element={<Contact/>}/>
+          <Route path='/doom-login' element={<Doom_Login/>}/>
         </Routes>
       </div>
     </>

@@ -1,0 +1,53 @@
+/* src/Components_CSS/contact.css */
+.contact-container {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 40px;
+  background-color: #0f172a; /* dark blue-black */
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+  font-family: 'Orbitron', 'Segoe UI', sans-serif;
+  color: #e2e8f0;
+  text-align: left;
+}
+
+.contact-container h1 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  color: #38bdf8; /* sky blue */
+  border-left: 5px solid #38bdf8;
+  padding-left: 15px;
+}
+
+.contact-info h3 {
+  font-size: 22px;
+  margin-top: 25px;
+  color: #facc15; /* yellow for highlight */
+  text-transform: uppercase;
+}
+
+.contact-info p {
+  font-size: 17px;
+  margin: 6px 0;
+  color: #94a3b8;
+}
+
+.contact-info a {
+  color: #60a5fa; /* blue-300 */
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+  color: #93c5fd;
+}
+
+.contact-note {
+  margin-top: 40px;
+  font-style: italic;
+  color: #64748b;
+  background-color: #1e293b;
+  padding: 15px 20px;
+  border-radius: 12px;
+  border-left: 4px solid #38bdf8;
+}

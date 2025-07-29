@@ -19,7 +19,7 @@ const Home = () => {
       <h1 style={{ paddingTop: '160px', textAlign: 'center' }}>BattleWorld Awaits!</h1>
       <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
         <Login_Button text="Login as Marvel Hero" onClick={() => navigate('/login')} />
-        <Login_Button text="Login as Doom" onClick={() => navigate('/login')} />
+        <Login_Button text="Login as Doom" onClick={() => navigate('/doom-login')} />
       </div>
       <div style={{ display: 'flex', gap: '24px', justifyContent: 'center', marginTop: '32px' }}>
         <FeatureBox

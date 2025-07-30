@@ -103,7 +103,8 @@ const HeroStatus=()=>{
         <button className="heroStatus-btn view" onClick={()=>{localStorage.setItem('jobTitle',job.companyName);navigate('/job-info')}}>📄 View More</button>
         <button className="heroStatus-btn pending">⏳ {statusMap.get(job.companyName)}</button>
         {buttonMap.get(job.companyName)}
-        <button className="heroStatus-btn disabled" disabled>🎥 Video Call</button>
+        {videoButton.get(job.companyName)}
+        {/* <button className="heroStatus-btn disabled" disabled>🎥 Video Call</button> */}
       </div>
     </div>
     ))}

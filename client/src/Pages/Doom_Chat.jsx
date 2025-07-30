@@ -19,7 +19,7 @@ useEffect(() => {
   const [users, setUsers] = useState([]);
   const [recipient, setRecipient] = useState(null);
   const [email,setEmail]=useState('');
-
+  const token=
   useEffect(() => {
     if (currentUser) {
       // socket.emit("register", currentUser);

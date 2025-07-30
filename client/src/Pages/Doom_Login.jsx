@@ -2,13 +2,16 @@
 import React, { useState } from 'react';
 import '../Components_CSS/Loginc.css';
 import { useNavigate } from 'react-router-dom';
+import {setStoreValue} from 'pulsy';
+import { jwtDecode } from 'jwt-decode';
 
 const Doom_Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [nme,setName]=useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async(e) =>{
     e.preventDefault();
 
     // 🔒 Hardcoded credentials (change as needed)
@@ -16,8 +19,27 @@ const Doom_Login = () => {
     const validPassword = 'doom@987';
 
     if (username === validUsername && password === validPassword) {
-      console.log('Login successful');
-      navigate('/doom');
+       const submitNormal=await fetch('http://localhost:5000/api/login',{
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({username,password})
+    });
+    if(submitNormal.ok){
+      const data=await submitNormal.json();
+      const token=data.token;
+      localStorage.setItem('token', token);
+      setStoreValue('auth',{token,user:{username}})
+    const n=jwtDecode(token);
+    setName(n.name);
+   navigate('/doom');
+   localStorage.setItem('userName',username); 
+   localStorage.setItem('Name',n.name);
+   setUsername('');
+   setPassword('');
+   setName('');
+  }
     } else {
       alert('Invalid username or password');
     }

@@ -497,8 +497,19 @@ app.post('/api/email',async(req,res)=>{
         res.status(500).send(false);
     }
 });
-
-
+app.post('/api/video-call-off',async(req,res)=>{
+    const{username}=req.body;
+    try{
+        await heroes.updateOne({USername:username,"AppliedJobs.$.videoCall":true},{
+            $set:{
+                "AppliedJobs.$.videoCall":false
+            }
+        });
+    }
+    catch(error){
+        console.log("Error video-call off!",error);
+    }
+});
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });

@@ -15,10 +15,24 @@ const Doom = () => {
     
     const Name=localStorage.getItem('Name');
     const n=5;
+    const [tot, setTot] = useState(0);
+
+    useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/doomOpenings");
+        const data = await res.json();
+        setTot(data.length);
+      } catch (err) {
+        console.error("Error fetching jobs:", err);
+      }
+    };
+    fetchJobs();
+  }, []);
     return(
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', height:"auto" }}>
         <Navbar_Login/> 
-         <Welcome name={Name} stats={{ activePositions: 1, totalApplicants: 2 * 2, shortlisted: 3 - 1, activeChats: 4 / 2 }} />
+         <Welcome name={Name} stats={{ activePositions: tot, totalApplicants: app, shortlisted: 3 - 1, activeChats: 4 / 2 }} />
       </div>  
     )
 }

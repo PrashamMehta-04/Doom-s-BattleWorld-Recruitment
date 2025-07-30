@@ -185,7 +185,6 @@ app.get('/api/heroes', async (req, res) => {
   }
 });
 
-
 app.get('/api/cards',verifyToken,async (req,res)=>{
     const username=req.user.username;
     try{
@@ -415,6 +414,7 @@ app.get('/api/status-applications',verifyToken,async(req,res)=>{
         const applications=await heroes.findOne({Username:username});
         console.log(applications.AppliedJobs);
         res.json(applications.AppliedJobs);
+        
     }
     catch(error){
         console.error("Error fetching applications:", error);
@@ -458,6 +458,7 @@ app.post('/api/hero-update',async(req,res)=>{
         console.error("Error updating",error);
     }
 });
+
 app.post('/api/video-call',async(req,res)=>{
     const{recipient,to,subject,text}=req.body;
     try{
@@ -495,7 +496,9 @@ app.post('/api/email',async(req,res)=>{
         console.log("error fetching email",error);
         res.status(500).send(false);
     }
-})
+});
+
+
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });

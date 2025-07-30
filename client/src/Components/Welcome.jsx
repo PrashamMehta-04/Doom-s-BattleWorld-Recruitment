@@ -1,7 +1,7 @@
 import React from 'react';
 import '../Components_CSS/Welcome.css';
 
-const Welcome = ({ name, jobs, applications, interviews }) => {
+const Welcome = ({ name, jobs, availableJobs }) => {
   return (
     <div className="wel">
       <div className="welcome-section">
@@ -13,15 +13,9 @@ const Welcome = ({ name, jobs, applications, interviews }) => {
         <h1>{jobs}</h1>
         <p>Open Jobs</p>
       </div>
-
       <div className="stat">
-        <h1>{applications}</h1>
-        <p>Applications</p>
-      </div>
-
-      <div className="stat">
-        <h1>{interviews}</h1>
-        <p>Interviews</p>
+        <h1>{availableJobs}</h1>
+        <p>Available Jobs</p>
       </div>
     </div>
   );

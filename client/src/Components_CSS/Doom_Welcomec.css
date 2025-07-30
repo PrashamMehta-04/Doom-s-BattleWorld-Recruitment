@@ -1,4 +1,4 @@
-.wel1 {
+ .welcome-container {
   width: 100%;
   padding: 50px 30px;
   background: radial-gradient(ellipse at top left, rgba(91, 63, 191, 0.5), rgba(18, 13, 59, 0.8));
@@ -7,80 +7,79 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  box-sizing: border-box;
-  backdrop-filter: blur(8px);
   color: white;
   margin-top: 65px;
   margin-bottom: 30px;
+  backdrop-filter: blur(8px);
+  box-sizing: border-box;
 }
 
+.welcome-heading {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
 
-.stats-container {
+.stats-grid {
   display: flex;
-  justify-content: center; 
-  align-items: center;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 30px;
-  margin-top: 30px;
-  padding-left: 20px;
 }
 
-
-.stat-box {
+.stat-card {
   width: 180px;
   height: 140px;
   background-color: #1c1f36;
   border-radius: 16px;
   padding: 20px;
   text-align: center;
-  color: white;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
   border: 2px solid rgba(255, 255, 255, 0.08);
   transition: transform 0.2s ease;
-
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center;     
+  justify-content: center;
+  align-items: center;
 }
 
-
-.stat-box:hover {
+.stat-card:hover {
   transform: translateY(-5px);
 }
 
 .stat-icon {
-  font-size: 30px;
-  margin-bottom: 10px;
+  font-size: 2.8rem;
+  margin-bottom: 5px;
+  line-height: 1;
+  display: block;
 }
 
-.box-blue .stat-icon {
+.stat-blue .stat-icon {
   color: #03a9f4;
 }
-.box-purple .stat-icon {
+.stat-purple .stat-icon {
   color: #9c27b0;
 }
-.box-yellow .stat-icon {
-  color: #ffeb3b;
+.stat-yellow .stat-icon {
+  color: #ffc107;
 }
-.box-pink .stat-icon {
+.stat-pink .stat-icon {
   color: #e91e63;
 }
 
-.stat-box h2 {
-  font-size: 28px;
+.stat-card h2 {
+  font-size: 20px;
   margin: 5px 0;
   color: #90ee90;
 }
 
-.stat-box p {
-  font-size: 20px;
+.stat-card p {
+  font-size: 18px;
   margin: 0;
-  align-content: center;
   color: #ddd;
 }
-.action-buttons {
+
+.button-row {
   margin-top: 30px;
   display: flex;
   flex-wrap: wrap;
@@ -89,29 +88,18 @@
 }
 
 .action-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   padding: 12px 20px;
   font-size: 15px;
   border: none;
   border-radius: 10px;
-  color: white;
   font-weight: bold;
+  color: white;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
-.action-btn .btn-icon {
-  font-size: 16px;
-}
-
 .action-btn.red {
   background-color: #e53935;
-}
-
-.action-btn.blue {
-  background-color: #1e88e5;
 }
 
 .action-btn.purple {

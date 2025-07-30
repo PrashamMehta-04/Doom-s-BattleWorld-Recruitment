@@ -5,6 +5,7 @@ import useAuthGuard from '../Components/useAuthGuard';
 import { getStoreValue } from 'pulsy';
 import {useNavigate} from 'react-router-dom';
 
+
 const Job_info=()=>{
     useAuthGuard();
     const today=new Date();
@@ -18,19 +19,55 @@ const Job_info=()=>{
     const [salary,setSalary]=useState('');
     const [location,setLocation]=useState('');
     const [requirements,setRequirements]=useState([]);
-    const handleSubmit=async()=>{
-        const response=await fetch('http://localhost:5000/api/hero-user',{
-            method:'POST',
-            headers:{'Content-Type':'application/json',
+    const [popupMessage, setPopupMessage] = useState('');
+const [showPopup, setShowPopup] = useState(false);
+
+
+    // const handleSubmit=async()=>{
+    //     const response=await fetch('http://localhost:5000/api/hero-user',{
+    //         method:'POST',
+    //         headers:{'Content-Type':'application/json',
+    //             'Authorization': `Bearer ${token}`,
+    //         },
+    //         body:JSON.stringify({title})
+    //     });
+    //     if(response.ok){
+    //         console.log("Applied");
+    //         navigate('/home-logged');
+    //     }
+    // }
+    const handleSubmit = async () => {
+    try {
+        const response = await fetch('http://localhost:5000/api/hero-user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             },
-            body:JSON.stringify({title})
+            body: JSON.stringify({ title })
         });
-        if(response.ok){
-            console.log("Applied");
-            navigate('/home-logged');
+
+        if (response.ok) {
+            setPopupMessage("✅ Application submitted successfully!");
+            setShowPopup(true);
+            setTimeout(() => {
+                setShowPopup(false);
+                navigate('/home-logged');
+            }, 2000);
+        } else {
+            setPopupMessage("❌ Failed to submit your application.");
+            setShowPopup(true);
+            setTimeout(() => setShowPopup(false), 3000);
         }
+    } catch (error) {
+        console.error("Submit error:", error);
+        setPopupMessage("❌ Error occurred while submitting.");
+        setShowPopup(true);
+        setTimeout(() => setShowPopup(false), 3000);
     }
+}
+
+
     useEffect(()=>{
         const job_info=async()=>{
             try{
@@ -109,12 +146,14 @@ const Job_info=()=>{
           <p className="job-info-about-text">
             Leading platform connecting heroes across dimensions for world-saving missions and interdimensional collaboration.
           </p>
-        </div>
-
-        <div className="job-info-apply-box">
-         
             <button type="submit" className="job-info-submit-button" onClick={handleSubmit}>Submit Application</button>
         </div>
+        {showPopup && (
+  <div className="popup-notification">
+    {popupMessage}
+  </div>
+)}
+
       </section>
     </div>
   </div>

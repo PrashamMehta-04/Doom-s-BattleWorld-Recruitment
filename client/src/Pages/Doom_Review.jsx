@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import '../Components_CSS/Doom_Reviewc.css';
-
+import { useNavigate } from 'react-router-dom';
 const Doom_Review = () => {
   const cardRef = useRef(null);
   const [startX, setStartX] = useState(null);
@@ -10,6 +10,7 @@ const Doom_Review = () => {
   const [rejected, setRejected] = useState([]);
   const [heroData, setHeroData] = useState([]);
   const title=localStorage.getItem('Title');
+  const navigate = useNavigate();
   useEffect(() => {
     axios.get(`http://localhost:5000/api/heroes?name=${title}`)
       .then(res => setHeroData(res.data))
@@ -78,14 +79,26 @@ const Doom_Review = () => {
     return <div className="swipe-card">Loading...</div>;
   }
 
+  // if (currentIndex >= heroData.length) {
+  //   return (
+  //     <div className="swipe-card finished">
+  //       <h2>No More Cards</h2>
+  //       <p>✅ Accepted: {accepted.length} | ❌ Rejected: {rejected.length}</p>
+  //     </div>
+  //   );
+  // }
   if (currentIndex >= heroData.length) {
-    return (
-      <div className="swipe-card finished">
-        <h2>No More Cards</h2>
-        <p>✅ Accepted: {accepted.length} | ❌ Rejected: {rejected.length}</p>
-      </div>
-    );
-  }
+  return (
+    <div className="swipe-card finished">
+      <h2>No More Cards</h2>
+      <p>✅ Accepted: {accepted.length} | ❌ Rejected: {rejected.length}</p>
+      <button className="back-home-button" onClick={() => navigate('/doom')}>
+        🔙 Back to Home
+      </button>
+    </div>
+  );
+}
+
 
   const currentHero = heroData[currentIndex];
   console.log(currentHero.Resume);

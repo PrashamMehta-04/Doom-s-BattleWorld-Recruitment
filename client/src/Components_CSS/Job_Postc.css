@@ -1,3 +1,103 @@
+.requirement-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  margin-bottom: 0px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;  
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.jobpost-input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #666;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.job-post-btn {
+  padding: 8px 16px;
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.job-post-btn:hover {
+  background-color: #574bdf;
+  transform: scale(1.03);
+}
+.input-with-remove {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.input-with-remove .jobpost-input {
+  width: 100%;
+  padding-right: 40px; /* Leaves space for remove button */
+  box-sizing: border-box;
+}
+
+.remove-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #ff6b6b;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.remove-btn:hover {
+  transform: translateY(-50%) scale(1.2);
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.job-post-btn {
+  padding: 8px 16px;
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.job-post-btn:hover {
+  background-color: #574bdf;
+  transform: scale(1.05);
+}
+
+
+
+
+
+
 
 .jobpost-bg {
   min-height: 100vh;
@@ -112,10 +212,10 @@
   margin-top: 6px;
   margin-bottom: -6px;
 }
-.job-post-btn-add,
+/* .job-post-btn-add,
 .job-post-btn-remove {
- font-size: 0.75rem; /* Smaller text */
-  padding: 4px 8px;   /* Compact size */
+ font-size: 0.75rem; 
+  padding: 4px 8px;   
   width: 23%;
   border-radius: 6px;
   background-color: #6c63ff;
@@ -130,4 +230,4 @@
 }
 .job-post-btn-add:hover, .job-post-btn-remove:hover{
   transform:scale(1.05);
-}
+} */

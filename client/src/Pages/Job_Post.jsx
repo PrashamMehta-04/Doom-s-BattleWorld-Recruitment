@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../Components_CSS/Job_Postc.css';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Job_Post = () => {
   const [companyName, setCompanyName] = useState('');
@@ -11,32 +11,32 @@ const Job_Post = () => {
   const [location, setLocation] = useState('');
   const [requirements, setRequirements] = useState([""]);
   const navigate = useNavigate();
-  const radd=()=>{
+  const radd = () => {
     setRequirements([...requirements, '']);
   }
-  const rremove=(index)=>{
-    if(requirements.length>1){
-      const updated=[...requirements];
-      updated.splice(index,1);
+  const rremove = (index) => {
+    if (requirements.length > 1) {
+      const updated = [...requirements];
+      updated.splice(index, 1);
       setRequirements(updated);
     }
   }
-  const rhandleChange=(index,req)=>{
-    const updated=[...requirements];
-    updated[index]=req;
+  const rhandleChange = (index, req) => {
+    const updated = [...requirements];
+    updated[index] = req;
     setRequirements(updated);
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await fetch('http://localhost:5000/api/job_post', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ companyName, subTitle, description, lastDate, salary, location,requirements })
-        });
-        if (response.ok) {
+      const response = await fetch('http://localhost:5000/api/job_post', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ companyName, subTitle, description, lastDate, salary, location, requirements })
+      });
+      if (response.ok) {
         alert("Job Posted Successfully!");
         setCompanyName('');
         setDescription('');
@@ -82,7 +82,7 @@ const Job_Post = () => {
             required
             className="jobpost-input"
           />
-           <label className="jobpost-label">Job Requirements</label>
+          {/* <label className="jobpost-label">Job Requirements</label>
            {requirements.map((requirements,index)=>(
             <div>
           <input
@@ -96,8 +96,35 @@ const Job_Post = () => {
            <button className="job-post-btn-remove" onClick={()=>rremove(index)}>Remove</button>
           </div>
           ))}
-          <button className="job-post-btn-add" onClick={radd}>Add</button>
-         
+          <button className="job-post-btn-add" onClick={radd}>Add</button> */}
+          <label className="jobpost-label">Job Requirements</label>
+          {requirements.map((req, index) => (
+            <div className="input-with-remove" key={index}>
+              <input
+                type="text"
+                placeholder="Enter Job Requirement"
+                value={req}
+                onChange={(e) => rhandleChange(index, e.target.value)}
+                required
+                className="jobpost-input"
+              />
+              <button
+                type="button"
+                className="remove-btn"
+                onClick={() => rremove(index)}
+                title="Remove requirement"
+              >
+                ✕
+              </button>
+            </div>
+          ))}
+          <div className="button-row">
+            <button type="button" className="job-post-btn" onClick={radd}>
+              Add Requirement
+            </button>
+          </div>
+
+
 
           <label className="jobpost-label">Post Description</label>
           <textarea

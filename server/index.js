@@ -108,9 +108,15 @@ app.post('/api/signup',async(req,res)=>{
     }
 });
 app.post('/api/resume',verifyToken,async(req,res)=>{
-    const{powerArr,bStory,battles,weak,pRole,url}=req.body;
+    const{powerArr,bStory,battles,weak,pRole,url, email}=req.body;
     const username=req.user.username;
     try{
+        if(email){
+            await user.updateOne(
+        { Username: req.user.username },
+        { $set: { email: email } }
+      );
+        }
         await heroes.updateOne(
             {Username:username},{
                 $set:{
@@ -185,7 +191,6 @@ app.get('/api/heroes', async (req, res) => {
   }
 });
 
-
 app.get('/api/cards',verifyToken,async (req,res)=>{
     const username=req.user.username;
     try{
@@ -234,6 +239,7 @@ app.get('/api/editprofile', verifyToken, async (req, res) => {
   try {
     const username = req.user.username; // assuming you attach `username` in verifyToken middleware
     const hero = await heroes.findOne({ Username: username });
+    const userData = await user.findOne({ Username: username });
 
     if (!hero) {
       return res.status(404).json({ error: 'Hero not found' });
@@ -245,7 +251,8 @@ app.get('/api/editprofile', verifyToken, async (req, res) => {
       Weakness: hero.Weakness || [],
       BackStory: hero.BackStory || '',
       PreferredRole: hero.preferredRole || '',
-      ResumeURL: hero.ResumeURL || ''
+      ResumeURL: hero.ResumeURL || '',
+      email: userData?.email || '',
     });
   } catch (error) {
     console.error('Edit Profile Fetch Error:', error);
@@ -415,6 +422,7 @@ app.get('/api/status-applications',verifyToken,async(req,res)=>{
         const applications=await heroes.findOne({Username:username});
         console.log(applications.AppliedJobs);
         res.json(applications.AppliedJobs);
+        
     }
     catch(error){
         console.error("Error fetching applications:", error);
@@ -458,6 +466,7 @@ app.post('/api/hero-update',async(req,res)=>{
         console.error("Error updating",error);
     }
 });
+
 app.post('/api/video-call',async(req,res)=>{
     const{recipient,to,subject,text}=req.body;
     try{
@@ -511,6 +520,50 @@ app.post('/api/video-call-off',async(req,res)=>{
         console.log("Error video-call off!",error);
     }
 });
+app.get('/api/pendingApplications', async (req, res) => {
+  try{
+    const all = await Doom.find({}, 'users');
+    let totalApplicants = 0;
+    for(const comp of all){
+        totalApplicants+=comp.users?.length || 0;
+    }
+    console.log("Total Applicants: ", totalApplicants);
+    res.json({totalApplicants});
+  }
+  catch(error){
+    console.error("Error fetching total applicants:", error);
+    res.status(500).send("Server Error");
+  }
+});
+app.get('/api/hero-acc', async (req, res) => {
+  try {
+    const allHeroes = await heroes.find({}, 'AppliedJobs');
+    let acc = 0;
+
+    for (const hero of allHeroes) {
+      const acceptedJobs = hero.AppliedJobs?.filter(job => job.status === 'Accepted') || [];
+      acc += acceptedJobs.length;
+    }
+
+    res.json({ acc });
+  } catch (error) {
+    console.error("Error fetching accepted jobs:", error);
+    res.status(500).send("Server Error");
+  }
+});
+app.get('/get-email', verifyToken, async (req, res) => {
+  try {
+    const username = req.user.username;
+    const foundUser = await user.findOne({ Username: username });
+    if (!foundUser) return res.status(404).json({ error: 'User not found' });
+
+    res.json({ email: foundUser.email });
+  } catch (error) {
+    console.error('Error fetching email:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 app.post('/api/delete-post',async(req,res)=>{
     const {title}=req.body;
     const data=await Doom.findOne({companyName:title});

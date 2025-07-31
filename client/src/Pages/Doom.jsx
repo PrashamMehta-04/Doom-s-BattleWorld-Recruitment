@@ -15,10 +15,47 @@ const Doom = () => {
     
     const Name=localStorage.getItem('Name');
     const n=5;
+    const [tot, setTot] = useState(0);
+    const [pending, setPending] = useState(0);
+    const [accepted, setAccepted] = useState(0);
+
+    useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/doomOpenings");
+        const data = await res.json();
+        setTot(data.length);
+      } catch (err) {
+        console.error("Error fetching jobs:", err);
+      }
+    };
+    const pendingApplications = async () => {
+      try{
+        const res1 = await fetch("http://localhost:5000/api/pendingApplications");
+        const data = await res1.json();
+        setPending(data.totalApplicants || 0);
+      }
+      catch(err){
+        console.error("Error fetching pending applications:", err);
+      }
+    };
+    const acceptedApplications = async () => {
+      try {
+        const res2 = await fetch("http://localhost:5000/api/hero-acc");
+        const data1 = await res2.json();
+        setAccepted(data1.acc || 0);
+      } catch (err) {
+        console.error("Error fetching accepted applications:", err);
+      }
+    };
+    fetchJobs(),
+    pendingApplications(),
+    acceptedApplications();
+  }, []);
     return(
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', height:"auto" }}>
         <Navbar_Login/> 
-         <Welcome name={Name} stats={{ activePositions: 1, totalApplicants: 2 * 2, shortlisted: 3 - 1, activeChats: 4 / 2 }} />
+         <Welcome name={Name} stats={{ activePositions: tot, totalApplicants: pending, shortlisted: accepted}} />
       </div>  
     )
 }

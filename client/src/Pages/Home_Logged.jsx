@@ -11,7 +11,8 @@ const Home_Logged=()=>{
   const navigate=useNavigate();
   useAuthGuard();
     const [jobs,setJobs]=useState([]);
-    const [len,setLen]=useState();
+    const [len,setLen]=useState(0);
+    const [res, setRes]=useState(0);
     const[profile,setProfile]=useState();
     const token=getStoreValue('auth')?.token;
     useEffect(()=>{
@@ -42,9 +43,11 @@ const Home_Logged=()=>{
     });
     if(response.ok){
      const {data,result}=await response.json();
-     console.log(result);
      const set=new Set(result);
+     console.log(set.size);
      setLen(data.length);
+     setRes(data.length - set.size);
+     
      const maps=data.map((job,i)=>{
      if(!set.has(job.companyName)){
       return(
@@ -76,7 +79,7 @@ const Home_Logged=()=>{
     return(
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', height:"auto" }}>
         <Navbar_Login/> 
-         <Welcome name={Name} jobs={len} applications={"5"} interviews={"2"}/>
+         <Welcome name={Name} jobs={len} availableJobs={res}/>
         <div>{profile}</div>
        <p style={{textAlign:'left', marginLeft:'25px', fontSize:"20px", fontWeight:'bold'}}>Recommended Jobs</p>
         {/* <div style={{display:"flex", flexWrap:"wrap", alignItems:"stretch", gap:"20px"}}>{jobs}</div> */}

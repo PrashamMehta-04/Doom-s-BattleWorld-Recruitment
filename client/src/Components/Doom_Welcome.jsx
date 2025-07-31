@@ -5,12 +5,12 @@ import {
   FaUserCheck,
   FaComments
 } from 'react-icons/fa';
-import '../Components_CSS/Doom_Welcomec.css';  // Renamed CSS file
+import '../Components_CSS/Doom_Welcomec.css';
 import CurrentOpenings from './Job_Openings';
 import { useNavigate } from 'react-router-dom';
 
 const Welcome = ({ name, stats }) => {
-  const { activePositions, totalApplicants, shortlisted, activeChats } = stats;
+  const { activePositions, totalApplicants, shortlisted} = stats;
   const navigate = useNavigate();
 
   return (
@@ -27,17 +27,12 @@ const Welcome = ({ name, stats }) => {
           <div className="stat-card stat-purple">
             <FaUsers className="stat-icon" />
             <h2>{totalApplicants}</h2>
-            <p>Total Applicants</p>
+            <p>Reviews Pending</p>
           </div>
           <div className="stat-card stat-yellow">
             <FaUserCheck className="stat-icon" />
             <h2>{shortlisted}</h2>
             <p>Shortlisted</p>
-          </div>
-          <div className="stat-card stat-pink">
-            <FaComments className="stat-icon" />
-            <h2>{activeChats}</h2>
-            <p>Active Chats</p>
           </div>
         </div>
 

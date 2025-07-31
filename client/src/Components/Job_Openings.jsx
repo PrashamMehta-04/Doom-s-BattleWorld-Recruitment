@@ -24,6 +24,21 @@ const CurrentOpenings = () => {
     localStorage.setItem('Title',title);
     navigate("/doom-review");
   };
+  const handleEndPosting=async(title)=>{
+    const response=await fetch("http://localhost:5000/api/delete-post",{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+      },
+      body:JSON.stringify({title})
+    });
+    if(response.ok){
+      window.location.reload();
+      console.log("Job Posting Ended Successfully!");
+      setJobs(jobs.filter(job => job.companyName !== title));
+    }
+
+  }
 
   return (
     <div className="openings-container">
@@ -34,9 +49,12 @@ const CurrentOpenings = () => {
             <h3 className="job-title">{job.companyName}</h3>
             <p className="job-desc">{job.subTitle}</p>
           </div>
+           <div className="button-group">
           <button className="review-btn" onClick={()=>handleReview(job.companyName)}>
             Review
           </button>
+           <button className='review-btn' onClick={()=>handleEndPosting(job.companyName)}>End Posting</button>
+           </div>
         </div>
       ))}
     </div>

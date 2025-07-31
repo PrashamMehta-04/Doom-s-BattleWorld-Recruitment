@@ -461,6 +461,7 @@ app.post('/api/hero-update',async(req,res)=>{
 app.post('/api/video-call',async(req,res)=>{
     const{recipient,to,subject,text}=req.body;
     try{
+        console.log(recipient);
         await heroes.updateOne({Username:recipient,"AppliedJobs.$.status":'Accepted'},{
             $set:{
                 "AppliedJobs.$.videoCall":true
@@ -504,11 +505,24 @@ app.post('/api/video-call-off',async(req,res)=>{
                 "AppliedJobs.$.videoCall":false
             }
         });
+        res.status(200).send(true);
     }
     catch(error){
         console.log("Error video-call off!",error);
     }
 });
+app.post('/api/delete-post',async(req,res)=>{
+    const {title}=req.body;
+    const data=await Doom.findOne({companyName:title});
+    const results=data.users;
+    await Doom.deleteOne({companyName:title});
+    for(const user of results){
+        await heroes.updateOne({Username:user},{
+            $pull:{AppliedJobs:{name:title}}
+        });
+    }
+
+})
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });

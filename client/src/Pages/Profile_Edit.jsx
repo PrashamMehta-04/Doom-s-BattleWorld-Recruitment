@@ -42,6 +42,7 @@ useEffect(() => {
       setWeak(data.Weakness || ['']);
       setBStory(data.BackStory || '');
       setProle(data.PreferredRole || '');
+      setPdfUrl(data.ResumeURL || '');
     } catch (err) {
       console.error(err);
     }

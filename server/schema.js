@@ -98,7 +98,7 @@ const doomSchema = new mongoose.Schema({
   users:{
     type:Array,
     default:[],
-  },
+  },  
   Accepted:[
     {
       Username:String,

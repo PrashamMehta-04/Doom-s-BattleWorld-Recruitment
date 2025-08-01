@@ -7,6 +7,7 @@ import useAuthGuard from '../Components/useAuthGuard';
 import {getStoreValue} from 'pulsy';
 import {useNavigate} from 'react-router-dom';
 import JobList from '../Components/Job_List';
+import '../Components_CSS/home_logged_search.css';
 const Home_Logged=()=>{
   const navigate=useNavigate();
   useAuthGuard();
@@ -14,7 +15,9 @@ const Home_Logged=()=>{
     const [len,setLen]=useState(0);
     const [res, setRes]=useState(0);
     const[profile,setProfile]=useState();
+    const [allJobs, setAllJobs] = useState([]);
     const token=getStoreValue('auth')?.token;
+    const [search, setSearch]=useState('');
     useEffect(()=>{
       const complete=async()=>{
         try{
@@ -62,6 +65,7 @@ const Home_Logged=()=>{
      }
     });
      setJobs(maps);
+     setAllJobs(maps); 
     }
     else{
       console.log("Failed To fatch");
@@ -75,13 +79,38 @@ const Home_Logged=()=>{
   fetchCards();
 },[]);
     const Name=localStorage.getItem('Name');
-    
+    const handleSearch = () => {
+  console.log(jobs);
+  if (search.trim().length > 0) {
+    const term = search
+      .toLowerCase()
+      .replace(/\s+/g, '');
+
+    // filter out undefined and match against the element's props.Title
+    const filtered = jobs.filter((job) => {
+      if (!job || !job.props) return false;
+      const title = job.props.Title
+        .toLowerCase()
+        .replace(/\s+/g, '');
+      return title.includes(term);
+    });
+
+    setJobs(filtered);
+  }
+  else if(search.length===0){
+    setJobs(allJobs)
+  }
+};
     return(
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', height:"auto" }}>
         <Navbar_Login/> 
          <Welcome name={Name} jobs={len} availableJobs={res}/>
         <div>{profile}</div>
        <p style={{textAlign:'left', marginLeft:'25px', fontSize:"20px", fontWeight:'bold'}}>Recommended Jobs</p>
+       <div className="search-container">
+      <input type="text" className="search-input" placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)}_/>
+  <button className="search-button" onClick={handleSearch}>Search</button>
+</div>
         {/* <div style={{display:"flex", flexWrap:"wrap", alignItems:"stretch", gap:"20px"}}>{jobs}</div> */}
         <JobList jobs={jobs} />
 

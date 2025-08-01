@@ -71,7 +71,7 @@ const HeroProfileEdit = () => {
     fetchProfile();
       fetchEmail();
   }, [token]);
-   }
+   
 useEffect(() => {
   const fetchProfile = async () => {
     try {
@@ -236,6 +236,5 @@ useEffect(() => {
       <button onClick={handleUpdate} className="btn submit">Update Profile</button>
     </div>
   );
-};
-
+}
 export default HeroProfileEdit;

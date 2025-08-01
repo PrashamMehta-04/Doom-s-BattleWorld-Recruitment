@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import '../Components_CSS/Doom_Reviewc.css';
 import { useNavigate } from 'react-router-dom';
+import { getStoreValue } from 'pulsy';
 const Doom_Review = () => {
   const cardRef = useRef(null);
   const [startX, setStartX] = useState(null);
@@ -11,6 +12,7 @@ const Doom_Review = () => {
   const [heroData, setHeroData] = useState([]);
   const title=localStorage.getItem('Title');
   const navigate = useNavigate();
+  const username=getStoreValue('auth')?.user?.username;
   useEffect(() => {
     axios.get(`http://localhost:5000/api/heroes?name=${title}`)
       .then(res => setHeroData(res.data))
@@ -110,6 +112,7 @@ const Doom_Review = () => {
   '/upload/fl_attachment/'
 );
 }
+if(username=='Doom007'){
   return (
     <div
       className="swipe-card"
@@ -160,5 +163,6 @@ const Doom_Review = () => {
     </div>
   );
 };
+}
 
 export default Doom_Review;

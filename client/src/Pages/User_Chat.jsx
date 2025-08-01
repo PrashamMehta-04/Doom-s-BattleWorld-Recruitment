@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef} from "react";
 import { io } from "socket.io-client";
-import Navbar_Login from "../Components/Doom_Navbar";
+import Navbar_Login from "../Components/Navbar_Login";
 import "../Components_CSS/Doom_Chatc.css";
 
 // const socket = io("http://localhost:5000");

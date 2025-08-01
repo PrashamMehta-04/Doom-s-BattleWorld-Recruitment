@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
   FaBriefcase,
   FaUsers,
@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Welcome = ({ name, stats }) => {
   const { activePositions, totalApplicants, shortlisted} = stats;
+  
   const navigate = useNavigate();
 
   return (
@@ -45,7 +46,9 @@ const Welcome = ({ name, stats }) => {
           </button>
         </div>
       </div>
-
+    <div>
+     
+    </div>
       <div>
         <CurrentOpenings />
       </div>

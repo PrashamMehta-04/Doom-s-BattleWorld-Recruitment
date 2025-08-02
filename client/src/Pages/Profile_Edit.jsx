@@ -72,6 +72,31 @@ const HeroProfileEdit = () => {
     fetchProfile();
       fetchEmail();
   }, [token]);
+   
+useEffect(() => {
+  const fetchProfile = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/api/editprofile', {
+        method:'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      setPowerArr(data.SuperPower || ['']);
+      setBattles(data.Battles || ['']);
+      setWeak(data.Weakness || ['']);
+      setBStory(data.BackStory || '');
+      setProle(data.PreferredRole || '');
+      setPdfUrl(data.ResumeURL || '');
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  fetchProfile();
+}, [token]);
 
 
   const handleUpdate = async () => {
@@ -213,6 +238,5 @@ const HeroProfileEdit = () => {
       <button onClick={handleUpdate} className="btn submit">Update Profile</button>
     </div>
   );
-};
-
+}
 export default HeroProfileEdit;

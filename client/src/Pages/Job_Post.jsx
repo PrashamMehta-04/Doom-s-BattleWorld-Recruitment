@@ -3,6 +3,7 @@ import '../Components_CSS/Job_Postc.css';
 import { useNavigate } from 'react-router-dom';
 import Navbar_Login from '../Components/Doom_Navbar';
 
+import {getStoreValue} from 'pulsy';
 const Job_Post = () => {
   const [companyName, setCompanyName] = useState('');
   const [subTitle, setSubTitle] = useState('');
@@ -12,6 +13,7 @@ const Job_Post = () => {
   const [location, setLocation] = useState('');
   const [requirements, setRequirements] = useState([""]);
   const navigate = useNavigate();
+  const username=getStoreValue('auth')?.user?.username;
   const radd = () => {
     setRequirements([...requirements, '']);
   }

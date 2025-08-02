@@ -10,7 +10,7 @@ import Navbar_Login from '../Components/Doom_Navbar';
 import Job_Cards from '../Components/Job_Cards';
 import Welcome from '../Components/Doom_Welcome';
 import useAuthGuard from '../Components/useAuthGuard';
-
+import { getStoreValue } from 'pulsy';
 const Doom = () => {
     
     const Name=localStorage.getItem('Name');
@@ -18,7 +18,7 @@ const Doom = () => {
     const [tot, setTot] = useState(0);
     const [pending, setPending] = useState(0);
     const [accepted, setAccepted] = useState(0);
-
+    const username =getStoreValue('auth')?.user?.username;
     useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -52,11 +52,12 @@ const Doom = () => {
     pendingApplications(),
     acceptedApplications();
   }, []);
+  if(username==='Doom007'){
     return(
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', height:"auto" }}>
         <Navbar_Login/> 
          <Welcome name={Name} stats={{ activePositions: tot, totalApplicants: pending, shortlisted: accepted}} />
       </div>  
-    )
+    )}
 }
 export default Doom;

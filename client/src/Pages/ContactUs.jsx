@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar_Login from "../Components/Navbar_Login";
+import Navbar_Login from "../Components/Navbar";
 import "../Components_CSS/PrivacyTermsc.css"; // Reusing the privacy theme
 
 const Contact = () => {

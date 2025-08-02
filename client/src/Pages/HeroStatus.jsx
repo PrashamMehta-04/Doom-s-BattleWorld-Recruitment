@@ -19,7 +19,7 @@ const HeroStatus=()=>{
     const [statusMap, setStatusMap] = useState(new Map());
     const [buttonMap, setButtonMap] = useState(new Map());
     const [videoButton, setVideoButton] = useState(new Map());
-
+    const [temp,setTemp]=useState([]);
     useEffect(()=>{
         
         const fecthApplications = async () => {
@@ -47,6 +47,7 @@ const HeroStatus=()=>{
             setJobs(data1);
             console.log(data1);
             setJobNum(data1.length);
+            setTemp(data1);
             
         }
         else{
@@ -102,6 +103,36 @@ const HeroStatus=()=>{
     setVideoButton(videoButtonTemp);
 
 }, [applications]);
+const penJobs=()=>{
+    const pArray=[];
+    temp.forEach((job)=>{
+        if(statusMap.get(job.companyName)=='Pending'){
+           pArray.push(job);
+        }
+    });
+     //setPenArray(pArray);
+     setJobs(pArray);
+}
+const accJobs=()=>{
+    const pArray=[];
+    temp.forEach((job)=>{
+        if(statusMap.get(job.companyName)=='Accepted'){
+           pArray.push(job);
+        }
+    });
+     //setPenArray(pArray);
+     setJobs(pArray);
+}
+const rejJobs=()=>{
+    const pArray=[];
+    temp.forEach((job)=>{
+        if(statusMap.get(job.companyName)=='Rejected'){
+           pArray.push(job);
+        }
+    });
+     //setPenArray(pArray);
+     setJobs(pArray);
+}
 
     // const statusMap=new Map();
     // const buttonMap=new Map();
@@ -147,10 +178,10 @@ const HeroStatus=()=>{
   </div>
 
   <div className="heroStatus-tabs">
-    <button className="heroStatus-tab active">All Applications</button>
-    <button className="heroStatus-tab">Pending</button>
-    <button className="heroStatus-tab">Accepted</button>
-    <button className="heroStatus-tab">Rejected</button>
+    <button className="heroStatus-tab active" onClick={()=>window.location.reload()}>All Applications</button>
+    <button className="heroStatus-tab" onClick={penJobs}>Pending</button>
+    <button className="heroStatus-tab" onClick={accJobs}>Accepted</button>
+    <button className="heroStatus-tab" onClick={rejJobs}>Rejected</button>
   </div>
  
   <div className="heroStatus-applications">

@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import Navbar_Login from "../Components/Doom_Navbar";
 import "../Components_CSS/Doom_Chatc.css";
 import { useNavigate } from 'react-router-dom';
-
+import {getStoreValue} from 'pulsy';
 // const socket = io("http://localhost:5000");
 
 
@@ -23,8 +23,7 @@ const Chat = ({ currentUser }) => {
   const filteredUsers = users.filter(user =>
     user.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  // const token =
+  const username=getStoreValue('auth')?.user?.username;
   useEffect(() => {
     if (currentUser) {
       // socket.emit("register", currentUser);
@@ -126,7 +125,9 @@ const Chat = ({ currentUser }) => {
     catch (error) {
       console.error("Failed!!!!", error);
     }
-  };
+  }
+  
+  if(username==='Doom007'){
   return (
     <div className="battleworld-wrapper">
       <Navbar_Login />
@@ -236,5 +237,6 @@ const Chat = ({ currentUser }) => {
     </div>
   );
 };
+}
 
 export default Chat;

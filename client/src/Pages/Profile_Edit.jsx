@@ -3,6 +3,7 @@ import '../Components_CSS/resumec.css';
 import { useNavigate } from 'react-router-dom';
 import { getStoreValue } from 'pulsy';
 import useAuthGuard from '../Components/useAuthGuard';
+import Navbar_Login from '../Components/Navbar_Login';
 
 
 const HeroProfileEdit = () => {
@@ -103,6 +104,7 @@ const HeroProfileEdit = () => {
 
   return (
     <div className="base-container">
+      <Navbar_Login></Navbar_Login>
       <h1>Edit Your Hero Profile</h1>
       <p>Update your multiverse details</p>
       <section className="form-section">

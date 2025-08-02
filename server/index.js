@@ -561,6 +561,18 @@ app.get('/get-email', verifyToken, async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+app.get('/api/hero-profile/:username', async (req, res) => {
+  try {
+    const hero = await heroes.findOne({ Username: username });
+    if (!hero) return res.status(404).json({ message: "Hero not found" });
+
+    res.json(hero); // Send full hero document
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);

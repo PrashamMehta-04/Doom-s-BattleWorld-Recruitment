@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import '../Components_CSS/Doom_Reviewc.css';
 import { useNavigate } from 'react-router-dom';
+import Navbar_Login from '../Components/Doom_Navbar';
 const Doom_Review = () => {
   const cardRef = useRef(null);
   const [startX, setStartX] = useState(null);
@@ -111,6 +112,8 @@ const Doom_Review = () => {
 );
 }
   return (
+  <div className="base-bg">
+      <Navbar_Login />
     <div
       className="swipe-card"
       ref={cardRef}
@@ -119,6 +122,7 @@ const Doom_Review = () => {
       onMouseDown={handleStart}
       onMouseUp={handleEnd}
     >
+      
       <img
         src={`https://api.dicebear.com/7.x/bottts-neutral/svg?seed=${currentHero.Username}`}
         alt={currentHero.Username}
@@ -158,6 +162,7 @@ const Doom_Review = () => {
         </a>
       )}
     </div>
+  </div>
   );
 };
 

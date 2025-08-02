@@ -3,6 +3,7 @@ import '../Components_CSS/resumec.css';
 import {useNavigate} from 'react-router-dom';
 import {getStoreValue} from 'pulsy';
 import useAuthGuard from '../Components/useAuthGuard';
+import Navbar_Login from '../Components/Navbar_Login';
 const Resume=()=>{
     useAuthGuard();
     const navigate=useNavigate();
@@ -108,6 +109,7 @@ const Resume=()=>{
     return(
        
 <div className="base-container">
+  <Navbar_Login />
   <h1>Create Your Hero Profile</h1>
   <p>Tell the multiverse about your powers and abilities</p>
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../Components_CSS/Job_Postc.css';
 import { useNavigate } from 'react-router-dom';
+import Navbar_Login from '../Components/Doom_Navbar';
 
 const Job_Post = () => {
   const [companyName, setCompanyName] = useState('');
@@ -54,7 +55,9 @@ const Job_Post = () => {
   };
 
   return (
+
     <div className="jobpost-bg">
+      <Navbar_Login></Navbar_Login>
       <div className="jobpost-glass-card">
         <div className="jobpost-logo">
           <span role="img" aria-label="bolt" className="jobpost-bolt">⚡</span>

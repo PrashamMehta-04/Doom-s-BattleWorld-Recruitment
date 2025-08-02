@@ -4,6 +4,7 @@ import '../Components_CSS/Loginc.css';
 import {jwtDecode} from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import {setStoreValue} from 'pulsy';
+import Navbar from '../Components/Navbar';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -88,6 +89,7 @@ const Login = () => {
 
   return (
     <div className="login-bg">
+      <Navbar/>
       <div className="login-glass-card">
         <div className="login-logo">
           <span role="img" aria-label="bolt" className="login-bolt">⚡</span>

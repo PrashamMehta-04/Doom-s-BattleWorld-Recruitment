@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import '../Components_CSS/Loginc.css';
 import { GoogleLogin } from '@react-oauth/google';
 import {useNavigate} from 'react-router-dom';
-// import { set } from 'mongoose';
+import Navbar from '../Components/Navbar';
+
 
 const Sign_Up = () => {
   const navigate=useNavigate();
@@ -62,6 +63,7 @@ const Sign_Up = () => {
 
   return (
     <div className="login-bg">
+      <Navbar/>
       <div className="login-glass-card">
         <div className="login-logo">
           <span role="img" aria-label="bolt" className="login-bolt">⚡</span>

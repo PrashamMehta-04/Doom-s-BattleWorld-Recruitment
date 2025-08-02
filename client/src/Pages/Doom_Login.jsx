@@ -4,6 +4,7 @@ import '../Components_CSS/Loginc.css';
 import { useNavigate } from 'react-router-dom';
 import {setStoreValue} from 'pulsy';
 import { jwtDecode } from 'jwt-decode';
+import Navbar from '../Components/Navbar';
 
 const Doom_Login = () => {
   const [username, setUsername] = useState('');
@@ -47,6 +48,7 @@ const Doom_Login = () => {
 
   return (
     <div className="login-bg">
+      <Navbar></Navbar>
       <div className="login-glass-card">
         <div className="login-logo">
           <span role="img" aria-label="bolt" className="login-bolt">⚡</span>

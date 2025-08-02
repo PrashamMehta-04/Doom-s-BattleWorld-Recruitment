@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import '../Components_CSS/Job_Postc.css';
 import { useNavigate } from 'react-router-dom';
 import Navbar_Login from '../Components/Doom_Navbar';
@@ -12,7 +12,10 @@ const Job_Post = () => {
   const [salary, setSalary] = useState('');
   const [location, setLocation] = useState('');
   const [requirements, setRequirements] = useState([""]);
+  const [msg, setMsg] = useState('');
+  const [showmsg, setShowMsg] = useState(false);
   const navigate = useNavigate();
+
   const username=getStoreValue('auth')?.user?.username;
   const radd = () => {
     setRequirements([...requirements, '']);
@@ -40,16 +43,22 @@ const Job_Post = () => {
         body: JSON.stringify({ companyName, subTitle, description, lastDate, salary, location, requirements })
       });
       if (response.ok) {
-        alert("Job Posted Successfully!");
+        setMsg('✅ Job posted Succesfully!');
+        setShowMsg(true);
+        setTimeout(() => {
+          setShowMsg(false);
+          navigate('../doom');
+        }, 2000);
         setCompanyName('');
         setDescription('');
         setLastDate('');
         setSalary('');
         setLocation('');
-        navigate('../doom');
       }
       else {
-        alert("Failed to post job");
+        setMsg('❌ Failed to Post Job');
+        setShowMsg(true);
+        setTimeout(() => setShowMsg(false), 3000);
       }
     } catch (error) {
       console.error("Error posting job:", error);
@@ -172,6 +181,9 @@ const Job_Post = () => {
 
           <button type="submit" className="jobpost-btn">Submit</button>
         </form>
+        <div>
+          {showmsg && <p className="msgg">{msg}</p>}
+        </div>
         <h4 className="jobpost-subtitle">Need help? <a href="/contact">Contact us</a></h4>
       </div>
     </div>

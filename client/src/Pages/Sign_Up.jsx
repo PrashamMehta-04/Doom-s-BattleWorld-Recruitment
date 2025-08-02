@@ -6,6 +6,8 @@ import Navbar from '../Components/Navbar';
 
 
 const Sign_Up = () => {
+  const [msg, setMsg] = useState('');
+  const [showmsg, setShowMsg] = useState(false);
   const navigate=useNavigate();
   const [form, setForm] = useState({
     name: '',
@@ -39,15 +41,24 @@ const Sign_Up = () => {
       body:JSON.stringify({username,password,name,type:'manual',Email:form.Email})
     });
     if(response.ok){
-      navigate('/login');
+      setMsg('✅ Profile created Successfully!');
+      setShowMsg(true);
+        setTimeout(() => {
+          setShowMsg(false);
+          navigate('/login');
+        }, 2000);
       localStorage.setItem('Name',name);
       localStorage.setItem('userName',username);
       setForm.username='';
       setForm.name='';
       setForm.password='';
       setForm.confirmPassword='';
+      setForm.Email='';
     }
     else if(response.status==401){
+      setMsg('❌ Password and Confirm Password does not match!');
+        setShowMsg(true);
+        setTimeout(() => setShowMsg(false), 3000);
       console.log("Password and Confirm password does not match!");
     }
     else{
@@ -85,16 +96,16 @@ const Sign_Up = () => {
             type="text"
             name="username"
             placeholder="Username"
-            value={form.Email}
+            value={form.username}
             onChange={handleChange}
             required
             className="login-input"
           />
             <input
             type="email"
-            name="username"
+            name="Email"
             placeholder="Email ID"
-            value={form.username}
+            value={form.Email}
             onChange={handleChange}
             required
             className="login-input"
@@ -128,6 +139,9 @@ const Sign_Up = () => {
           /> */}
           <button type="submit" className="login-btn">Sign Up</button>
         </form>
+        <div>
+          {msg && <p className="login-msg">{msg}</p>}
+        </div>
         {/* <div className="login-google-btn">
           <GoogleLogin
             onSuccess={credentialResponse => {

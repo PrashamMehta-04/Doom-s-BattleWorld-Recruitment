@@ -16,6 +16,8 @@ const HeroProfileEdit = () => {
   const [pdfUrl, setPdfUrl] = useState('');
   const [email, setEmail] = useState('');
   const token = getStoreValue('auth')?.token;
+  const [msg, setMsg] = useState('');
+  const [showmsg, setShowMsg] = useState(false);
   const navigate = useNavigate();
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
@@ -123,7 +125,19 @@ useEffect(() => {
         },
         body: JSON.stringify({ powerArr, battles, weak, bStory, pRole, url, email })
       });
-      if (response.ok) navigate('/home-logged');
+      if (response.ok){
+        setMsg('✅ Profile updated Successfully!');
+        setShowMsg(true);
+        setTimeout(() => {
+          setShowMsg(false);
+          navigate('/home-logged');
+        }, 2000);
+      }
+      else{
+        setMsg('❌ Invalid username or password');
+        setShowMsg(true);
+        setTimeout(() => setShowMsg(false), 3000);
+      }
     };
   }
 
@@ -233,6 +247,9 @@ useEffect(() => {
             <p className="job-info-upload-note">PDF, DOC, DOCX (Max 10MB)</p>
           </div>
         </form>
+        <div>
+          {msg && <p className="login-msg">{msg}</p>}
+        </div>
       </div>
 
       <button onClick={handleUpdate} className="btn submit">Update Profile</button>

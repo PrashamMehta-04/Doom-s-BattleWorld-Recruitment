@@ -48,6 +48,7 @@ const Login = () => {
         console.log("Password and Username do not match!");
       }
       else {
+        setMsg('❌ Invalid username or password');
         console.log("Server Error");
       }
     }

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import '../Components_CSS/hero_Profile.css';
 import { useParams } from 'react-router-dom';
 import Profile_SuperPower from '../Components/Profile_SuperPower';
-import Navbar_Login from '../Components/Navbar_Login';
-
+import Navbar_Login from '../Components/Doom_Navbar';
+import {useNavigate} from 'react-router-dom';
 const HeroPublicProfile = () => {
+  const navigate=useNavigate()
   const { username } = useParams();
   const [power, setPower] = useState([]);
   const [story, setStory] = useState('');
@@ -98,6 +99,7 @@ const HeroPublicProfile = () => {
           </div>
         </div>
       </div>
+      <div><button onClick={()=>navigate('/chat')}/>Back</div>
     </div>
   );
 };

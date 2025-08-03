@@ -78,7 +78,7 @@ const CurrentOpenings = () => {
       <input type="text" className="Doom-search" value={search} onChange={(e) => setSearch(e.target.value)} />
       <button onClick={handleSearch}>Search</button>
       {showmsg && <p className="doom-msg">{msg}</p>}
-      {jobs.map((job, index) => (
+      {(jobs||[]).map((job, index) => (
         <div key={index} className="job-card">
           <div className="job-info">
             <h3 className="job-title">{job.companyName}</h3>

@@ -396,6 +396,11 @@ app.post('/api/hero-user',verifyToken,async(req,res)=>{
     const username=req.user.username;
     const {title}=req.body;
     try{
+      const check=heroes.findOne({Username:username});
+      if(check.SuperPower.length==0||check.keyBattles.length==0||check.BackStory.length==0||check.Resume.length==0||check.Weakness.length==0||check.preferredRole.length==0){
+        res.status(404).send(false);
+      }
+      else{
         await Doom.updateOne(
             {companyName:title},{
                 $push:{
@@ -411,6 +416,7 @@ app.post('/api/hero-user',verifyToken,async(req,res)=>{
             }
         );
         res.status(200).send(true);
+      }
     }
     catch(error){
         console.log("Error! ",error);

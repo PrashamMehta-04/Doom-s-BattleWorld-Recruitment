@@ -10,7 +10,7 @@ import CurrentOpenings from './Job_Openings';
 import { useNavigate } from 'react-router-dom';
 
 const Welcome = ({ name, stats }) => {
-  const { activePositions, totalApplicants, shortlisted} = stats;
+  const { activePositions, totalApplicants, shortlisted} = useState(0);
   
   const navigate = useNavigate();
 

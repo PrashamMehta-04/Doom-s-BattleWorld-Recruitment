@@ -36,6 +36,7 @@ const schema2=mongoose.Schema({
     },
     BackStory:{
         type:String,
+        default:'',
        
     },
     keyBattles:{
@@ -47,9 +48,11 @@ const schema2=mongoose.Schema({
     },
     preferredRole:{
         type:String,
+        default:''
     },
     Resume:{
-      type:String
+      type:String,
+      default:''
     },
     AppliedJobs:[
       {

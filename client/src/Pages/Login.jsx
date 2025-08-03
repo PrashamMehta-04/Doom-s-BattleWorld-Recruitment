@@ -12,6 +12,7 @@ const Login = () => {
   const [type, setType] = useState('');
   const [msg, setMsg] = useState('');
   const [showmsg, setShowMsg] = useState(false);
+  const [success,setSuccess]=useState('');
   const navigate = useNavigate();
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +25,7 @@ const Login = () => {
         body: JSON.stringify({ username, password })
       });
       if (submitNormal.ok) {
-        setMsg('✅ Logged in Sucessfully!');
+        setSuccess('✅ Logged in Sucessfully!');
         setShowMsg(true);
         setTimeout(() => {
           setShowMsg(false);
@@ -44,10 +45,15 @@ const Login = () => {
         setName('');
       }
       else if (submitNormal.status == 401) {
-        setMsg('❌ Invalid username or password');
+        setMsg('Invalid username or password');
+        setUsername('');
+        setPassword('');
         console.log("Password and Username do not match!");
       }
       else {
+        setMsg('Invalid username or password!');
+        setUsername('');
+        setPassword('');
         console.log("Server Error");
       }
     }
@@ -71,7 +77,7 @@ const Login = () => {
         body: JSON.stringify({ username: decode.email, password: null, name: decode.name, type: "google" })
       });
       if (response.ok) {
-        setMsg('✅ Logged in Sucessfully!');
+        setSuccess('✅ Logged in Sucessfully!');
         setShowMsg(true);
         setTimeout(() => {
           setShowMsg(false);
@@ -83,7 +89,6 @@ const Login = () => {
         setStoreValue('auth', { token, user: { username } })
         const n = jwtDecode(token);
         setName(n.name);
-        console.log(n.name);
         localStorage.setItem('userName', username);
         localStorage.setItem('Name', n.name);
         setUsername('');
@@ -92,7 +97,7 @@ const Login = () => {
         console.log("Logged in Successfully");
       }
       else {
-        setMsg('❌ Invalid username or password');
+        setMsg('Invalid username or password!');
         console.log("Error logging in");
       }
     }
@@ -128,10 +133,11 @@ const Login = () => {
             required
             className="login-input"
           />
+          <div style={{color:"red"}}>{msg}</div>
           <button type="submit" className="login-btn">Sign In</button>
         </form>
         <div>
-            {msg && <p className="login-msg">{msg}</p>}
+            {success && <p className="login-msg">{success}</p>}
           </div>
         <h4>New to BattleWorld? <a href="/sign-up">Create account</a></h4>
         <div className="login-google-btn">

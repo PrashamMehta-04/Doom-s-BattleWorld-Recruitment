@@ -9,4 +9,3 @@ module.exports={
     Gmail_APP:process.env.Gmail_App,
     Gmail:process.env.Gmail
 };
-const DOOM_USERNAME = "prashammehta360@gmail.com";

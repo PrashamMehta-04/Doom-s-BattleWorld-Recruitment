@@ -11,11 +11,13 @@ const Hero_profile=()=>{
     const [weakness,setWeakness]=useState([]);
     const [battles, setBattles]=useState([]);
     const [role,setRole]=useState('');
-    const username=localStorage.getItem('userName');
+    const username=getStoreValue('auth')?.user?.username;
     const name=localStorage.getItem('Name');
+    const [navbar,setNavbar]=useState();
     const token=getStoreValue('auth')?.token;
     useEffect(()=>{
         const profileMatching=async()=>{
+           
             try{
             const response=await fetch('http://localhost:5000/api/heroProfile',{
                 method:'GET',
@@ -36,17 +38,19 @@ const Hero_profile=()=>{
             else{
                 console.log("NOT FOUND!")
             }
+           
         }
         catch(error){
             console.log(error);
         }
     }
     profileMatching();
-    },[])
+    },[]);
+    
     return(
        
         <div className="cq-wrapper">
-          <Navbar_Login/>   
+          {navbar}   
         <div className="cq-container">
   <div className="cq-hero-header">
     <div className="cq-avatar">

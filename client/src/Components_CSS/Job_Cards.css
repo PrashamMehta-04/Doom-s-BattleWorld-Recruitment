@@ -1,4 +1,4 @@
- .Cards {
+ /* .Cards {
   background: linear-gradient(90deg, #211e57 0%, #2d1a67 100%);
   width: 250px;
   margin-left: 15px;
@@ -46,6 +46,84 @@
   transition: all 0.3s ease;
   width: 100%;
   align-self: center;
+}
+
+.Cards button:hover {
+  transform: scale(1.06);
+} */
+
+.Cards {
+  background: linear-gradient(90deg, #211e57 0%, #2d1a67 100%);
+  width: 250px;
+  height: 340px; /* Fixed consistent height */
+  margin: 15px 30px 0 15px;
+  text-align: left;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.Cards:hover {
+  transform: translateY(-7px);
+  border-color: rgba(73, 85, 213, 0.942);
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.2);
+}
+
+.Cards .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.Cards .head {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #fff;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.Cards .card-subtitle {
+  font-size: 12px;
+  margin-bottom: 12px;
+  color: #ccc;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.Cards .card-text {
+  font-size: 12px;
+  color: #ddd;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.Cards .Last {
+  margin-bottom: 15px;
+}
+
+.Cards button {
+  background-color: orangered;
+  transition: all 0.3s ease;
+  width: 100%;
+  align-self: center;
+  font-size: 14px;
+  padding: 6px 0;
+  border: none;
+  border-radius: 8px;
 }
 
 .Cards button:hover {

@@ -54,7 +54,13 @@ const Job_info = () => {
           setShowPopup(false);
           navigate('/home-logged');
         }, 2000);
-      } else {
+      }
+      else if(response.status==404){
+        setPopupMessage("❌ Make your profile first!");
+        setShowPopup(true);
+        setTimeout(() => setShowPopup(false), 3000);
+      }
+       else {
         setPopupMessage("❌ Failed to submit your application.");
         setShowPopup(true);
         setTimeout(() => setShowPopup(false), 3000);

@@ -111,6 +111,7 @@ app.post('/api/resume',verifyToken,async(req,res)=>{
     const{powerArr,bStory,battles,weak,pRole,url, email}=req.body;
     const username=req.user.username;
     try{
+      console.log(url);
         if(email){
             await user.updateOne(
         { Username: req.user.username },
@@ -397,10 +398,25 @@ app.post('/api/hero-user',verifyToken,async(req,res)=>{
     const {title}=req.body;
     try{
       const check=heroes.findOne({Username:username});
-      if(check.SuperPower.length==0||check.keyBattles.length==0||check.BackStory.length==0||check.Resume.length==0||check.Weakness.length==0||check.preferredRole.length==0){
-        res.status(404).send(false);
-      }
+  if (
+  !check.SuperPower?.length ||
+  !check.keyBattles?.length ||
+  !check.BackStory?.length ||
+  !check.Resume?.length ||
+  !check.Weakness?.length ||
+  !check.preferredRole?.length
+) {
+  res.status(404).send(false);
+}
+
       else{
+        console.log(!check.SuperPower?.length==0);
+        console.log(!check.BackStory?.length==0);
+        console.log(!check.keyBattles?.length);
+        console.log(!check.Resume?.length);
+        console.log(!check.Weakness?.length);
+        console.log(!check.preferredRole?.length);
+        console.log(username);
         await Doom.updateOne(
             {companyName:title},{
                 $push:{

@@ -23,7 +23,12 @@
   z-index: 1000;
   animation: fadeInOutTop 3s ease;
 }
-
+.doom-image img {
+  max-width:350px;   /* adjust this as per your design */
+  height: auto;
+  margin-top: 300px;
+  border-radius: 10px;
+}
 
 .login-glass-card {
   background: rgba(30, 30, 60, 0.75);

@@ -14,6 +14,8 @@ const Resume=()=>{
    const [bStory,setBStory]=useState('');
    const[pRole,setProle]=useState('');
    const [pdfUrl,setPdfUrl]=useState('');
+   const [success,setSuccess]=useState('');
+   const [showMsg, setShowMsg]=useState('');
    const wadd=()=>{
     setWeak([...weak,'']);
    }
@@ -77,7 +79,8 @@ const Resume=()=>{
         if(!pdfUrl){
           console.log("please upload your resume!");
         }
-        else{       
+        else{ 
+          console.log(pdfUrl);      
         const formData=new FormData();
         formData.append('file',pdfUrl);
         formData.append('upload_preset',"doom-s_battleworld");
@@ -98,8 +101,14 @@ const Resume=()=>{
            body:JSON.stringify({powerArr,bStory,battles,weak,pRole,url}) 
         });
         if(response.ok){
-            navigate('/home-logged');
+             setSuccess('✅ Made profile in Sucessfully!');
+        setShowMsg(true);
+        setTimeout(() => {
+          setShowMsg(false);
+          navigate('/home-logged');
+        }, 2000);
         }
+        
         else{
             console.log("Server Error!");
         }
@@ -110,6 +119,9 @@ const Resume=()=>{
        
 <div className="base-container">
   <Navbar_Login />
+  <div>
+            {success && <p className="login-msg">{success}</p>}
+          </div>
   <h1>Create Your Hero Profile</h1>
   <p>Tell the multiverse about your powers and abilities</p>
 

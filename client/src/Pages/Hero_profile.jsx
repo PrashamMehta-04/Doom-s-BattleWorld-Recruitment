@@ -52,6 +52,7 @@ const Hero_profile=()=>{
         <div className="cq-wrapper">
           {navbar}   
         <div className="cq-container">
+          
   <div className="cq-hero-header">
     <div className="cq-avatar">
       <div className="cq-avatar-icon">⚡</div>

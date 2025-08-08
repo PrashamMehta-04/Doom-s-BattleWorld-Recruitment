@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { setStoreValue } from 'pulsy';
 import { jwtDecode } from 'jwt-decode';
 import Navbar from '../Components/Navbar';
-import doom from '../Components_CSS/image.png'
+// import doom from '../Components_CSS/image.png'
 const Doom_Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -61,7 +61,7 @@ const Doom_Login = () => {
   return (
     <div className="login-bg">  
       <Navbar />
-      <div className="doom-image"><img src={doom}></img></div>
+      {/* <div className="doom-image"><img src={doom}></img></div> */}
       <div className="login-glass-card">
         
         <div className="login-logo">

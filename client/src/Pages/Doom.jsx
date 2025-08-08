@@ -24,6 +24,7 @@ const Doom = () => {
       try {
         const res = await fetch("http://localhost:5000/api/doomOpenings");
         const data = await res.json();
+        console.log(data.length);
         setTot(data.length);
       } catch (err) {
         console.error("Error fetching jobs:", err);
@@ -51,7 +52,8 @@ const Doom = () => {
     fetchJobs(),
     pendingApplications(),
     acceptedApplications();
-  }, []);
+  }, [tot,pending,accepted]);
+  console.log(tot);
   if(username==='Doom007'){
     return(
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', height:"auto" }}>

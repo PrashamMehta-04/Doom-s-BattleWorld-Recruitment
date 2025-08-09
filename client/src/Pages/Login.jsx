@@ -62,7 +62,7 @@ const Login = () => {
       console.error("Error", error);
     }
 
-    console.log('Email:', username, 'Password:', password);
+    
   };
   // handle email/password login here const submitGoogle =async (e)=>{
   const submitGoogle = async (credentialResponse) => {

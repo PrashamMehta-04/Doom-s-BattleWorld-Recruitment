@@ -15,7 +15,7 @@ const verifyToken=require('./Route');
 const { Message } = require('./schema');
 const nodemailer=require('nodemailer');
 app.use(cors({
-  origin: 'http://localhost:5173', // your frontend origin
+  origin: process.env.CLIENT_URL, // your frontend origin
   credentials: true
 }));
 const saltRounds=10;
@@ -303,7 +303,7 @@ const server = http.createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:5173',
+    origin: process.env.CLIENT_URL,
     credentials: true
   },
 });

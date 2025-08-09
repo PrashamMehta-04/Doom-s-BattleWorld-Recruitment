@@ -15,7 +15,7 @@ const verifyToken=require('./Route');
 const { Message } = require('./schema');
 const nodemailer=require('nodemailer');
 app.use(cors({
-  origin: process.env.CLIENT_URL, // your frontend origin
+  origin: 'http://localhost:5173', // your frontend origin
   credentials: true
 }));
 const saltRounds=10;
@@ -303,7 +303,7 @@ const server = http.createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL,
+    origin: ['http://localhost:5173', 'https://doom-s-battleworld-recruitment.vercel.app'],
     credentials: true
   },
 });

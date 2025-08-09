@@ -176,13 +176,13 @@ const Chat = ({ currentUser }) => {
                 {/* <div className="chat-user">{recipient}</div> */}
                 <div
                   className="chat-user"
-                  style={{ cursor: "pointer", textDecoration: "underline" }}
+                  style={{ cursor: "pointer", }}
                   onClick={() => navigate(`/hero-profile/${recipient}`)}
                 >
                   {recipient}
                 </div>
 
-                <div className="chat-status">Online</div>
+                {/* <div className="chat-status">Online</div> */}
               </div>
 
               <div className="chat-body">

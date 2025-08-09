@@ -397,7 +397,7 @@ app.post('/api/hero-user',verifyToken,async(req,res)=>{
     const username=req.user.username;
     const {title}=req.body;
     try{
-      const check=heroes.findOne({Username:username});
+      const check=await heroes.findOne({Username:username});
   if (
   !check.SuperPower?.length ||
   !check.keyBattles?.length ||
@@ -410,13 +410,6 @@ app.post('/api/hero-user',verifyToken,async(req,res)=>{
 }
 
       else{
-        console.log(!check.SuperPower?.length==0);
-        console.log(!check.BackStory?.length==0);
-        console.log(!check.keyBattles?.length);
-        console.log(!check.Resume?.length);
-        console.log(!check.Weakness?.length);
-        console.log(!check.preferredRole?.length);
-        console.log(username);
         await Doom.updateOne(
             {companyName:title},{
                 $push:{

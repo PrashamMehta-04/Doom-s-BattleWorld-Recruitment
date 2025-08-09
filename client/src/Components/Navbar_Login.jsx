@@ -20,9 +20,7 @@ const Navbar_Login=()=>{
     return(
         <div className="navbar-main">
         <header className="header">
-          <div>
-            {Msg && <p className="login-msg">{Msg}</p>}
-          </div>
+
       <div className="logo">
         <span className='logo-icon'>⚡</span>
         <span className="logo-text">BattleWorld</span>

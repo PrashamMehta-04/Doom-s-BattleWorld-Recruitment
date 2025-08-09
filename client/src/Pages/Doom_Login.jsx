@@ -61,7 +61,7 @@ const Doom_Login = () => {
   return (
     <div className="login-bg">  
       <Navbar />
-      <div className="doom-image"><img src={doom}></img></div>
+     
       <div className="login-glass-card">
         
         <div className="login-logo">

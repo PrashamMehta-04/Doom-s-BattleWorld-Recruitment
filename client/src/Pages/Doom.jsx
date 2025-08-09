@@ -12,7 +12,7 @@ import Welcome from '../Components/Doom_Welcome';
 import useAuthGuard from '../Components/useAuthGuard';
 import { getStoreValue } from 'pulsy';
 const Doom = () => {
-    
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
     const Name=localStorage.getItem('Name');
     const n=5;
     const [tot, setTot] = useState(0);
@@ -22,7 +22,7 @@ const Doom = () => {
     useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/doomOpenings");
+        const res = await fetch(`${base_URL}/api/doomOpenings`);
         const data = await res.json();
         console.log(data.length);
         setTot(data.length);
@@ -32,7 +32,7 @@ const Doom = () => {
     };
     const pendingApplications = async () => {
       try{
-        const res1 = await fetch("http://localhost:5000/api/pendingApplications");
+        const res1 = await fetch(`${base_URL}/api/pendingApplications`);
         const data = await res1.json();
         setPending(data.totalApplicants || 0);
       }
@@ -42,7 +42,7 @@ const Doom = () => {
     };
     const acceptedApplications = async () => {
       try {
-        const res2 = await fetch("http://localhost:5000/api/hero-acc");
+        const res2 = await fetch("${base_URL}\/api/hero-acc");
         const data1 = await res2.json();
         setAccepted(data1.acc || 0);
       } catch (err) {

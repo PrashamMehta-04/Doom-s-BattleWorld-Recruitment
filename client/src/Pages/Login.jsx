@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { setStoreValue } from 'pulsy';
 import Navbar from '../Components/Navbar';
 const Login = () => {
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -17,7 +18,7 @@ const Login = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const submitNormal = await fetch('http://localhost:5000/api/login', {
+      const submitNormal = await fetch(`${base_URL}/api/login`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -69,7 +70,7 @@ const Login = () => {
 
 
     try {
-      const response = await fetch("http://localhost:5000/api/google", {
+      const response = await fetch(`${base_URL}/api/google`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'

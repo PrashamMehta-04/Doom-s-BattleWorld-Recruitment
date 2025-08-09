@@ -395,7 +395,7 @@ server.listen(PORT, () => {
 
 app.post('/api/hero-user',verifyToken,async(req,res)=>{
     const username=req.user.username;
-    const {title}=req.body;
+    const {title,today}=req.body;
     try{
       const check=await heroes.findOne({Username:username});
   if (
@@ -421,7 +421,7 @@ app.post('/api/hero-user',verifyToken,async(req,res)=>{
         await heroes.updateOne(
             {Username:username},{
                 $push:{
-                    AppliedJobs:{name:title,status:'Pending'}
+                    AppliedJobs:{name:title,status:'Pending',Date:today}
                 }
             }
         );

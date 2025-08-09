@@ -6,12 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { getStoreValue } from 'pulsy';
 
 const Chat = ({ currentUser }) => {
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
   const socketRef = useRef(null);
   const navigate = useNavigate();
   const chatEndRef = useRef(null); // ✅ Auto-scroll reference
 
   useEffect(() => {
-    socketRef.current = io("http://localhost:5000");
+    socketRef.current = io(`${base_URL}`);
     return () => socketRef.current.disconnect();
   }, []);
 
@@ -32,7 +33,7 @@ const Chat = ({ currentUser }) => {
     if (currentUser) {
       socketRef.current.emit("register", currentUser);
     }
-    fetch("http://localhost:5000/api/users")
+    fetch(`${base_URL}/api/users`)
       .then((res) => res.json())
       .then((data) => setUsers(data.filter((u) => u.username !== currentUser)));
   }, [currentUser]);
@@ -67,7 +68,7 @@ const Chat = ({ currentUser }) => {
     socketRef.current.on("chatHistory", handleHistory);
 
     const fetchEmail = async () => {
-      const response = await fetch('http://localhost:5000/api/email', {
+      const response = await fetch(`${base_URL}/api/email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ recipient })
@@ -103,7 +104,7 @@ const Chat = ({ currentUser }) => {
 
   const videoRef = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/video-call', {
+      const response = await fetch(`${base_URL}/api/video-call`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

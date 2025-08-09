@@ -8,6 +8,7 @@ import Navbar_Login from '../Components/Navbar_Login';
 
 const HeroProfileEdit = () => {
   useAuthGuard();
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
   const [powerArr, setPowerArr] = useState(['']);
   const [battles, setBattles] = useState(['']);
   const [weak, setWeak] = useState(['']);
@@ -32,7 +33,7 @@ const HeroProfileEdit = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/editprofile', {
+        const res = await fetch(`${base_URL}/api/editprofile`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -53,7 +54,7 @@ const HeroProfileEdit = () => {
     };
     const fetchEmail = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/get-email', {
+        const res = await fetch(`${base_URL}/api/get-email`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -78,7 +79,7 @@ const HeroProfileEdit = () => {
 useEffect(() => {
   const fetchProfile = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/editprofile', {
+      const res = await fetch(`${base_URL}/api/editprofile`, {
         method:'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -92,7 +93,7 @@ useEffect(() => {
       setWeak(data.Weakness || ['']);
       setBStory(data.BackStory || '');
       setProle(data.PreferredRole || '');
-      setPdfUrl(data.ResumeURL || '');
+      setPdfUrl(data.ResumeURL);
     } catch (err) {
       console.error(err);
     }
@@ -102,10 +103,7 @@ useEffect(() => {
 
 
   const handleUpdate = async () => {
-    if (!pdfUrl) {
-      console.log("please upload your resume!");
-    }
-    else {
+    
       const formData = new FormData();
       formData.append('file', pdfUrl);
       formData.append('upload_preset', "doom-s_battleworld");
@@ -117,7 +115,7 @@ useEffect(() => {
       const data = await cloud.json();
       console.log(data);
       const url = data.secure_url;
-      const response = await fetch('http://localhost:5000/api/resume', {
+      const response = await fetch(`${base_URL}/api/resume`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -139,7 +137,7 @@ useEffect(() => {
         setTimeout(() => setShowMsg(false), 3000);
       }
     };
-  }
+  
 
   return (
     <div className="base-container">
@@ -235,7 +233,7 @@ useEffect(() => {
 
       <div className="job-info-apply-box">
         <h3 className="job-info-apply-title">🚀 Apply Now</h3>
-        <form className="job-info-form">
+        <form className="job-info-form" noValidate>
           <label className="job-info-form-label">Upload Resume</label>
           <div className="job-info-upload-box">
             <input
@@ -244,7 +242,7 @@ useEffect(() => {
               onChange={handleFileChange}
             />
             <p>Click to upload or drag and drop</p>
-            <p className="job-info-upload-note">PDF, DOC, DOCX (Max 10MB)</p>
+            <p className="job-info-upload-note">Please upload a PDF file</p>
           </div>
         </form>
         <div>

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../Components_CSS/Job_Openingsc.css";
 
 const CurrentOpenings = () => {
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
   const [jobs, setJobs] = useState([]);
   const [search, setSearch] = useState('');
   const [msg, setmsg] = useState('');
@@ -12,7 +13,7 @@ const CurrentOpenings = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/doomOpenings");
+        const res = await fetch(`${base_URL}/api/doomOpenings`);
         const data = await res.json();
         setJobs(data);
       } catch (err) {
@@ -29,7 +30,7 @@ const CurrentOpenings = () => {
 
   const handleEndPosting = async (title) => {
     try {
-      const response = await fetch("http://localhost:5000/api/delete-post", {
+      const response = await fetch(`${base_URL}/api/delete-post`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title })

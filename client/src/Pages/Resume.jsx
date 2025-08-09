@@ -6,6 +6,7 @@ import useAuthGuard from '../Components/useAuthGuard';
 import Navbar_Login from '../Components/Navbar_Login';
 const Resume=()=>{
     useAuthGuard();
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
     const navigate=useNavigate();
    const[powerArr,setPowerArr]=useState(['']);
    const[battles,setBattles]=useState(['']);
@@ -93,7 +94,7 @@ const Resume=()=>{
         console.log(data);
         const url=data.secure_url;
         console.log(url);
-         const response=await fetch('http://localhost:5000/api/resume',{
+         const response=await fetch(`${base_URL}/api/resume`,{
            method:'POST',
            headers:{'Content-Type':'application/json',
              Authorization: `Bearer ${token}`,

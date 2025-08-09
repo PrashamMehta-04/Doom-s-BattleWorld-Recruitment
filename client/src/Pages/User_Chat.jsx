@@ -6,11 +6,12 @@ import "../Components_CSS/Doom_Chatc.css";
 // const socket = io("http://localhost:5000");
 
 const UserChat = ({ currentUser }) => {
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
   const socketRef = useRef(null);
   const chatBodyRef = useRef(null); // ⬅ New ref for auto-scroll
 
   useEffect(() => {
-    socketRef.current = io("http://localhost:5000");
+    socketRef.current = io(`${base_URL}`);
     return () => socketRef.current.disconnect();
   }, []);
 

@@ -6,6 +6,7 @@ import Navbar from '../Components/Navbar';
 
 
 const Sign_Up = () => {
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
   const [msg, setMsg] = useState('');
   const [showmsg, setShowMsg] = useState(false);
   const navigate=useNavigate();
@@ -33,7 +34,7 @@ const Sign_Up = () => {
       const username=form.username;
       const password=form.password;
       const name=form.name;
-    const response=await fetch('http://localhost:5000/api/signup',{
+    const response=await fetch(`${base_URL}/api/signup`,{
       method:"POST",
       headers:{
       'Content-Type':'application/json'

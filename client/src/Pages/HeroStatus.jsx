@@ -7,6 +7,7 @@ import {useNavigate} from 'react-router-dom';
 // import { set } from '../../../server';
 const HeroStatus=()=>{
     useAuthGuard();
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
     const navigate=useNavigate();
     const [applications, setApplications] = useState([{}]);
     const [jobs,setJobs]=useState([]);
@@ -14,16 +15,18 @@ const HeroStatus=()=>{
     const [acc, setAcc]=useState(0);
     const [rej, setRej]=useState(0);
     const [pen, setPen]=useState(0);
+    const [date,setDate]=useState('');
     const [chatButton,setChatButton]=useState(false);
     const token=getStoreValue('auth')?.token;
     const [statusMap, setStatusMap] = useState(new Map());
     const [buttonMap, setButtonMap] = useState(new Map());
     const [videoButton, setVideoButton] = useState(new Map());
+    const [DateMap,setDateMap]=useState(new Map())
     const [temp,setTemp]=useState([]);
     useEffect(()=>{
         
         const fecthApplications = async () => {
-            const response=await fetch(`http://localhost:5000/api/status-applications`,{
+            const response=await fetch(`${base_URL}/api/status-applications`,{
                 method:'GET',
                 headers:{
                     'Content-Type':'application/json',
@@ -35,7 +38,7 @@ const HeroStatus=()=>{
                 console.log(data);
                 console.log(data.status);
                 setApplications(data);
-                 const response2=await fetch('http://localhost:5000/api/hero-status',{
+                 const response2=await fetch(`${base_URL}/api/hero-status`,{
             method:'POST',
             headers:{'Content-Type':'application/json',
                 'Authorization': `Bearer ${token}`,
@@ -65,7 +68,7 @@ const HeroStatus=()=>{
     const statusMapTemp = new Map();
     const buttonMapTemp = new Map();
     const videoButtonTemp = new Map();
-
+    const dateMapTemp=newMap()
     let Accepted = 0, Rejected = 0, Pending = 0;
 
     applications.forEach((app) => {
@@ -85,7 +88,10 @@ const HeroStatus=()=>{
         } else {
             videoButtonTemp.set(app.name, <button className="heroStatus-btn disabled" disabled>🎥 Video Call</button>);
         }
-
+        let temp=app.Date;
+        const options = { day: "2-digit", month: "long", year: "numeric" };
+        const formatted = new Date(temp).toLocaleDateString("en-US", options);
+        dateMapTemp.set(app.name,formatted);
         if(app.status === 'Accepted') {
             Accepted++;
         } else if(app.status === 'Rejected') {
@@ -101,6 +107,7 @@ const HeroStatus=()=>{
     setStatusMap(statusMapTemp);
     setButtonMap(buttonMapTemp);
     setVideoButton(videoButtonTemp);
+    setDateMap(dateMapTemp);
 
 }, [applications]);
 const penJobs=()=>{
@@ -134,36 +141,7 @@ const rejJobs=()=>{
      setJobs(pArray);
 }
 
-    // const statusMap=new Map();
-    // const buttonMap=new Map();
-    // const videoButton=new Map();
-    // let Accepted = 0, Rejected = 0, Pending = 0;
-    // applications.forEach((app) => {
-    //     statusMap.set(app.name,app.status);
-    //     if(app.status=='Pending'||app.status=='Rejected'){
-    //        buttonMap.set(app.name, <button className="heroStatus-btn disabled" disabled>💬 Chat</button>);
-    //     }
-    //     else{
-    //         buttonMap.set(app.name, <button className="heroStatus-btn" onClick={()=>{localStorage.setItem('jobTitle',app.name);navigate('/chat-user')}}>💬 Chat</button>);
-    //     }
-    //     if(app.videoCall){
-    //         videoButton.set(app.name, <button className="heroStatus-btn" onClick={()=>navigate('/video-call')}>🎥 Video Call</button>)
-    //     }
-    //     else{
-    //         videoButton.set(app.name, <button className="heroStatus-btn disabled" disabled>🎥 Video Call</button>);
-    //     }
-    //     if(app.status === 'Accepted') {
-    //         Accepted++;
-    //     } else if(app.status === 'Rejected') {
-    //         Rejected++;
-    //     } else if(app.status === 'Pending') {
-    //         Pending++;
-    //     }
-
-    // });
-    // setAcc(Accepted);
-    // setRej(Rejected); 
-    // setPen(Pending);
+   
     return(
         <div className="heroStatus-container">
             <Navbar_Login/>
@@ -191,7 +169,7 @@ const rejJobs=()=>{
     <div className="heroStatus-jobCard pending" key={index}>
       <h3 className="heroStatus-jobTitle">{job.companyName}</h3>
       
-      <p className="heroStatus-appliedDate">Applied: March 5, 2024</p>
+      <p className="heroStatus-appliedDate">{DateMap.get(job.companyName)}</p>
       <p className="heroStatus-description">{job.subTitle}</p>
       <div className="heroStatus-buttons">
         <button className="heroStatus-btn view" onClick={()=>{localStorage.setItem('jobTitle',job.companyName);navigate('/job-info')}}>📄 View More</button>

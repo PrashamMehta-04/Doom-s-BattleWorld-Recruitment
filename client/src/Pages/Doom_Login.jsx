@@ -7,6 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 import Navbar from '../Components/Navbar';
 // import doom from '../Components_CSS/image.png'
 const Doom_Login = () => {
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
@@ -22,7 +23,7 @@ const Doom_Login = () => {
     const validPassword = 'doom@987';
 
     if (username === validUsername && password === validPassword) {
-      const submitNormal = await fetch('http://localhost:5000/api/login', {
+      const submitNormal = await fetch(`${base_URL}/api/login`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'

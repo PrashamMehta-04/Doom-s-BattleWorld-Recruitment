@@ -5,6 +5,7 @@ import Navbar_Login from '../Components/Doom_Navbar';
 
 import {getStoreValue} from 'pulsy';
 const Job_Post = () => {
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
   const [companyName, setCompanyName] = useState('');
   const [subTitle, setSubTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -35,7 +36,7 @@ const Job_Post = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/job_post', {
+      const response = await fetch(`${base_URL}/api/job_post`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

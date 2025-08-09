@@ -3,6 +3,7 @@ import VideoCall from "../Components/VideoCall";
 import { getStoreValue } from 'pulsy';
 import { useNavigate } from "react-router-dom";
 const Video_Call_room=({type})=>{
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
     const navigate=useNavigate();
     const username=getStoreValue('auth')?.user?.username;
     const backHome=()=>{
@@ -10,7 +11,7 @@ const Video_Call_room=({type})=>{
             navigate('/doom');
         }
         else{
-            fetch('http://localhost:5000/api/video-call-off',{
+            fetch(`${base_URL}/api/video-call-off`,{
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json',

@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const Job_info = () => {
   useAuthGuard();
   const today = new Date();
-
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
   const token = getStoreValue('auth')?.token;
   const title = localStorage.getItem('jobTitle');
@@ -24,7 +24,7 @@ const Job_info = () => {
 
 
   // const handleSubmit=async()=>{
-  //     const response=await fetch('http://localhost:5000/api/hero-user',{
+  //     const response=await fetch('${base_URL}/api/hero-user',{
   //         method:'POST',
   //         headers:{'Content-Type':'application/json',
   //             'Authorization': `Bearer ${token}`,
@@ -38,13 +38,13 @@ const Job_info = () => {
   // }
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/hero-user', {
+      const response = await fetch(`${base_URL}/api/hero-user`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ title })
+        body: JSON.stringify({ title,today })
       });
 
       if (response.ok) {
@@ -77,7 +77,7 @@ const Job_info = () => {
   useEffect(() => {
     const job_info = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/job-info", {
+        const response = await fetch(`${base_URL}/api/job-info`, {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',

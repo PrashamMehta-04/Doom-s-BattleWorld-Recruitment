@@ -12,7 +12,7 @@ import '../Components_CSS/home_logged_search.css';
 const Home_Logged = () => {
   const navigate = useNavigate();
   useAuthGuard();
-
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
   const [jobs, setJobs] = useState([]);
   const [len, setLen] = useState(0);
   const [res, setRes] = useState(0);
@@ -24,7 +24,7 @@ const Home_Logged = () => {
   useEffect(() => {
     const complete = async () => {
       try {
-        const response2 = await fetch('http://localhost:5000/api/profile', {
+        const response2 = await fetch(`${base_URL}/api/profile`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ const Home_Logged = () => {
 
     const fetchCards = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/cards', {
+        const response = await fetch(`${base_URL}/api/cards`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

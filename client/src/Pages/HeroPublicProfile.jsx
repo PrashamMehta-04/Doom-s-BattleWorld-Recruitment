@@ -5,6 +5,8 @@ import Profile_SuperPower from '../Components/Profile_SuperPower';
 import Navbar_Login from '../Components/Doom_Navbar';
 import {useNavigate} from 'react-router-dom';
 const HeroPublicProfile = () => {
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
+
   const navigate=useNavigate()
   const { username } = useParams();
   const [power, setPower] = useState([]);
@@ -17,7 +19,7 @@ const HeroPublicProfile = () => {
   useEffect(() => {
     const fetchHeroProfile = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/hero-profile/${username}`);
+        const response = await fetch(`${base_URL}/api/hero-profile/${username}`);
         if (response.ok) {
           const data = await response.json();
           setPower(data.SuperPower.map((i) => <Profile_SuperPower power={i} key={i} />));

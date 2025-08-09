@@ -4,8 +4,11 @@ import { getStoreValue } from 'pulsy';
 import Profile_SuperPower from '../Components/Profile_SuperPower';
 import Navbar_Login from '../Components/Navbar_Login';
 import { useNavigate } from 'react-router-dom';
+import useAuthGuard from '../Components/useAuthGuard';
 const Hero_profile=()=>{
   const navigate=useNavigate();
+  useAuthGuard();
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
     const [power,setPower]=useState([]);
     const [story,setStory]=useState('');
     const [weakness,setWeakness]=useState([]);
@@ -19,7 +22,7 @@ const Hero_profile=()=>{
         const profileMatching=async()=>{
            
             try{
-            const response=await fetch('http://localhost:5000/api/heroProfile',{
+            const response=await fetch(`${base_URL}/api/heroProfile`,{
                 method:'GET',
                 headers:{'Content-Type':'application/json',
                     'Authorization': `Bearer ${token}`,},

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar_Login from '../Components/Doom_Navbar';
 import { getStoreValue } from 'pulsy';
 const Doom_Review = () => {
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
   const cardRef = useRef(null);
   const [startX, setStartX] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -15,7 +16,7 @@ const Doom_Review = () => {
   const navigate = useNavigate();
   const username=getStoreValue('auth')?.user?.username;
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/heroes?name=${title}`)
+    axios.get(`${base_URL}/api/heroes?name=${title}`)
       .then(res => setHeroData(res.data))
       .catch(err => console.error("Error fetching heroes:", err));
   }, []);
@@ -25,7 +26,7 @@ const Doom_Review = () => {
     setStartX(clientX);
   };
    const update=async(username,status)=>{
-        const response =await fetch(`http://localhost:5000/api/hero-update`,{
+        const response =await fetch(`${base_URL}/api/hero-update`,{
           method:'POST',
           headers:{
           'Content-Type':'application/json',},

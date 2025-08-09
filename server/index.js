@@ -15,9 +15,10 @@ const verifyToken=require('./Route');
 const { Message } = require('./schema');
 const nodemailer=require('nodemailer');
 app.use(cors({
-  origin: process.env.CLIENT_URL, // your frontend origin
+  origin: process.env.CLIENT_URL, 
   credentials: true
 }));
+console.log(process.env.CLIENT_URL);
 const saltRounds=10;
 cloudinary.config({
     cloud_name:config.cloudName,

@@ -19,9 +19,9 @@ const Doom_Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // 🔒 Hardcoded credentials (change as needed)
-    const validUsername = import.meta.env.dUsername;
-    const validPassword = import.meta.env.dPsswd;
+    
+    const validUsername = import.meta.env.VITE_DUSERNAME;
+    const validPassword = import.meta.env.VITE_DPASSWD;
 
     if (username === validUsername && password === validPassword) {
       const submitNormal = await fetch(`${base_URL}/api/login`, {

@@ -15,7 +15,7 @@ const verifyToken=require('./Route');
 const { Message } = require('./schema');
 const nodemailer=require('nodemailer');
 app.use(cors({
-  origin: 'https://doom-s-battleworld-recruitment.vercel.app', // your frontend origin
+  origin: process.env.CLIENT_URL, // your frontend origin
   credentials: true
 }));
 const saltRounds=10;

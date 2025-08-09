@@ -15,9 +15,10 @@ const verifyToken=require('./Route');
 const { Message } = require('./schema');
 const nodemailer=require('nodemailer');
 app.use(cors({
-  origin: 'http://localhost:5173', // your frontend origin
+  origin: 'https://doom-s-battleworld-recruitment.vercel.app', // your frontend origin
   credentials: true
 }));
+console.log(process.env.CLIENT_URL);
 const saltRounds=10;
 cloudinary.config({
     cloud_name:config.cloudName,

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar_Login from '../Components/Navbar_Login';
 import Welcome from '../Components/Welcome';
-import Making_Profile from '../Components/making_Profile';
+import Making_Profile from '../Components/Making_Profile';
 import Job_Cards from '../Components/Job_Cards';
 import useAuthGuard from '../Components/useAuthGuard';
 import { getStoreValue } from 'pulsy';

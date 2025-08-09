@@ -405,7 +405,8 @@ app.post('/api/hero-user',verifyToken,async(req,res)=>{
   !check.Resume?.length ||
   !check.Weakness?.length ||
   !check.preferredRole?.length
-) {
+) 
+{
   res.status(404).send(false);
 }
 

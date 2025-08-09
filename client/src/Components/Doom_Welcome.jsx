@@ -8,9 +8,10 @@ import {
 import '../Components_CSS/Doom_Welcomec.css';
 import CurrentOpenings from './Job_Openings';
 import { useNavigate } from 'react-router-dom';
+import { act } from 'react';
 
 const Welcome = ({ name, stats }) => {
-  const { activePositions, totalApplicants, shortlisted} = useState(0);
+  const { activePositions = 0, totalApplicants = 0, shortlisted = 0 } = stats;
   
   const navigate = useNavigate();
 

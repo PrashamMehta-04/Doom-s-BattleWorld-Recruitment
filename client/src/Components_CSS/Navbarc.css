@@ -1,7 +1,4 @@
-.navbar-main{
-  margin-bottom: 15px;
-}
-.header {
+ .custom-navbar {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,52 +10,49 @@
   z-index: 1000;
   color: white;
   height: 70px;
-  line-height: 60px;
   font-family: 'Segoe UI', sans-serif;
   background: rgba(10, 10, 35, 0.97);
-  margin-bottom: 180px;
 }
 
-.logo {
+.custom-logo-section {
   font-size: 20px;
   font-weight: bold;
   display: flex;
   align-items: center;
-  gap:5px;
+  gap: 5px;
+  margin-left: 0; /* Fully left aligned */
 }
 
-.logo-text {
+.custom-logo-text {
   color: white;
   text-align: left;
 }
-.logo-icon {
+
+.custom-logo-icon {
   color: black;
 }
-.nav-links {
+
+.custom-nav-links {
   display: flex;
+  align-items: center; /* Align Home & Logout vertically */
   gap: 17px;
   font-size: 15px;
 }
 
-.nav-links a {
+.custom-nav-links a {
   text-decoration: none;
   color: white;
   transition: color 0.3s ease;
   padding: 5px;
 }
 
-.nav-links a:hover {
+.custom-nav-links a:hover {
   color: #a58dff;
 }
 
-.icon {
-  font-size: 15px;
-}
-.button{
+.custom-logout-btn {
   background: orangered;
-  background-size: 100% 100%;
   height: 40px;
-  margin-top: 15px;
   color: white;
   padding: 9px 24px;
   border: none;
@@ -66,8 +60,22 @@
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
-  transition:all 0.3s ease;
+  transition: all 0.3s ease;
+  margin-top: 0; /* Removed extra top margin for alignment */
 }
-.button:hover{
-  transform:scale(1.05);
+
+.custom-logout-btn:hover {
+  transform: scale(1.05);
+}
+
+.custom-login-msg {
+  position: absolute;
+  top: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: lightgreen;
 }

@@ -2,7 +2,6 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import './App.css'
 import Home from './Pages/Home'
-import Navbar from './Components/Navbar';
 import Login from './Pages/Login';
 import Sign from './Pages/Sign_Up';
 import Home_Logged from './Pages/Home_Logged';
@@ -10,7 +9,7 @@ import Doom from './Pages/Doom';
 import Job_Post from './Pages/Job_Post';
 import Resume from './Pages/Resume';
 import Doom_Review from './Pages/Doom_Review';
-import Hero_profile from './Pages/Hero_profile';
+import Hero_profile from './Pages/hero_profile';
 import Job_info from './Pages/Job_info';
 import Video_Call_room from './Pages/Video_Call_room';
 import Chat from './Pages/Doom_Chat';
@@ -23,6 +22,7 @@ import Contact from './Pages/ContactUs';
 import Doom_Login from './Pages/Doom_Login';
 import HeroPublicProfile from './Pages/HeroPublicProfile';
 export default function App() {
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
   const [username, setUsername] = useState('');
   const [role, setRole] = useState('');
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ useEffect(() => {
     return;
   }
 
-  fetch('http://localhost:5000/api/current-user', {
+  fetch(`${base_URL}/api/current-user`, {
     headers: {
       Authorization: 'Bearer ' + token
     }

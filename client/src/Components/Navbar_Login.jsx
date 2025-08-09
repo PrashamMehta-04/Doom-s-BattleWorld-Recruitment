@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../Components_CSS/Navbarc.css';
 import { useNavigate } from 'react-router-dom';
 import { setStoreValue } from 'pulsy';  
+import { Link } from 'react-router-dom';
 
 const Navbar_Login = () => {
   const [msg, setMsg] = useState('');
@@ -32,9 +33,9 @@ const Navbar_Login = () => {
       </div>
 
       <nav className="custom-nav-links">
-        <a onClick={() => navigate('/home-logged')} href="#">Home</a>
-        <a onClick={() => navigate('/status')} href="#">Status</a>
-        <a onClick={() => navigate('/hero-profile')} href="#">My Profile</a>
+        <Link to="/home-logged">Home</Link>
+        <Link to="/status">Status</Link>
+        <Link to="/hero-profile">My Profile</Link>
         <button className="custom-logout-btn" onClick={logout}>Logout</button>
       </nav>
     </header>

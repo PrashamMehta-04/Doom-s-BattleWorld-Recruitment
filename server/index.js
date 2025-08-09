@@ -18,7 +18,6 @@ app.use(cors({
   origin: process.env.CLIENT_URL, 
   credentials: true
 }));
-console.log(process.env.CLIENT_URL);
 const saltRounds=10;
 cloudinary.config({
     cloud_name:config.cloudName,

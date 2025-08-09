@@ -5,6 +5,7 @@ import { getStoreValue } from 'pulsy';
 import './authStore';
 
 const useAuthGuard = () => {
+  const base_URL=import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,7 +16,7 @@ const useAuthGuard = () => {
       return;
     }
 
-    fetch('http://localhost:5000/api/validate', {
+    fetch(`${base_URL}/api/validate`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,

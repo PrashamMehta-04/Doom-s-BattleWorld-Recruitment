@@ -68,7 +68,7 @@ const HeroStatus=()=>{
     const statusMapTemp = new Map();
     const buttonMapTemp = new Map();
     const videoButtonTemp = new Map();
-    const dateMapTemp=newMap()
+    const dateMapTemp = new Map();
     let Accepted = 0, Rejected = 0, Pending = 0;
 
     applications.forEach((app) => {

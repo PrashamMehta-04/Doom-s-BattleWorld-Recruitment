@@ -5,6 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import { setStoreValue } from 'pulsy';
 import Navbar from '../Components/Navbar';
+import { Link } from 'react-router-dom';
 const Login = () => {
   const base_URL=import.meta.env.VITE_API_BASE_URL;
   const [username, setUsername] = useState('');
@@ -30,7 +31,8 @@ const Login = () => {
         setShowMsg(true);
         setTimeout(() => {
           setShowMsg(false);
-          navigate('/home-logged');
+          <Link to="/home-logged" />;
+          // navigate('/home-logged');
         }, 2000);
         const data = await submitNormal.json();
         const token = data.token;
@@ -82,7 +84,8 @@ const Login = () => {
         setShowMsg(true);
         setTimeout(() => {
           setShowMsg(false);
-          navigate('/home-logged');
+          // navigate('/home-logged');
+          <Link to="/home-logged" />;
         }, 2000);
         const data = await response.json();
         const token = data.token;

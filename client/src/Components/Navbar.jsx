@@ -19,9 +19,9 @@ const Navbar = () => {
       </div>
 
       <nav className="custom-nav-links">
-        <a onClick={() => navigate('/about')} href="#">About</a>
-        <a onClick={() => navigate('/Privacy-Terms')} href="#">Privacy/Terms</a>
-        <a onClick={() => navigate('/contact')} href="#">Contact Us</a>
+        <a onClick={() => navigate('/about')} href="">About</a>
+        <a onClick={() => navigate('/Privacy-Terms')} href="">Privacy/Terms</a>
+        <a onClick={() => navigate('/contact')} href="">Contact Us</a>
       </nav>
     </header>
   );

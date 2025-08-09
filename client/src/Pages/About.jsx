@@ -28,7 +28,6 @@ const About = () => {
           <li><strong>Post roles and missions</strong> – Define the next battlefront and requirements.</li>
           <li><strong>Swipe through candidates</strong> – Reject, shortlist, save, or like with a simple gesture.</li>
           <li><strong>Engage via chat or calls</strong> – Schedule interviews and send official summons via email.</li>
-          <li><strong>AI Matchmaking</strong> – Discover candidates with high compatibility using smart profiling logic.</li>
         </ul>
       </div>
 

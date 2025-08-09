@@ -527,11 +527,11 @@ app.post('/api/email',async(req,res)=>{
 app.post('/api/video-call-off',async(req,res)=>{
     const{username}=req.body;
     try{
-        await heroes.updateOne({USername:username,"AppliedJobs.$.videoCall":true},{
-            $set:{
-                "AppliedJobs.$.videoCall":false
-            }
-        });
+          await heroes.updateOne(
+  { Username: username },
+  { $set: { "AppliedJobs.$[elem].videoCall": false } },
+  { arrayFilters: [ { "elem.videoCall": true } ] }
+);
         res.status(200).send(true);
     }
     catch(error){

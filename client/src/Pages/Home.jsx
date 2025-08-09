@@ -8,6 +8,7 @@ import msg from '../Components_CSS/message-square.svg';
 import search from '../Components_CSS/search-check.svg';
 import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const Home = () => {
   const [showGoogle, setShowGoogle] = useState(true);
@@ -18,8 +19,14 @@ const Home = () => {
       <Navbar />
       <h1 style={{ paddingTop: '160px', textAlign: 'center' }}>BattleWorld Awaits!</h1>
       <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
-        <Login_Button text="Login as Marvel Hero" onClick={() => navigate('/login')} />
-        <Login_Button text="Login as Doom" onClick={() => navigate('/doom-login')} />
+        {/* <Login_Button text="Login as Marvel Hero" onClick={() => navigate('/login')} /> */}
+        <Link to="/login">
+          <Login_Button text="Login as Marvel Hero" />
+        </Link>
+
+        <Link to="/doom-login">
+          <Login_Button text="Login as Doom" />
+        </Link>
       </div>
       <div style={{ display: 'flex', gap: '24px', justifyContent: 'center', marginTop: '32px' }}>
         <FeatureBox

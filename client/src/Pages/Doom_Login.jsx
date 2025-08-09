@@ -6,6 +6,7 @@ import { setStoreValue } from 'pulsy';
 import { jwtDecode } from 'jwt-decode';
 import Navbar from '../Components/Navbar';
 // import doom from '../Components_CSS/image.png'
+import { Link } from 'react-router-dom';
 const Doom_Login = () => {
   const base_URL=import.meta.env.VITE_API_BASE_URL;
   const [username, setUsername] = useState('');
@@ -44,7 +45,9 @@ const Doom_Login = () => {
         setShowMsg(true);
         setTimeout(() => {
           setShowMsg(false);
-          navigate('/doom');
+
+          // navigate('/doom');
+          <Link to="/doom" />;
         }, 2000);
         setUsername('');
         setPassword('');

@@ -24,6 +24,7 @@ const Doom_Login = () => {
     const validPassword = import.meta.env.VITE_DPASSWD;
 
     if (username === validUsername && password === validPassword) {
+      console.log('ACC');
       const submitNormal = await fetch(`${base_URL}/api/login`, {
         method: "POST",
         headers: {

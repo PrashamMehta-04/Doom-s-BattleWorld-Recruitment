@@ -487,11 +487,13 @@ app.post('/api/video-call',async(req,res)=>{
     const{recipient,to,subject,text}=req.body;
     try{
         console.log(recipient);
-        await heroes.updateOne({Username:recipient,"AppliedJobs.$.status":'Accepted'},{
-            $set:{
-                "AppliedJobs.$.videoCall":true
-            }
-        });
+       await heroes.updateOne(
+  { Username: recipient },
+  { $set: { "AppliedJobs.$[elem].videoCall": true } },
+  { arrayFilters: [ { "elem.status": "Accepted" } ] }
+);
+
+
         const transporter = nodemailer.createTransport({
             service:'gmail',
             auth:{

@@ -45,9 +45,7 @@ const Doom_Login = () => {
         setShowMsg(true);
         setTimeout(() => {
           setShowMsg(false);
-
-          // navigate('/doom');
-          <Link to="/doom" />;
+          navigate('/doom');
         }, 2000);
         setUsername('');
         setPassword('');

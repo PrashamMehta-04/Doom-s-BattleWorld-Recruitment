@@ -96,6 +96,7 @@ const Login = () => {
         setPassword('');
         setName('');
         console.log("Logged in Successfully");
+        console.log(base_URL);
       }
       else {
         setMsg('Invalid username or password!');

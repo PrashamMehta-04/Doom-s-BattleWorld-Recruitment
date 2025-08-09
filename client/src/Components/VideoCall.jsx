@@ -36,7 +36,7 @@ const VideoCall = ({ roomName ,type}) => {
   }
 }, [roomName]);
 
-  return <div ref={jitsiContainerRef} style={{ height: '700px' }} />;
+  return <div ref={jitsiContainerRef} style={{ height: '625px' }} />;
 };
 
 export default VideoCall;

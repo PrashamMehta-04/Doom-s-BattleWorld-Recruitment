@@ -21,12 +21,25 @@ const Video_Call_room=({type})=>{
             navigate('/home-logged');
         }
     }
-    return(
-        <div>
-            <h2>Video Call Room</h2>
-            <VideoCall roomName={"important"} type={type}/>
-            <button onClick={backHome}>Back to Home</button>
-        </div>
-    );
+    return (
+  <div style={{ position: "relative" }}>
+    <button
+      onClick={backHome}
+      className="back-home-button"
+      style={{
+        position: "absolute",
+        top: "10px",
+        left: "10px"
+      }}
+    >
+      Back to Home
+    </button>
+
+    <h2 style={{ textAlign: "center", marginTop: "30px" }}>Video Call Room</h2>
+    <VideoCall roomName={"important"} type={type} />
+  </div>
+);
+
+
 }
 export default Video_Call_room;

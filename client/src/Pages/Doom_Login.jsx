@@ -22,8 +22,9 @@ const Doom_Login = () => {
     // 🔒 Hardcoded credentials (change as needed)
     const validUsername = import.meta.env.dUsername;
     const validPassword = import.meta.env.dPsswd;
-
+    console.log(validUsername, validPassword);
     if (username === validUsername && password === validPassword) {
+      console.log('ACC');
       const submitNormal = await fetch(`${base_URL}/api/login`, {
         method: "POST",
         headers: {

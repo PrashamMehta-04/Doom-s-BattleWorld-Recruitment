@@ -5,6 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import { setStoreValue } from 'pulsy';
 import Navbar from '../Components/Navbar';
+import { Link } from 'react-router-dom';
 const Login = () => {
   const base_URL=import.meta.env.VITE_API_BASE_URL;
   const [username, setUsername] = useState('');
@@ -141,7 +142,7 @@ const Login = () => {
         <div>
             {success && <p className="login-msg">{success}</p>}
           </div>
-        <h4>New to BattleWorld? <a href="/sign-up">Create account</a></h4>
+        <h4>New to BattleWorld? <Link to="/sign-up">Create account</Link></h4>
         <div className="login-google-btn">
           <GoogleLogin
             onSuccess={submitGoogle}

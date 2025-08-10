@@ -90,7 +90,7 @@ app.post('/api/signup',async(req,res)=>{
     try{
         const check=await user.findOne({Username:username});
         const check2=await user.findOne({email:Email})
-        if(check){
+        if(check||check2){
             res.status(401).send("Username already exists");
         }
         else{

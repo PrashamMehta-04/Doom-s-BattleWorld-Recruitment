@@ -8,6 +8,7 @@ import Navbar_Login from '../Components/Navbar_Login';
 
 const HeroProfileEdit = () => {
   useAuthGuard();
+  <Navbar_Login/>
   const base_URL=import.meta.env.VITE_API_BASE_URL;
   const [powerArr, setPowerArr] = useState(['']);
   const [battles, setBattles] = useState(['']);

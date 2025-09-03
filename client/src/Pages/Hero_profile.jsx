@@ -53,7 +53,7 @@ const Hero_profile=()=>{
     return(
        
         <div className="cq-wrapper">
-          {navbar}   
+          <Navbar_Login/>   
         <div className="cq-container">
           
   <div className="cq-hero-header">

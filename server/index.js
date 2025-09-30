@@ -15,7 +15,7 @@ const verifyToken=require('./Route');
 const { Message } = require('./schema');
 const nodemailer=require('nodemailer');
 app.use(cors({
-  origin: process.env.CLIENT_URL, // your frontend origin
+  origin: process.env.CLIENT_URL, 
   credentials: true
 }));
 const saltRounds=10;
@@ -35,7 +35,9 @@ db.once('open',()=>{
     console.log("Connected to database");
 })
 app.use(express.json());
-
+app.get('/', (req,res)=>{
+    res.sendFile(path.join(__dirname,"../client/index.html"))
+  })
 app.post('/api/google', async (req, res) => {
     const { username, password, name, type } = req.body;
     try {
